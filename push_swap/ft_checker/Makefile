@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/21 11:23:10 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/21 22:41:41 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ GRN	= \033[0;32m
 
 NAME	=	../checker
 
-LIBFT	=	../libft
+LIBFT	=	../libft/libft
 
 HEADERS	=	headers
 
@@ -51,7 +51,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 INCLUDES	= -I $(HEADERS) -I ../headers
 
-LIBS	=	-L../libft -lft
+LIBS	=	-L./$(LIBFT) -lft
 
 RM		=	rm -f
 

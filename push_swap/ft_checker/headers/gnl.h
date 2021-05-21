@@ -15,7 +15,7 @@
 # define BUFFER_SIZE 64
 # include <unistd.h>
 # include <stdlib.h>
-# include "../../libft/libft.h"
+# include "../../libft/libft/libft.h"
 
 int		get_next_line(int fd, char **line);
 size_t	ft_partial_len(char *buf);

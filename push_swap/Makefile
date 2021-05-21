@@ -6,11 +6,11 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/21 11:32:01 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/21 22:40:52 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAKEFLAGS	+=	--quiet
+# MAKEFLAGS	+=	--quiet
 
 WHT	= \033[0;37m
 BLK	= \033[0;30m
@@ -20,7 +20,7 @@ GRN	= \033[0;32m
 
 NAME	=	push_swap
 
-LIBFT	=	libft
+LIBFT	=	libft/libft
 
 HEADERS	=	headers
 
@@ -45,7 +45,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 INCLUDES	= -I $(HEADERS)
 
-LIBS	=	-L./libft -lft
+LIBS	=	-L./$(LIBFT) -lft
 
 RM		=	rm -f
 

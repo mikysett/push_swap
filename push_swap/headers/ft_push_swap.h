@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h>
-# include "../libft/libft.h"
+# include "../libft/libft/libft.h"
 # include "ft_types.h"
 # include "ft_sort.h"
 # include "ft_operation_swap.h"

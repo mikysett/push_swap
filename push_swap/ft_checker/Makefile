@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/21 22:41:41 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/22 17:06:16 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ YEL	= \033[0;33m
 GRN	= \033[0;32m
 
 NAME	=	../checker
+
+FAST	=	
 
 LIBFT	=	../libft/libft
 
@@ -61,11 +63,17 @@ $(DIR_O)/%.o: %.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(NAME):	$(DEPS) $(OBJS)
-			@make bonus -C $(LIBFT)
+			@make $(FAST)bonus -C $(LIBFT)
 			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
 			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
 
 all:		$(NAME)
+
+fast:		CFLAGS += -O3
+fast:		FAST = fast
+fast:		all
+			printf "$(WHT)[$(GRN)$(NAME) --> OPTIMIZATION FLAG ACTIVE (-O3)$(WHT)]\n"
+
 
 clean:
 			$(RM) $(OBJS)
@@ -77,4 +85,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all fast clean fclean re

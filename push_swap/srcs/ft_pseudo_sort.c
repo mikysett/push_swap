@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/28 14:01:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/28 19:25:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,35 @@ t_ps	*ft_best_checked(t_list **checks, int circled, int first_nb)
 			if (best == 0 || best->score < curr_ps->score)
 			{
 				best = curr_ps;
-				printf("%sALREADY CHECKED, size: %d\n%s", CLR_GREEN, curr_ps->size, CLR_WHITE);
+				// printf("%sALREADY CHECKED, size: %d\n%s", CLR_GREEN, curr_ps->size, CLR_WHITE);
 			}
+		}
+		curr = curr->next;
+	}
+	return (best);
+}
+
+t_ps	*ft_abs_best_checked(t_list **checks, bool *linear_v, bool *circled_v)
+{
+	t_list	*curr;
+	t_ps	*curr_ps;
+	t_ps	*best;
+
+	best = 0;
+	curr = *checks;
+	*circled_v = false;
+	*linear_v = false;
+	while (curr)
+	{
+		curr_ps = (t_ps *)curr->content;
+		if (curr_ps->circled && !*circled_v)
+			*circled_v = true;
+		else if (!*linear_v)
+			*linear_v = true;
+		if (best == 0 || best->score < curr_ps->score)
+		{
+			best = curr_ps;
+			// printf("%sALREADY CHECKED, size: %d\n%s", CLR_GREEN, curr_ps->size, CLR_WHITE);
 		}
 		curr = curr->next;
 	}
@@ -191,21 +218,21 @@ static void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	}
 }
 
-void	ft_set_checked(bool *checked, t_ps *res, int size)
-{
-	int	i;
-	int	j;
+// void	ft_set_checked(bool *checked, t_ps *res, int size)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = size - 1;
-	j = res->size - 1;
-	while (j >= 0)
-	{
-		if (res->hash[j] == true)
-			checked[i] = true;
-		i--;
-		j--;
-	}
-}
+// 	i = size - 1;
+// 	j = res->size - 1;
+// 	while (j >= 0)
+// 	{
+// 		if (res->hash[j] == true)
+// 			checked[i] = true;
+// 		i--;
+// 		j--;
+// 	}
+// }
 
 void	ft_init_ps_data(t_ps_data *ps_data, t_stack *s)
 {
@@ -228,40 +255,54 @@ void	ft_init_ps_data(t_ps_data *ps_data, t_stack *s)
 	}
 }
 
+void	ft_free_checks(t_ps_data *ps_data)
+{
+	int		i;
+
+	i = 0;
+	while (i < ps_data->s->size)
+	{
+		// ft_ls
+		i++;
+	}
+}
+
 void	ft_pseudo_sort(t_data *data)
 {
-	int			i;
-	bool		*checked;
+	int		i;
+	int		i_nb;
+	bool	circled_v;
+	bool	linear_v;
+	// bool		*checked;
 
 	t_ps_data	ps_data;
 
 	i = 0;
 	ft_init_ps_data(&ps_data, &data->s_a);
 
-	checked = ft_calloc(data->s_a.size, sizeof(bool));
-	if (!checked)
-		ft_exit_failure();
+	// checked = ft_calloc(data->s_a.size, sizeof(bool));
+	// if (!checked)
+	// 	ft_exit_failure();
 
 	while (i < data->s_a.size - 1)
 	{
-		// if (checked[i] == false)
-		{
-			printf("\n%sDoing pseudo sort starting at pos: %d%s - ",
-				CLR_BLUE, i, CLR_WHITE);
-			ps_data.new = ft_do_pseudo_sort(&ps_data, false, i,
-				data->s_a.stack[i].nb);
-			ps_data.recursions = 0;
-			ft_set_checked(checked, ps_data.new, data->s_a.size);
-			ft_print_pseudo_sorted(ps_data.new);
-			ft_take_best(&ps_data.best, &ps_data.new);
-			// ft_free_pseudo_sort(ps_data.new);
-			if (ps_data.best->score >= data->s_a.size - i)
-				break;
-		}
+		i_nb = data->s_a.stack[i].nb;
+		printf("\n%sDoing pseudo sort starting at pos: %d%s - ",
+			CLR_BLUE, i, CLR_WHITE);
+		ps_data.new = ft_abs_best_checked(ps_data.checks[i], &linear_v, &circled_v);
+		if (!ps_data.new || !linear_v || !circled_v)
+			ps_data.new = ft_do_pseudo_sort(&ps_data, false, i, i_nb);
+		ps_data.recursions = 0;
+		// ft_set_checked(checked, ps_data.new, data->s_a.size);
+		ft_print_pseudo_sorted(ps_data.new);
+		ft_take_best(&ps_data.best, &ps_data.new);
+		// ft_free_pseudo_sort(ps_data.new);
+		if (ps_data.best->score >= data->s_a.size - i)
+			break;
 		i++;
 	}
-	ft_print_checks(ps_data.checks, ps_data.s->size);
+	// ft_print_checks(ps_data.checks, ps_data.s->size);
 	ft_set_is_sorted(&data->s_a, ps_data.best);
 	ft_free_pseudo_sort(ps_data.best);
-	free(checked);
+	// free(checked);
 }

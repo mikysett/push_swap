@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/23 01:27:18 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/26 09:28:29 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DIR_O	=	obj
 SRCS	:=	$(shell find $(DIR_S) -name *.c) \
 			../srcs/ft_parser.c \
 			../srcs/ft_init_data.c \
-			../srcs/ft_sort.c \
+			../srcs/ft_check_sort.c \
 			../srcs/ft_duplicated_nb.c \
 			../srcs/ft_tests.c \
 			../srcs/ft_utilities.c

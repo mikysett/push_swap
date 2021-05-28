@@ -6,116 +6,133 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/19 22:29:03 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/28 09:57:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	ft_set_pos(t_stack *s, bool is_initial)
+int	prev_p(int pos, int step, int stack_size)
 {
-	int		i;
-
-	i = 0;
-	if (is_initial)
-		while (i < s->size)
-		{
-			s->stack[i].initial_pos = i;
-			i++;
-		}
+	if (pos - step < 0)
+		return (stack_size + (pos - step));
 	else
-		while (i < s->size)
-		{
-			s->stack[i].sort_pos = i;
-			i++;
-		}
+		return (pos - step);
 }
 
-static int	ft_partition(t_stack *s, int low, int high, int pivot)
+int	next_p(int pos, int step, int stack_size)
 {
-	t_nb	buf;
-	int		i;
-	int		curr_pos;
-
-	i = high;
-	// printf("-> ");
-	while (i >= low && s->stack[i].nb < pivot)
-		i--;
-	curr_pos = i;
-	// printf("pivot: %10d, low: %5d, high: %5d, curr_pos: %5d, ",
-	// 	pivot, low, high, curr_pos);
-	while (i >= low)
-	{
-		if (s->stack[i].nb < pivot)
-		{
-			if (i != curr_pos)
-			{
-				buf = s->stack[i];
-				s->stack[i] = s->stack[curr_pos];
-				s->stack[curr_pos] = buf;
-			}
-			curr_pos--;
-		}
-		i--;
-	}
-	if (curr_pos == high)
-	{
-		// printf("returned pos (-1): %d\n", curr_pos - 1);
-		return (curr_pos - 1);
-	}
-	// printf("returned pos: %d\n", curr_pos);
-	return (curr_pos);
+	if (pos + step > stack_size - 1)
+		return (pos + step - stack_size);
+	else
+		return (pos + step);
 }
 
-void	ft_set_sort_pos(t_stack *s, int low, int high)
-{
-	int	new_division;
-	int	pivot;
+/* Return the position of the larger sorted range in the stack */
+// void	ft_get_larger_range(t_nb *s, int ssize, t_range *range)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		range_size;
 
-	if (low >= high)
-		return ;
-	pivot = s->stack[high].nb;
-	// if (pivot == 164011056)
-	// 	return ;
-	new_division = ft_partition(s, low, high, pivot);
-	ft_set_sort_pos(s, low, new_division);
-	ft_set_sort_pos(s, new_division + 1, high);
-}
+// 	i = 0;
+// 	while (i < ssize)
+// 	{
+// 		j = i;
+// 		range_size = 1;
+// 		while (s[j].sort_pos == (s[next_p(j, 1, ssize)].sort_pos - 1) % ssize)
+// 		{
+// 			j = next_p(j, 1, ssize);
+// 			if (j == i)
+// 				break ;
+// 			range_size++;
+// 		}
+// 		if (range_size > range->size)
+// 		{
+// 			range->size = range_size;
+// 			range->lower = i;
+// 		}
+// 		i += range_size;
+// 		// printf("biggest range: %d\n", range->size);
+// 	}
+// 	range->higher = next_p(range->lower, range->size - 1, ssize);
+// }
 
-void	ft_fix_pos(t_stack *s)
-{
-	int		i;
-	int		initial_pos;
-	t_nb	buf;
+// void	ft_set_sort_range(t_stack *s, t_range range)
+// {
+// 	int	i;
+// 	int	curr;
 
-	i = 0;
-	ft_set_pos(s, false);
-	while (i < s->size)
-	{
-		if (s->stack[i].initial_pos != i)
-		{
-			initial_pos = s->stack[i].initial_pos;
-			buf = s->stack[initial_pos];
-			s->stack[initial_pos] = s->stack[i];
-			s->stack[i] = buf;
-		}
-		else
-			i++;
-	}
-}
+// 	i = 0;
+// 	curr = range.lower;
+// 	while (i < range.size)
+// 	{
+// 		s->stack[curr].is_sorted = true;
+// 		curr = next_p(curr, 1, s->size);
+// 		i++;
+// 	}
+// }
+
+// void	ft_set_pseudo_sorted(t_stack *s, t_range *range)
+// {
+// 	int i;
+// 	int	last_sort_nb;
+
+// 	i = prev_p(range->lower, 1, s->size);
+// 	last_sort_nb = s->stack[range->lower].nb;
+// 	while (i != range->higher)
+// 	{
+// 		if (s->stack[i].nb > last_sort_nb)
+// 		{
+// 			s->stack[i].pseudo_sort_lower = true;
+// 			last_sort_nb = s->stack[i].nb;
+// 		}
+// 		i = prev_p(i, 1, s->size);
+// 	}
+
+// 	i = next_p(range->higher, 1, s->size);
+// 	last_sort_nb = s->stack[range->higher].nb;
+// 	while (i != range->higher)
+// 	{
+// 		if (s->stack[i].nb < last_sort_nb)
+// 		{
+// 			s->stack[i].pseudo_sort_higher = true;
+// 			last_sort_nb = s->stack[i].nb;
+// 		}
+// 		i = next_p(i, 1, s->size);
+// 	}
+// }
 
 bool	ft_sort(t_data *data)
 {
-	printf("SORTING STARTS\n");
+	// t_range	biggest_range;
+
 	ft_set_pos(&data->s_a, true);
-	printf("QUICKSORT STARTS\n");
+	// ft_set_sort_pos(&data->s_a_sorted, 0, data->s_a_sorted.size - 1);
+	// if (ft_duplicated_nb(&data->s_a_sorted))
+	// 	return (false);
 	ft_set_sort_pos(&data->s_a, 0, data->s_a.size - 1);
 	if (ft_duplicated_nb(&data->s_a))
 		return (false);
+	// if (ft_already_sorted(&data->s_a))
+	// 	return (true);
 	// To test
 	ft_is_sorted(&data->s_a);
+	// To remove if s_a_sorted is implemented
 	ft_fix_pos(&data->s_a);
+
+	// FALLBACK IF PSEUDO_SORT IS TOO SLOW?!
+	// biggest_range.size = 0;
+	// ft_get_larger_range(data->s_a.stack, data->s_a.size, &biggest_range);
+	// ft_set_sort_range(&data->s_a, biggest_range);
+	// ft_set_pseudo_sorted(&data->s_a, &biggest_range);
+	
+	ft_pseudo_sort(data);
+	
+	// ft_generate_ops(data);
+
+
 	// To test
-	// ft_print_stack(&data->s_a);
+	ft_print_stack(&data->s_a);
 	return (true);
 }

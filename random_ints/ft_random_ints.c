@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 17:06:24 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/21 14:44:19 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/24 19:11:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	srand(time(NULL));
-	if (max - min + 1 != 0)
-		random_nb = (rand() % (max - min + 1)) + min;
-	else
-		random_nb = rand() + min;
+	random_nb = rand();
+	// if (max - min + 1 != 0)
+	// 	random_nb = (rand() % (max - min + 1)) + min;
+	// else
+	// 	random_nb = rand() + min;
 	ft_duplicated_nb(random_nb, pos_hash, neg_hash);
 	printf("%d", random_nb);
 	i = 1;

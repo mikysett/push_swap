@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/18 15:03:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/28 09:53:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <limits.h>
 # include "../libft/libft/libft.h"
 # include "ft_types.h"
+# include "ft_pseudo_sort.h"
+# include "ft_check_sort.h"
 # include "ft_sort.h"
 # include "ft_operation_swap.h"
 # include "ft_operation_push.h"
@@ -34,5 +36,6 @@ bool	ft_init_data(int argc, char **argv, t_data *data);
 bool	ft_duplicated_nb(t_stack *stack_a);
 
 void	ft_free_data(t_data *data);
+void	ft_exit_failure(void);
 
 #endif

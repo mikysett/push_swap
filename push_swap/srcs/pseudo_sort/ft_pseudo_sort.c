@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 09:18:32 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 16:00:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,30 @@ static t_ps	*ft_set_result(t_ps *best, bool circled, int first_nb, int size)
 	return (res);
 }
 
+static bool	ft_is_nb_eligible(int s_i_nb, int rec_pos_nb, bool circled,
+	int first_nb)
+{
+	if ((s_i_nb < rec_pos_nb && (circled == false
+			|| (circled == true && s_i_nb > first_nb)))
+				|| (circled == false && s_i_nb > first_nb))
+		return (true);
+	return (false);
+}
 
 static t_ps	*ft_do_pseudo_sort(t_ps_data *ps_data, bool circled, int pos,
 	int first_nb)
 {
 	t_ps_rec	rec;
 	int			i;
-	int			i_nb;
 
 	ft_init_ps_rec(&rec, ps_data->s, circled, pos);
 	ps_data->nb_rec++;
-	i = pos + 1;
-	while (i < rec.s_size)
-	{
-		i_nb = ps_data->s->stack[i].nb;
-		if ((i_nb < rec.pos_nb && (circled == false
-			|| (circled == true && i_nb > first_nb)))
-				|| (circled == false && i_nb > first_nb))
+	i = pos;
+	while (++i < rec.s_size)
+		if (ft_is_nb_eligible(ps_data->s->stack[i].nb,
+				rec.pos_nb, circled, first_nb))
 		{
-			if (i_nb > rec.pos_nb)
+			if (ps_data->s->stack[i].nb > rec.pos_nb)
 				circled = true;
 			rec.new = ft_best_checked(ps_data->checks[i], circled, first_nb);
 			if (!rec.new)
@@ -75,8 +80,6 @@ static t_ps	*ft_do_pseudo_sort(t_ps_data *ps_data, bool circled, int pos,
 			if (ps_data->nb_rec > MAX_REC || rec.best->score > rec.s_size - pos)
 				break;
 		}
-		i++;
-	}
 	return (ft_set_result(rec.best, rec.circled, first_nb, rec.s_size - pos));
 }
 
@@ -136,6 +139,7 @@ void	ft_pseudo_sort(t_data *data)
 	ft_print_pseudo_sorted(ps_data.best);
 	// ft_print_checks(ps_data.checks, ps_data.s->size);
 	ft_set_is_sorted(&data->s_a, ps_data.best);
+	data->nb_sorted = ps_data.best->score;
 	ft_free_checks(&ps_data);
 	// ft_free_pseudo_sort(ps_data.best);
 	// free(checked);

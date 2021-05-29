@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 09:19:22 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 18:15:13 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef enum	e_op_type
 {
+	op_none,
 	op_sa,
 	op_sb,
 	op_ss,
@@ -36,7 +37,6 @@ typedef enum	e_op_type
 	op_rra,
 	op_rrb,
 	op_rrr,
-	op_none,
 	op_error
 }				t_op_type;
 
@@ -46,6 +46,7 @@ typedef struct	s_nb
 	bool	is_sorted;
 	int		sort_pos;
 	int		init_pos;
+	int		mov_to_sort;
 }				t_nb;
 
 typedef struct	s_stack
@@ -66,6 +67,8 @@ typedef struct	s_data
 	t_stack		s_a;
 	// t_stack		s_a_sorted;
 	t_stack		s_b;
+	bool		wait_to_swap;
+	id_t		nb_sorted;
 }				t_data;
 
 typedef struct	s_ps

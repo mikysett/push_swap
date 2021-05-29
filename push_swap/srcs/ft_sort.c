@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 08:46:26 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 15:42:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ bool	ft_sort(t_data *data)
 	
 	ft_pseudo_sort(data);
 	
-	// ft_generate_ops(data);
-
+	ft_generate_ops(data);
 
 	// To test
 	// ft_print_stack(&data->s_a);

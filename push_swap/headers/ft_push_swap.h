@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/28 09:53:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 09:01:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <limits.h>
 # include "../libft/libft/libft.h"
 # include "ft_types.h"
+# include "ft_pseudo_sort_init.h"
+# include "ft_pseudo_sort_utilities.h"
 # include "ft_pseudo_sort.h"
 # include "ft_check_sort.h"
 # include "ft_sort.h"

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/28 12:44:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 09:19:22 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define CLR_BLUE	"\033[0;34m"
 
 # define OP_BUF_SIZE	1000
+# define MAX_REC		1000000L
 
 typedef enum	e_op_type
 {
@@ -82,13 +83,12 @@ typedef struct	s_ps_data
 	t_stack	*s;
 	t_ps	*best;
 	t_ps	*new;
-	long	recursions;
+	long	nb_rec;
 	t_list	***checks;
 }				t_ps_data;
 
 typedef struct	s_ps_rec
 {
-	t_ps	*res;
 	t_ps	*best;
 	t_ps	*new;
 	int		pos_nb;

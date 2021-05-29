@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/28 09:55:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/29 08:55:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,34 @@ void	ft_print_pseudo_sorted(t_ps *pseudo_sorted)
 		i++;
 	}
 	printf(" --- %sscore: %d%s\n", CLR_BLUE, score, CLR_WHITE);
+}
+
+void	ft_print_checks(t_list ***checks, int size)
+{
+	t_list	*curr;
+	t_ps	*curr_ps;
+	int		i;
+	int		nb_checks;
+
+	i = 0;
+	nb_checks = 0;
+	while (i < size)
+	{
+		printf("%sChecks for: %d%s\n", CLR_YELLOW, i, CLR_WHITE);
+		curr = *checks[i];
+		while (curr)
+		{
+			curr_ps = (t_ps *)curr->content;
+			printf("%scircled: %d, first_nb: %6d%s - ",
+				CLR_BLUE,
+				curr_ps->circled,
+				curr_ps->lower_nb,
+				CLR_WHITE);
+			ft_print_pseudo_sorted(curr_ps);
+			curr = curr->next;
+			nb_checks++;
+		}
+		i++;
+	}
+	printf("Total checks: %d\n", nb_checks);
 }

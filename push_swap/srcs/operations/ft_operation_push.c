@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/16 12:29:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:52:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,17 @@ static bool	ft_push(t_stack *s_in, t_stack *s_out)
 void	ft_push_a(t_data *data)
 {
 	if (ft_push(&data->s_a, &data->s_b))
+	{
 		write(1, "pa\n", 3);
+		data->nb_moves++;
+	}
 }
 
 void	ft_push_b(t_data *data)
 {
 	if (ft_push(&data->s_b, &data->s_a))
+	{
 		write(1, "pb\n", 3);
+		data->nb_moves++;
+	}
 }

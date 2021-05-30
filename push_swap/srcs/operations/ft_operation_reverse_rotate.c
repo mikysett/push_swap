@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/16 12:29:39 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:53:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,26 @@ static bool	ft_reverse_rotate(t_stack *s)
 void	ft_reverse_rotate_a(t_data *data)
 {
 	if (ft_reverse_rotate(&data->s_a))
+	{
 		write(1, "rra\n", 4);
+		data->nb_moves++;
+	}
 }
 
 void	ft_reverse_rotate_b(t_data *data)
 {
 	if (ft_reverse_rotate(&data->s_b))
+	{
 		write(1, "rrb\n", 4);
+		data->nb_moves++;
+	}
 }
 
 void	ft_reverse_rotate_2(t_data *data)
 {
 	if (ft_reverse_rotate(&data->s_a) || ft_reverse_rotate(&data->s_b))
+	{
 		write(1, "rrr\n", 4);
+		data->nb_moves++;
+	}
 }

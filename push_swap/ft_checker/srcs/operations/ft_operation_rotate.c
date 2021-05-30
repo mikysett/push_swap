@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/19 10:20:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:03:39 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	ft_rotate(t_stack *s)
 		return (false);
 	top = s->size - 1;
 	buf = s->stack[top];
-	while (top >= 0)
+	while (top > 0)
 	{
 		s->stack[top] = s->stack[top - 1];
 		top--;

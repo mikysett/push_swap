@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/16 12:29:54 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:53:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	ft_rotate(t_stack *s)
 		return (false);
 	top = s->size - 1;
 	buf = s->stack[top];
-	while (top >= 0)
+	while (top > 0)
 	{
 		s->stack[top] = s->stack[top - 1];
 		top--;
@@ -33,17 +33,26 @@ static bool	ft_rotate(t_stack *s)
 void	ft_rotate_a(t_data *data)
 {
 	if (ft_rotate(&data->s_a))
+	{
 		write(1, "ra\n", 3);
+		data->nb_moves++;
+	}
 }
 
 void	ft_rotate_b(t_data *data)
 {
 	if (ft_rotate(&data->s_b))
+	{
 		write(1, "rb\n", 3);
+		data->nb_moves++;
+	}
 }
 
 void	ft_rotate_2(t_data *data)
 {
 	if (ft_rotate(&data->s_a) || ft_rotate(&data->s_b))
+	{
 		write(1, "rr\n", 3);
+		data->nb_moves++;
+	}
 }

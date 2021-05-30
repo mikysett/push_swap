@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/19 10:42:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:53:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,26 @@ static bool	ft_swap(t_stack *s)
 void	ft_swap_a(t_data *data)
 {
 	if (ft_swap(&data->s_a))
+	{
 		write(1, "sa\n", 3);
+		data->nb_moves++;
+	}
 }
 
 void	ft_swap_b(t_data *data)
 {
 	if (ft_swap(&data->s_b))
+	{
 		write(1, "sb\n", 3);
+		data->nb_moves++;
+	}
 }
 
 void	ft_swap_2(t_data *data)
 {
 	if (ft_swap(&data->s_a) || ft_swap(&data->s_b))
+	{
 		write(1, "ss\n", 3);
+		data->nb_moves++;
+	}
 }

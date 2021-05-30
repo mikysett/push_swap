@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 18:15:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:50:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ typedef struct	s_data
 	// t_stack		s_a_sorted;
 	t_stack		s_b;
 	bool		wait_to_swap;
-	id_t		nb_sorted;
+	int			nb_sorted;
+
+	int			nb_moves;
 }				t_data;
 
 typedef struct	s_ps

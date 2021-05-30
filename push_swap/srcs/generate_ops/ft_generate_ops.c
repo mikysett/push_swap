@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 18:24:32 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:54:19 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	ft_is_rotate_better(t_data *data)
 	// To be implemented
 	int	op_by_rotate;
 	int	op_by_reverse;
+	return (true);
 }
 
 bool	ft_optimal_swap(t_data *data)
@@ -37,18 +38,20 @@ void	ft_optimal_reverse_push(t_data *data)
 	t_nb	*last;
 
 	last = &data->s_a.stack[data->s_a.size - 1];
-	while (last->is_sorted == false)
+	first = &data->s_a.stack[0];
+	while (first->is_sorted == false)
 	{
-		first = &data->s_a.stack[0];
-		if (last < last->nb)
-
-		if (last > first)
+		if (!first->is_sorted && last > first)
+		{
+			printf("orp - ");
 			ft_push_b(data);
+		}
 		else
 		{
-			ft_reverse_rotate_b(data);
+			ft_reverse_rotate_a(data);
 			last = &data->s_a.stack[data->s_a.size - 1];
 		}
+		first = &data->s_a.stack[0];
 	}
 }
 
@@ -56,22 +59,27 @@ void	ft_fill_b(t_data *data)
 {
 	int	last_nb;
 
-	if (!data->s_a.size || data->nb_sorted == data->s_a.size)
-		return ;
-	while (data->s_a.size && data->s_a.stack[0].is_sorted == false)
+	while (data->s_a.size &&
+		data->s_a.stack[data->s_a.size - 1].is_sorted == false)
 	{
+		// printf("s_a[0].nb: %d, is sorted: %d\n",
+		// 	data->s_a.stack[0].nb,
+		// 	data->s_a.stack[0].is_sorted);
+		// write(1, "fb - ", 5);
 		ft_push_b(data);
 		if (data->wait_to_swap == true)
 			data->wait_to_swap = false;
 		else if (ft_optimal_swap(data))
 			data->wait_to_swap = true;
 	}
+	if (!data->s_a.size || data->nb_sorted == data->s_a.size)
+		return ;
 	if (ft_is_rotate_better(data))
-		while (data->s_a.stack[0].is_sorted == true)
+		while (data->s_a.stack[data->s_a.size - 1].is_sorted == true)
 			ft_rotate_a(data);
 	else
 	{
-		while (data->s_a.stack[data->s_a.size - 1].is_sorted == true)
+		while (data->s_a.stack[0].is_sorted == true)
 			ft_reverse_rotate_a(data);
 		ft_optimal_reverse_push(data);
 	}
@@ -80,6 +88,22 @@ void	ft_fill_b(t_data *data)
 
 int		ft_best_to_sort(t_data *data)
 {
+	int	i;
+	int	j;
+	int	nb_sort_pos;
+
+	i = 0;
+	while (i < data->s_b.size)
+	{
+		nb_sort_pos = data->s_b.stack[i].sort_pos;
+		j = 0;
+		while (j < data->s_a.size)
+		{
+			// if ()
+			j++;
+		}
+		i++;
+	}
 	// To be implemented
 	return (0);
 }
@@ -118,7 +142,11 @@ void	ft_rotate_sorted(t_data *data)
 void	ft_generate_ops(t_data *data)
 {
 	data->wait_to_swap = true;
+	data->nb_moves = 0;
 	ft_fill_b(data);
+	ft_print_stack(&data->s_a);
+	ft_print_stack(&data->s_b);
+	printf("Nb moves: %d\n", data->nb_moves);
 	ft_sort_in_a(data);
 	ft_rotate_sorted(data);
 	ft_flush_print_buffer();

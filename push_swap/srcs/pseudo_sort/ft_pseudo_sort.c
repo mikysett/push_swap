@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 16:00:36 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 16:21:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ static t_ps	*ft_do_pseudo_sort(t_ps_data *ps_data, bool circled, int pos,
 
 void	ft_pseudo_sort(t_data *data)
 {
-	int		i;
-	int		i_nb;
-	bool	circled_v;
-	bool	linear_v;
+	int			i;
+	int			i_nb;
+	bool		circled_v;
+	bool		linear_v;
 	// bool		*checked;
 
 	t_ps_data	ps_data;

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:36:23 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/19 22:49:25 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:18:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	ft_checker(t_data *data)
 		ft_do_op(data, op);
 		read_result = get_next_line(STDIN_FILENO, &line) > 0;
 	}
+	if (line)
+		free(line);
 	if (op == op_error || read_result < 0)
 		write(STDERR_FILENO, "Error\n", 6);
 	else

@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/26 09:28:29 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/30 17:20:59 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,24 +32,25 @@ DIR_O	=	obj
 
 # Using wildcards: $(shell find $(DIR_S) -name *.c)
 SRCS	:=	$(shell find $(DIR_S) -name *.c) \
-			../srcs/ft_parser.c \
+			../srcs/parser/ft_parser.c \
+			../srcs/parser/ft_duplicated_nb.c \
 			../srcs/ft_init_data.c \
 			../srcs/ft_check_sort.c \
-			../srcs/ft_duplicated_nb.c \
 			../srcs/ft_tests.c \
 			../srcs/ft_utilities.c
 
 OBJS	:= $(SRCS:%.c=$(DIR_O)/%.o)
 
 SUB_DIR_O := $(shell find $(DIR_S) -type d)
-SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
+SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%) \
+				srcs/parser
 
 # Using wildcards: $(shell find $(HEADERS) -name *.h)
 DEPS	=	$(shell find $(HEADERS) -name *.h)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	=	-Wall -Wextra -fsanitize=address
 
 INCLUDES	= -I $(HEADERS) -I ../headers
 

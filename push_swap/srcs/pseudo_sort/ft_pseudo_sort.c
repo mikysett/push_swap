@@ -6,17 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/30 16:21:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:43:32 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-// void	ft_free_pseudo_sort(t_ps *pseudo_sort)
-// {
-// 	free(pseudo_sort->hash);
-// 	free(pseudo_sort);
-// }
 
 static t_ps	*ft_set_result(t_ps *best, bool circled, int first_nb, int size)
 {
@@ -74,7 +68,7 @@ static t_ps	*ft_do_pseudo_sort(t_ps_data *ps_data, bool circled, int pos,
 			if (!rec.new)
 			{
 				rec.new = ft_do_pseudo_sort(ps_data, circled, i, first_nb);
-				ft_save_check(ps_data->checks[i], &rec);
+				ft_save_check(ps_data->checks[i], rec.new);
 			}
 			ft_take_best(&rec.best, &rec.new);
 			if (ps_data->nb_rec > MAX_REC || rec.best->score > rec.s_size - pos)
@@ -122,9 +116,14 @@ void	ft_pseudo_sort(t_data *data)
 		// printf("\n%sDoing pseudo sort starting at pos: %d%s - ", CLR_BLUE, i, CLR_WHITE);
 		ps_data.new = ft_abs_best_checked(ps_data.checks[i], &linear_v, &circled_v);
 		if (!ps_data.new || !linear_v || !circled_v)
+		{
 			ps_data.new = ft_do_pseudo_sort(&ps_data, false, i, i_nb);
-		if (ps_data.nb_rec > 0)
-			printf("i: %10d, nb_rec: %ld\n", i, ps_data.nb_rec);
+			ft_save_check(*ps_data.checks, ps_data.new);
+		}
+		DEBUG_CODE(
+			if (ps_data.nb_rec > 0)
+				printf("i: %10d, nb_rec: %ld\n", i, ps_data.nb_rec);
+		)
 		ps_data.nb_rec = 0;
 		// To test
 		// ft_print_pseudo_sorted(ps_data.new);
@@ -136,7 +135,7 @@ void	ft_pseudo_sort(t_data *data)
 		i++;
 	}
 	// To test
-	ft_print_pseudo_sorted(ps_data.best);
+	DEBUG_CODE(ft_print_pseudo_sorted(ps_data.best);)
 	// ft_print_checks(ps_data.checks, ps_data.s->size);
 	ft_set_is_sorted(&data->s_a, ps_data.best);
 	data->nb_sorted = ps_data.best->score;

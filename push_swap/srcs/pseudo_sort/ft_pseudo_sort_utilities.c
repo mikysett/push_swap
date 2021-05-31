@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 09:04:27 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 19:25:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@ void	ft_free_checks(t_ps_data *ps_data)
 	while (i < ps_data->s->size)
 	{
 		ft_lstclear(ps_data->checks[i], ft_free_sgl_check);
+		free(ps_data->checks[i]);
 		i++;
 	}
 	free(ps_data->checks);
 }
 
-void	ft_save_check(t_list **checks, t_ps_rec *rec)
+void	ft_save_check(t_list **checks, t_ps *new)
 {
 	t_list	*new_el;
 
-	new_el = ft_lstnew((void *)rec->new);
+	new_el = ft_lstnew((void *)new);
 	if (!new_el)
 		ft_exit_failure();
 	ft_lstadd_front(checks, new_el);

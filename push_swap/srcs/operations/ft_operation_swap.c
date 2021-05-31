@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/30 17:53:28 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:44:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	ft_swap_b(t_data *data)
 
 void	ft_swap_2(t_data *data)
 {
-	if (ft_swap(&data->s_a) || ft_swap(&data->s_b))
+	bool	result;
+
+	result = ft_swap(&data->s_a);
+	if (ft_swap(&data->s_b) || result)
 	{
 		write(1, "ss\n", 3);
 		data->nb_moves++;

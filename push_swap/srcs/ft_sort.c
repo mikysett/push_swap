@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 15:42:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:42:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ bool	ft_sort(t_data *data)
 		return (false);
 	// if (ft_already_sorted(&data->s_a))
 	// 	return (true);
-	// To test
-	ft_is_sorted(&data->s_a);
+	DEBUG_CODE(ft_is_sorted(&data->s_a);)
 	// To remove if s_a_sorted is implemented
 	ft_fix_pos(&data->s_a);
 
@@ -128,10 +127,13 @@ bool	ft_sort(t_data *data)
 	// ft_set_pseudo_sorted(&data->s_a, &biggest_range);
 	
 	ft_pseudo_sort(data);
-	
-	ft_generate_ops(data);
 
 	// To test
-	// ft_print_stack(&data->s_a);
+	DEBUG_CODE(
+		printf("Stack A initial:\n");
+		ft_print_stack(&data->s_a);
+	)
+	ft_generate_ops(data);
+
 	return (true);
 }

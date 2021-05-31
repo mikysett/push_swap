@@ -6,11 +6,17 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 09:11:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 19:18:34 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+void	ft_free_pseudo_sort(t_ps *pseudo_sort)
+{
+	free(pseudo_sort->hash);
+	free(pseudo_sort);
+}
 
 void	ft_init_ps_rec(t_ps_rec *rec, t_stack *s, bool circled, int pos)
 {

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/26 09:28:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/30 22:53:39 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define FT_SORT_H
 
 bool	ft_sort(t_data *data);
+int		prev_p(int pos, int step, int stack_size);
+int		next_p(int pos, int step, int stack_size);
 
 #endif

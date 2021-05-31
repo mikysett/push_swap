@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 08:55:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/05/31 11:03:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,4 +160,15 @@ void	ft_print_checks(t_list ***checks, int size)
 		i++;
 	}
 	printf("Total checks: %d\n", nb_checks);
+}
+
+void	ft_print_strat(t_nb *nb)
+{
+	printf("sorting strat for nb: %d\n", nb->nb);
+	printf("%12s: %d\n", "mov_to_sort", nb->mov_to_sort);
+	printf("%12s: %d\n", "b_r", nb->strat.b_r);
+	printf("%12s: %d\n", "b_rr", nb->strat.b_rr);
+	printf("%12s: %d\n", "a_r", nb->strat.a_r);
+	printf("%12s: %d\n", "a_rr", nb->strat.a_rr);
+	printf("%12s: %d\n", "type", nb->strat.type);
 }

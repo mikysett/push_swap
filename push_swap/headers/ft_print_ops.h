@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_ops.c                                     :+:      :+:    :+:   */
+/*   ft_print_ops.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/29 15:46:18 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/29 15:48:51 by msessa           ###   ########.fr       */
+/*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
+/*   Updated: 2021/06/01 13:09:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#ifndef FT_PRINT_OPS
+# define FT_PRINT_OPS
 
-void	ft_flush_print_buffer(void)
-{
+void	ft_print_ops(t_data *data, t_op_type op_type);
 
-}
+#endif

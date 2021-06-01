@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/31 23:28:17 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 13:29:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,5 +419,5 @@ void	ft_generate_ops(t_data *data)
 		ft_print_stack(&data->s_b);
 		printf("Nb moves: %d\n", data->nb_moves);
 	)
-	ft_flush_print_buffer();
+	ft_print_ops(data, op_none);
 }

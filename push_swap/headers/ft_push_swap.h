@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/30 16:22:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 11:17:52 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "ft_pseudo_sort.h"
 # include "ft_check_sort.h"
 # include "ft_sort.h"
+# include "ft_print_ops.h"
 # include "ft_generate_ops.h"
 
 # include "ft_tests.h"

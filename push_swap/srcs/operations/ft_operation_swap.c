@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/31 10:44:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 13:19:33 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_swap_a(t_data *data)
 {
 	if (ft_swap(&data->s_a))
 	{
-		write(1, "sa\n", 3);
+		ft_print_ops(data, op_sa);
+		// write(1, "sa\n", 3);
 		data->nb_moves++;
 	}
 }
@@ -39,19 +40,34 @@ void	ft_swap_b(t_data *data)
 {
 	if (ft_swap(&data->s_b))
 	{
-		write(1, "sb\n", 3);
+		ft_print_ops(data, op_sb);
+		// write(1, "sb\n", 3);
 		data->nb_moves++;
 	}
 }
 
 void	ft_swap_2(t_data *data)
 {
-	bool	result;
+	int	size_a;
+	int	size_b;
 
-	result = ft_swap(&data->s_a);
-	if (ft_swap(&data->s_b) || result)
+	ft_swap_a(data);
+	ft_swap_b(data);
+	size_a = data->s_a.size;
+	size_b = data->s_b.size;
+	if (size_a && size_b)
 	{
-		write(1, "ss\n", 3);
+		ft_print_ops(data, op_ss);
+		data->nb_moves++;
+	}
+	else if (size_a)
+	{
+		ft_print_ops(data, op_sa);
+		data->nb_moves++;
+	}
+	else if (size_b)
+	{
+		ft_print_ops(data, op_sb);
 		data->nb_moves++;
 	}
 }

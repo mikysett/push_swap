@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/31 23:08:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 13:20:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # endif
 
 # define OP_BUF_SIZE	1000
+# define OP_SUB_BUF		10
 # define MAX_REC		1000000L
 
 typedef enum	e_op_type
@@ -46,6 +47,13 @@ typedef enum	e_op_type
 	op_rrr,
 	op_error
 }				t_op_type;
+
+typedef struct	s_op_info
+{
+	t_op_type	type;
+	int			a_size;
+	int			b_size;
+}				t_op_info;
 
 typedef enum	e_strat_type
 {

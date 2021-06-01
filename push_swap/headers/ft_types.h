@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 13:20:57 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 18:57:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
 
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else

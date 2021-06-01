@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 13:29:27 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 18:11:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,11 @@ void	ft_fill_b(t_data *data)
 				data->s_a.bigger_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
 			else if (data->s_a.stack[data->s_a.size - 1].sort_pos < data->s_a.smaller_sort_pos)
 				data->s_a.smaller_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
-			// if (!ft_optimal_swap(data))
+			// In some cases better in some cases worst
+			// if (data->s_b.size > 1
+			// 	&& data->s_b.stack[data->s_b.size - 1].nb < data->s_b.stack[data->s_b.size - 2].nb)
+			// 	ft_swap_2(data);
+			// else
 				ft_swap_a(data);
 			ft_fill_b(data);
 			return ;
@@ -149,9 +153,17 @@ void	ft_fill_b(t_data *data)
 				data->s_a.bigger_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
 			else if (data->s_a.stack[data->s_a.size - 1].sort_pos < data->s_a.smaller_sort_pos)
 				data->s_a.smaller_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
-			// if (!ft_optimal_swap(data))
-			ft_reverse_rotate_a(data);
-			ft_swap_a(data);
+			// In some cases better in some cases worst
+			// if (data->s_b.size > 2
+			// 	&& data->s_b.stack[data->s_b.size - 1].nb < data->s_b.stack[data->s_b.size - 2].nb)
+			// 	ft_reverse_rotate_2(data);
+			// else
+				ft_reverse_rotate_a(data);
+			// if (data->s_b.size > 1
+			// 	&& data->s_b.stack[data->s_b.size - 1].nb < data->s_b.stack[data->s_b.size - 2].nb)
+			// 	ft_swap_2(data);
+			// else
+				ft_swap_a(data);
 			ft_fill_b(data);
 			return ;
 		}

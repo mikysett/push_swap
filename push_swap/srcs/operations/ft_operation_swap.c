@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 13:19:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:24:59 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,22 @@ void	ft_swap_b(t_data *data)
 
 void	ft_swap_2(t_data *data)
 {
-	int	size_a;
-	int	size_b;
+	bool	res_sa;
+	bool	res_sb;
 
-	ft_swap_a(data);
-	ft_swap_b(data);
-	size_a = data->s_a.size;
-	size_b = data->s_b.size;
-	if (size_a && size_b)
+	res_sa = ft_swap(&data->s_a);
+	res_sb = ft_swap(&data->s_b);
+	if (res_sa && res_sb)
 	{
 		ft_print_ops(data, op_ss);
 		data->nb_moves++;
 	}
-	else if (size_a)
+	else if (res_sa)
 	{
 		ft_print_ops(data, op_sa);
 		data->nb_moves++;
 	}
-	else if (size_b)
+	else if (res_sb)
 	{
 		ft_print_ops(data, op_sb);
 		data->nb_moves++;

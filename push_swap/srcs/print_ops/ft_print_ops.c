@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:31:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 13:32:12 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/01 18:15:17 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_print_ops(t_data *data, t_op_type op_type)
 
 	if (op_type == op_none)
 	{
+		ft_optimize_ops(ops, nb_ops);
 		ft_print(ops, nb_ops);
 		nb_ops = 0;
 		return ;
@@ -79,6 +80,7 @@ void	ft_print_ops(t_data *data, t_op_type op_type)
 	nb_ops++;
 	if (nb_ops == OP_BUF_SIZE)
 	{
+		ft_optimize_ops(ops, nb_ops);
 		ft_print(ops, OP_BUF_SIZE - OP_SUB_BUF);
 		ft_align_ops(ops);
 		nb_ops = OP_SUB_BUF;

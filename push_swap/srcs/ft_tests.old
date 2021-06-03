@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/03 17:57:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/02 17:13:26 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,18 @@ void	ft_print_pseudo_sorted(t_ps *pseudo_sorted)
 	int	score = 0;
 
 	i = 0;
-	// printf("Pseudo sorted hash (size: %d):\n", pseudo_sorted->size);
-	// printf("%scircled: %d, first_nb: %6d%s - ",
-	// 	CLR_BLUE,
-	// 	pseudo_sorted->circled,
-	// 	pseudo_sorted->lower_nb,
-	// 	CLR_WHITE);
+	printf("Pseudo sorted hash (size: %d):\n", pseudo_sorted->size);
+	printf("%scircled: %d, first_nb: %6d%s - ",
+		CLR_BLUE,
+		pseudo_sorted->circled,
+		pseudo_sorted->lower_nb,
+		CLR_WHITE);
 	while (i < pseudo_sorted->size)
 	{
-		if (pseudo_sorted->hash[i] != 0)
+		if (pseudo_sorted->hash[i] == true)
 		{
 			score++;
-			printf("%d", pseudo_sorted->hash[i]);
+			printf("1");
 		}
 		else
 			printf("0");
@@ -153,11 +153,11 @@ void	ft_print_checks(t_list ***checks, int size)
 		while (curr)
 		{
 			curr_ps = (t_ps *)curr->content;
-			// printf("%scircled: %d, first_nb: %6d%s - ",
-			// 	CLR_BLUE,
-			// 	curr_ps->circled,
-			// 	curr_ps->lower_nb,
-			// 	CLR_WHITE);
+			printf("%scircled: %d, first_nb: %6d%s - ",
+				CLR_BLUE,
+				curr_ps->circled,
+				curr_ps->lower_nb,
+				CLR_WHITE);
 			ft_print_pseudo_sorted(curr_ps);
 			curr = curr->next;
 			nb_checks++;

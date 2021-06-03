@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/03 09:28:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/03 17:49:59 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,16 @@ bool	ft_sort(t_data *data)
 	// ft_set_pseudo_sorted(&data->s_a, &biggest_range);
 	
 	ft_pseudo_sort(&data->s_a);
-	// while (1)
-	// {
-	// 	;
-	// }
+	printf("PSEUDO SORTING CHECKS COMPLETED\n");
 	// To test
 	DEBUG_CODE(
 		printf("Stack A initial:\n");
 		ft_print_stack(&data->s_a);
 	)
+	while (1)
+	{
+		;
+	}
 	ft_generate_ops(data);
 
 	return (true);

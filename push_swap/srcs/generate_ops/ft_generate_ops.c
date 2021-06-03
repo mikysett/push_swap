@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 18:11:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/02 16:03:35 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_optimal_reverse_push(t_data *data)
 
 	last = &data->s_a.stack[data->s_a.size - 1];
 	first = &data->s_a.stack[0];
-	while (first->is_sorted == false)
+	while (first->is_sorted != 1)
 	{
 		if (!first->is_sorted && !last->is_sorted && last > first)
 		{
@@ -106,28 +106,62 @@ int	next_sorted(t_stack *s, int start_pos)
 	return (start_pos);
 }
 
+bool	ft_possible_sort_by_top(t_stack *s, int nb_sort_pos,
+	int start, bool recursive)
+{
+	if (start < 0)
+		return (false);
+	if (s->stack[start].is_sorted == 1)
+	{
+		if (s->stack[start].sort_pos == s->smaller_sort_pos
+			&& (nb_sort_pos > s->bigger_sort_pos || nb_sort_pos < s->smaller_sort_pos))
+			return (true);
+		else if (recursive)
+			return (ft_possible_sort_by_top(s, s->stack[start].sort_pos,
+					start - 1, true));
+		else
+			return (false);
+	}
+	else if (recursive)
+		return (ft_possible_sort_by_top(s, s->stack[start].sort_pos,
+				start - 1, true));
+	else
+		return (false);
+}
+
 void	ft_fill_b(t_data *data)
 {
 	int	prev_sorted_i;
 	int	next_sorted_i;
-
 	while (data->s_a.size &&
-		data->s_a.stack[data->s_a.size - 1].is_sorted == false)
+		data->s_a.stack[data->s_a.size - 1].is_sorted != 1)
 	{
-		// printf("s_a[0].nb: %d, is sorted: %d\n",
-		// 	data->s_a.stack[0].nb,
-		// 	data->s_a.stack[0].is_sorted);
-		// write(1, "fb - ", 5);
+		if (ft_possible_sort_by_top(&data->s_a,
+				data->s_a.stack[data->s_a.size - 1].sort_pos,
+				data->s_a.size - 2, false))
+		{
+			data->s_a.nb_sorted++;
+			data->s_a.stack[data->s_a.size - 1].is_sorted = 1;
+			if (data->s_a.stack[data->s_a.size - 1].sort_pos > data->s_a.bigger_sort_pos)
+				data->s_a.bigger_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
+			else
+				data->s_a.smaller_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
+
+			ft_swap_a(data);
+			ft_fill_b(data);
+			return ;
+		}
+
 		prev_sorted_i = prev_sorted(&data->s_a, data->s_a.size - 3);
 		next_sorted_i = next_sorted(&data->s_a, 1);
-		if (data->s_a.stack[data->s_a.size - 2].is_sorted == true
+		if (data->s_a.stack[data->s_a.size - 2].is_sorted == 1
 				&& ft_is_sort_pos(&data->s_a,
 					data->s_a.size - 2 - prev_sorted_i,
 					data->s_a.stack[data->s_a.size - 1].sort_pos,
 					prev_sorted_i))
 		{
-			data->nb_sorted++;
-			data->s_a.stack[data->s_a.size - 1].is_sorted = true;
+			data->s_a.nb_sorted++;
+			data->s_a.stack[data->s_a.size - 1].is_sorted = 1;
 			if (data->s_a.stack[data->s_a.size - 1].sort_pos > data->s_a.bigger_sort_pos)
 				data->s_a.bigger_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
 			else if (data->s_a.stack[data->s_a.size - 1].sort_pos < data->s_a.smaller_sort_pos)
@@ -141,14 +175,19 @@ void	ft_fill_b(t_data *data)
 			ft_fill_b(data);
 			return ;
 		}
-		else if (data->s_a.stack[0].is_sorted == true
+		else if (
+			!(ft_possible_sort_by_top(&data->s_a,
+				data->s_a.stack[data->s_a.size - 2].sort_pos,
+				data->s_a.size - 3, true))
+			&&
+			data->s_a.stack[0].is_sorted == 1
 				&& ft_is_sort_pos(&data->s_a,
 					next_sorted_i,
 					data->s_a.stack[data->s_a.size - 1].sort_pos,
 					0))
 		{
-			data->nb_sorted++;
-			data->s_a.stack[data->s_a.size - 1].is_sorted = true;
+			data->s_a.nb_sorted++;
+			data->s_a.stack[data->s_a.size - 1].is_sorted = 1;
 			if (data->s_a.stack[data->s_a.size - 1].sort_pos > data->s_a.bigger_sort_pos)
 				data->s_a.bigger_sort_pos = data->s_a.stack[data->s_a.size - 1].sort_pos;
 			else if (data->s_a.stack[data->s_a.size - 1].sort_pos < data->s_a.smaller_sort_pos)
@@ -174,14 +213,14 @@ void	ft_fill_b(t_data *data)
 		else if (ft_optimal_swap(data))
 			data->wait_to_swap = true;
 	}
-	if (!data->s_a.size || data->nb_sorted == data->s_a.size)
+	if (!data->s_a.size || data->s_a.nb_sorted == data->s_a.size)
 		return ;
 	if (ft_is_rotate_better(data))
-		while (data->s_a.stack[data->s_a.size - 1].is_sorted == true)
+		while (data->s_a.stack[data->s_a.size - 1].is_sorted == 1)
 			ft_rotate_a(data);
 	else
 	{
-		while (data->s_a.stack[0].is_sorted == true)
+		while (data->s_a.stack[0].is_sorted == 1)
 			ft_reverse_rotate_a(data);
 		ft_optimal_reverse_push(data);
 	}
@@ -198,9 +237,9 @@ void	ft_mov_align_a(t_nb *nb, t_stack *s, int nb_sort_pos)
 	nb->strat.a_r = 0;
 	nb->strat.a_rr = 1;
 	DEBUG_CODE(
-		printf("smaller sort pos: %d\n", s->smaller_sort_pos);
-		printf("bigger sort pos: %d\n", s->bigger_sort_pos);
-		printf("nb sort pos: %d\n", nb_sort_pos);
+		// printf("smaller sort pos: %d\n", s->smaller_sort_pos);
+		// printf("bigger sort pos: %d\n", s->bigger_sort_pos);
+		// printf("nb sort pos: %d\n", nb_sort_pos);
 	)
 	// while (s->stack[top].sort_pos < nb_sort_pos
 	// 		|| (s->stack[next_p(top, 1, s->size)].sort_pos < nb_sort_pos
@@ -209,7 +248,7 @@ void	ft_mov_align_a(t_nb *nb, t_stack *s, int nb_sort_pos)
 	{
 		nb->strat.a_r++;
 		top--;
-		DEBUG_CODE(printf("top: %d\n", top);)
+		// DEBUG_CODE(printf("top: %d\n", top);)
 	}
 	// while (s->stack[down].sort_pos > nb_sort_pos
 	// 		|| s->stack[prev_p(down, 1, s->size)].sort_pos < nb_sort_pos)
@@ -217,7 +256,7 @@ void	ft_mov_align_a(t_nb *nb, t_stack *s, int nb_sort_pos)
 	{
 		nb->strat.a_rr++;
 		down++;
-		DEBUG_CODE(printf("down\n");)
+		// DEBUG_CODE(printf("down\n");)
 	}
 }
 
@@ -291,8 +330,8 @@ t_nb	ft_best_to_sort(t_data *data)
 			best_nb = nb;
 		i++;
 	}
-	data->nb_sorted++;
-	best_nb->is_sorted = true;
+	data->s_a.nb_sorted++;
+	best_nb->is_sorted = 1;
 	DEBUG_CODE(
 		printf("BEST NB TO SORT: %d\n", best_nb->nb);
 		ft_print_strat(best_nb);
@@ -411,8 +450,9 @@ void	ft_generate_ops(t_data *data)
 {
 	data->wait_to_swap = true;
 	data->nb_moves = 0;
-	DEBUG_CODE(printf("data->nb_sorted: %d\n", data->nb_sorted);)
+	DEBUG_CODE(printf("data->s_a.nb_sorted: %d\n", data->s_a.nb_sorted);)
 	ft_set_edge_sort_pos(&data->s_a);
+	// return ;
 	ft_fill_b(data);
 	DEBUG_CODE(
 		printf("Stack A:\n");
@@ -433,3 +473,32 @@ void	ft_generate_ops(t_data *data)
 	)
 	ft_print_ops(data, op_none);
 }
+
+// t_range	ft_take_best_range(t_stack *s)
+// {
+// 	int		i;
+// 	t_range	before_ps;
+
+// 	i = s->size - 1;
+// 	while (i >= 0)
+// 	{
+
+// 		i--;
+// 	}
+// }
+
+// void	ft_generate_ops(t_data *data)
+// {
+// 	t_range	best_range;
+
+// 	data->wait_to_swap = true;
+// 	data->nb_moves = 0;
+// 	ft_set_edge_sort_pos(&data->s_a);
+// 	best_range = ft_take_best_range(&data->s_a);
+
+// 	ft_fill_b(data);
+// 	ft_sort_in_a(data);
+
+// 	ft_rotate_sorted(data);
+// 	ft_print_ops(data, op_none);
+// }

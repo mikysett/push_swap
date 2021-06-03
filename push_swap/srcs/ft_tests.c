@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/31 11:03:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/02 17:13:26 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_print_stack(t_stack *s)
 	printf("----  %20s|%20s|%20s|\n", "NUMBER", "INITIAL POS", "SORTED POS");
 	while (i >= 0)
 	{
-		if (s->stack[i].is_sorted)
+		if (s->stack[i].is_sorted > 0)
 		{
 			printf(CLR_GREEN);
 			nb_sorted++;
@@ -118,6 +118,11 @@ void	ft_print_pseudo_sorted(t_ps *pseudo_sorted)
 
 	i = 0;
 	printf("Pseudo sorted hash (size: %d):\n", pseudo_sorted->size);
+	printf("%scircled: %d, first_nb: %6d%s - ",
+		CLR_BLUE,
+		pseudo_sorted->circled,
+		pseudo_sorted->lower_nb,
+		CLR_WHITE);
 	while (i < pseudo_sorted->size)
 	{
 		if (pseudo_sorted->hash[i] == true)

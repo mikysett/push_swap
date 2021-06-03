@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 18:57:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/03 08:22:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define OP_BUF_SIZE	1000
 # define OP_SUB_BUF		10
-# define MAX_REC		1000000L
+# define MAX_REC		100000L
 
 typedef enum	e_op_type
 {
@@ -75,7 +75,7 @@ typedef struct	s_sort_strat
 typedef struct	s_nb
 {
 	int				nb;
-	bool			is_sorted;
+	int				is_sorted;
 	int				sort_pos;
 	int				init_pos;
 	t_sort_strat	strat;
@@ -86,6 +86,8 @@ typedef struct	s_stack
 {
 	t_nb	*stack;
 	int		size;
+	int		nb_sorted;
+	int		sorting_level;
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
 }				t_stack;
@@ -103,7 +105,6 @@ typedef struct	s_data
 	// t_stack		s_a_sorted;
 	t_stack		s_b;
 	bool		wait_to_swap;
-	int			nb_sorted;
 
 	int			nb_moves;
 }				t_data;
@@ -133,7 +134,6 @@ typedef struct	s_ps_rec
 	t_ps	*new;
 	int		pos_nb;
 	int		s_size;
-	bool	circled;
 }				t_ps_rec;
 
 #endif

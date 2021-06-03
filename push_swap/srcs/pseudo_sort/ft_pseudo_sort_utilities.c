@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 17:04:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/02 15:24:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ void	ft_take_best(t_ps **best, t_ps **new)
 {
 	if ((*best) == 0 || (*best)->score < (*new)->score)
 		(*best) = (*new);
-
-	// if ((*best) == 0)
-	// 	(*best) = (*new);
-	// else if ((*best)->score < (*new)->score)
-	// {
-	// 	ft_free_pseudo_sort(*best);
-	// 	(*best) = (*new);
-	// }
-	// else
-	// 	ft_free_pseudo_sort(*new);
 }
 
 void	ft_set_is_sorted(t_stack *s, t_ps *ps)
@@ -71,7 +61,7 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	while (j >= 0)
 	{
 		if (ps->hash[j] == true)
-			s->stack[i].is_sorted = true;
+			s->stack[i].is_sorted = s->sorting_level;
 		i--;
 		j--;
 	}

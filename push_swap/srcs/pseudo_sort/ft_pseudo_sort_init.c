@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/30 19:18:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/02 18:32:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	ft_free_pseudo_sort(t_ps *pseudo_sort)
 	free(pseudo_sort);
 }
 
-void	ft_init_ps_rec(t_ps_rec *rec, t_stack *s, bool circled, int pos)
+void	ft_init_ps_rec(t_ps_rec *rec, t_stack *s, int pos)
 {
 	rec->best = 0;
 	rec->new = 0;
 	rec->pos_nb = s->stack[pos].nb;
 	rec->s_size = s->size;
-	rec->circled = circled;
 }
 
 void	ft_init_ps_data(t_ps_data *ps_data, t_stack *s)
@@ -64,8 +63,11 @@ t_ps	*ft_best_checked(t_list **checks, int circled, int first_nb)
 		{
 			if (best == 0 || best->score < curr_ps->score)
 			{
+			// 	printf("%sSERVING FROM BUFFER CHECKS, SIZE: %d%s\n",
+			// 		CLR_GREEN,
+			// 		curr_ps->size,
+			// 		CLR_WHITE);
 				best = curr_ps;
-				// printf("%sALREADY CHECKED, size: %d\n%s", CLR_GREEN, curr_ps->size, CLR_WHITE);
 			}
 		}
 		curr = curr->next;
@@ -91,10 +93,7 @@ t_ps	*ft_abs_best_checked(t_list **checks, bool *linear_v, bool *circled_v)
 		else if (!*linear_v)
 			*linear_v = true;
 		if (best == 0 || best->score < curr_ps->score)
-		{
 			best = curr_ps;
-			// printf("%sALREADY CHECKED, size: %d\n%s", CLR_GREEN, curr_ps->size, CLR_WHITE);
-		}
 		curr = curr->next;
 	}
 	return (best);

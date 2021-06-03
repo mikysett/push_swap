@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/31 11:42:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/03 09:28:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	next_p(int pos, int step, int stack_size)
 // 	curr = range.lower;
 // 	while (i < range.size)
 // 	{
-// 		s->stack[curr].is_sorted = true;
+// 		s->stack[curr].is_sorted = 1;
 // 		curr = next_p(curr, 1, s->size);
 // 		i++;
 // 	}
@@ -126,8 +126,11 @@ bool	ft_sort(t_data *data)
 	// ft_set_sort_range(&data->s_a, biggest_range);
 	// ft_set_pseudo_sorted(&data->s_a, &biggest_range);
 	
-	ft_pseudo_sort(data);
-
+	ft_pseudo_sort(&data->s_a);
+	// while (1)
+	// {
+	// 	;
+	// }
 	// To test
 	DEBUG_CODE(
 		printf("Stack A initial:\n");

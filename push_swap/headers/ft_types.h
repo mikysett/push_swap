@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/03 18:24:20 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 01:36:12 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,11 @@ typedef struct	s_data
 
 typedef struct	s_ps
 {
-	bool	*hash;
+	char	*hash;
+	int		size;
+	int		chunk_size;
 	int		score;
-	int		start;
-	int		size;	
+	int		partial_score;
 }				t_ps;
 
 typedef struct	s_ps_data
@@ -131,8 +132,8 @@ typedef struct	s_ps_rec
 	t_ps	*best;
 	t_ps	*new;
 	int		pos_nb;
-	int		pos_first_nb;
-	int		s_size;
+	// int		pos_first_nb;
+	// int		s_size;
 }				t_ps_rec;
 
 #endif

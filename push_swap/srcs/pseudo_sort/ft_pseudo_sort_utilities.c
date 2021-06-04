@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/02 15:24:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 00:44:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ static void	ft_free_sgl_check(void *void_ps)
 	free(ps);
 }
 
-void	ft_free_checks(t_ps_data *ps_data)
+void	ft_free_checks(t_list ***checks, int s_size)
 {
 	int		i;
 
 	i = 0;
-	while (i < ps_data->s->size)
+	while (i < s_size)
 	{
-		ft_lstclear(ps_data->checks[i], ft_free_sgl_check);
-		free(ps_data->checks[i]);
+		ft_lstclear(checks[i], ft_free_sgl_check);
+		free(checks[i]);
 		i++;
 	}
-	free(ps_data->checks);
+	free(checks);
 }
 
 void	ft_save_check(t_list **checks, t_ps *new)
@@ -51,19 +51,23 @@ void	ft_take_best(t_ps **best, t_ps **new)
 		(*best) = (*new);
 }
 
+void	ft_take_partial_best(t_ps **best, t_ps **new)
+{
+	if ((*new) != 0
+		&& ((*best) == 0 || (*best)->partial_score < (*new)->partial_score))
+		(*best) = (*new);
+}
+
 void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 {
 	int	i;
-	int	j;
 
-	i = s->size - 1;
-	j = ps->size - 1;
-	while (j >= 0)
+	i = 0;
+	while (i < s->size)
 	{
-		if (ps->hash[j] == true)
+		if (ps->hash[i] == true)
 			s->stack[i].is_sorted = s->sorting_level;
-		i--;
-		j--;
+		i++;
 	}
 }
 

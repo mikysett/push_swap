@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/03 18:43:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 01:27:04 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,49 @@
 
 static t_ps	*ft_set_result(t_ps *best, int size, int pos, int initial_pos)
 {
-	int		i;
 	t_ps	*res;
 
 	res = malloc(sizeof(t_ps));
 	if (res)
-		res->hash = ft_calloc(size, sizeof(bool));
+		res->hash = ft_calloc(size, sizeof(char));
 	if (!res || !res->hash)
 		ft_exit_failure();
-	res->hash[0] = 1;
+	res->hash[pos] = 1;
 	res->score = 1;
+	res->partial_score = 1;
 	res->size = size;
+	if (pos > initial_pos)
+		res->chunk_size = size - pos;
+	else
+		res->chunk_size = initial_pos - pos;
 	if (!best)
 		return (res);
-	i = 0;
-	printf("best hash (pos: %d):\n", pos);
-	while (i < size)
+	pos++;
+	if (pos == size)
+		pos = 0;
+	while (pos != initial_pos)
 	{
-		printf("%d", best->hash[i]);
-		if (best->hash[i] != 0)
-			res->hash[(i + pos) % size] = best->hash[i];
-		i++;
+		if (best->hash[pos] != 0)
+			res->hash[pos] = 1;
+		pos++;
+		if (pos == size)
+			pos = 0;
 	}
-	printf("\n");
-	res->score += best->score;
+	res->partial_score += best->partial_score;
+	res->score += best->partial_score;
+
+
+	// int i;
+	// i = 0;
+	// printf(CLR_YELLOW);
+	// while (i < size)
+	// {
+	// 	printf("%d", res->hash[i]);
+	// 	i++;
+	// }
+	// printf("\n");
+	// printf(CLR_WHITE);
+	
 	return (res);
 }
 
@@ -48,82 +67,90 @@ static bool	ft_is_nb_eligible(t_nb *nb, int rec_pos_nb)
 	return (false);
 }
 
-static t_ps	*ft_do_pseudo_sort(t_ps_data *ps_data, int pos, int initial_pos)
+static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s, int pos, int initial_pos)
 {
 	t_ps_rec	rec;
+	t_nb		*nb;
 	int			i;
 
-	ft_init_ps_rec(&rec, ps_data->s, pos);
-	i = pos;
-	while (++i % ps_data->s->size != initial_pos)
+	ft_init_ps_rec(&rec, s, pos);
+	i = (pos + 1) % s->size;
+	while (i != initial_pos)
 	{
-		// if (pos == 0)
-		// 	printf("i %% = %d - ", i % ps_data->s->size);
-		if (ft_is_nb_eligible(&ps_data->s->stack[i % ps_data->s->size], rec.pos_nb))
+		nb = &s->stack[i];
+		if (!nb->is_sorted && nb->nb < rec.pos_nb)
 		{
 			// Recursion depth limit
 			// if (ps_data->nb_rec > MAX_REC)
 			// 	break;
-			// rec.new = ft_best_checked(ps_data->checks[i % ps_data->s->size]);
-			// if (!rec.new)
+			rec.new = ft_best_checked(checks[i], s->size, i, initial_pos);
+			if (!rec.new)
 			{
-				rec.new = ft_do_pseudo_sort(ps_data, i % ps_data->s->size, initial_pos);
+				rec.new = ft_do_pseudo_sort(checks, s, i, initial_pos);
 				// DEBUG_CODE(printf("%sRECAL: nb_rec: %ld%s - ", CLR_YELLOW, ps_data->nb_rec, CLR_WHITE);)
-				ft_save_check(ps_data->checks[i % ps_data->s->size], rec.new);
-				// ft_print_checks(ps_data->checks, ps_data->s->size);
-				ps_data->nb_rec++;
+				
+				ft_save_check(checks[i], rec.new);
+				
+				// ft_print_checks(ps_data->checks, s->size);
+
+				// ps_data->nb_rec++;
 			}
-			ft_take_best(&rec.best, &rec.new);
+			ft_take_partial_best(&rec.best, &rec.new);
 			// NO recursion depth limit
-			// if (rec.best->score > ps_data->s->size - pos)
+			// if (rec.best->score > s->size - pos)
 			// 	break;
 		}
+		i++;
+		if (i == s->size)
+			i = 0;
 	}
 	// if (pos == 0)
 	// 	ft_exit_failure();
-	// printf("ps_data->s->size(%d) + pos(%d): %d\n\n", ps_data->s->size, pos, ps_data->s->size + pos);
-	return (ft_set_result(rec.best, ps_data->s->size, pos, initial_pos));
+	// printf("s->size(%d) + pos(%d): %d\n\n", s->size, pos, s->size + pos);
+	return (ft_set_result(rec.best, s->size, pos, initial_pos));
 }
 
 void	ft_pseudo_sort(t_stack *s)
 {
 	int			i;
-	int			i_nb;
-
-	t_ps_data	ps_data;
+	t_ps		*best;
+	t_ps		*new;
+	t_list		***checks;
 
 	i = 0;
+	best = 0;
 	s->sorting_level++;
-	ft_init_ps_data(&ps_data, s);
 
-	while (i < s->size - 1)
+	// ft_init_ps_data(&ps_data, s);
+	checks = ft_init_checks(s->size);
+	while (i < s->size)
 	{
-		i_nb = s->stack[i].nb;
-		ps_data.new = ft_abs_best_checked(ps_data.checks[i]);
-		if (!ps_data.new)
+		// i_nb = s->stack[i].nb;
+		// ps_data.new = ft_abs_best_checked(ps_data.checks[i]);
+		// if (!ps_data.new)
 		{
-			printf("pos: %d\n\n", i);
-			ps_data.new = ft_do_pseudo_sort(&ps_data, i, i);
-			ft_save_check(*ps_data.checks, ps_data.new);
+			new = ft_do_pseudo_sort(checks, s, i, i);
+			ft_save_check(checks[i], new);
+			
 			// ft_print_pseudo_sorted(ps_data.new);
 		}
 		DEBUG_CODE(
 			printf("\n%sDoing pseudo sort starting at pos: %d%s - ", CLR_BLUE, i, CLR_WHITE);
-			if (ps_data.nb_rec > 0)
-				printf("i: %10d, nb_rec: %ld\n", i, ps_data.nb_rec);
+			printf("    i: %4d\n", i);
 		)
 		// To switch recursions from global nb to single rec execution number
 		// ps_data.nb_rec = 0;
-		DEBUG_CODE(ft_print_pseudo_sorted(ps_data.new);)
-		ft_take_best(&ps_data.best, &ps_data.new);
-		if (ps_data.best->score >= s->size - i)
-			break;
+		DEBUG_CODE(ft_print_pseudo_sorted(new);)
+		ft_take_best(&best, &new);
+		// if (ps_data.best->score >= s->size - i)
+		// 	break;
 		i++;
 	}
-	DEBUG_CODE(ft_print_pseudo_sorted(ps_data.best);)
+	DEBUG_CODE(ft_print_pseudo_sorted(best);)
 
-	ft_set_is_sorted(s, ps_data.best);
-	s->nb_sorted = ps_data.best->score;
+	ft_set_is_sorted(s, best);
+	s->nb_sorted = best->score;
+	DEBUG_CODE(printf("nb_sorted: %d\n", best->score);)
 
-	ft_free_checks(&ps_data);
+	ft_free_checks(checks, s->size);
 }

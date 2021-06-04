@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:14:31 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/02 11:59:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:33:34 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,42 @@ static int	ft_opti_rra(t_op_info *ops, int curr_pos, int nb_ops, bool *is_fine)
 	return (0);
 }
 
+static int	ft_opti_ra(t_op_info *ops, int curr_pos, int nb_ops, bool *is_fine)
+{
+	int	next[2];
+
+	next[0] = ft_next_op(ops, curr_pos, nb_ops);
+	next[1] = ft_next_op(ops, next[0], nb_ops);
+
+	if (next[1] == -1)
+		return (0);
+	if (ops[curr_pos].a_size == 3
+		&& ops[curr_pos].type == op_ra
+		&& ops[next[0]].type == op_sa
+		&& ops[next[1]].type == op_rra)
+	{
+		ops[curr_pos].type = op_sa;
+		ops[next[0]].type = op_ra;
+		ops[next[1]].type = op_none;
+		DEBUG_CODE(printf("ft_opti_ra() applied!\n");)
+		*is_fine = false;
+		return (next[1] - curr_pos);
+	}
+	else if (ops[curr_pos].b_size != 3
+		&& ops[curr_pos].type == op_rb
+		&& ops[next[0]].type == op_sb
+		&& ops[next[1]].type == op_rrb)
+	{
+		ops[curr_pos].type = op_sb;
+		ops[next[0]].type = op_rb;
+		ops[next[1]].type = op_none;
+		DEBUG_CODE(printf("ft_opti_rb() applied!\n");)
+		*is_fine = false;
+		return (next[1] - curr_pos);
+	}
+	return (0);
+}
+
 void	ft_optimize_ops(t_op_info *ops, int nb_ops)
 {
 	int		i;
@@ -213,6 +249,8 @@ void	ft_optimize_ops(t_op_info *ops, int nb_ops)
 			continue;
 		if (ops[i].type == op_rra)
 			i += ft_opti_rra(ops, i, nb_ops, &is_fine);
+		if (ops[i].type == op_ra || ops[i].type == op_rb)
+			i += ft_opti_ra(ops, i, nb_ops, &is_fine);
 	}
 	if (!is_fine)
 		ft_optimize_ops(ops, nb_ops);

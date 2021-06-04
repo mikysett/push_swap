@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 01:36:12 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 16:28:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else
@@ -115,7 +115,6 @@ typedef struct	s_ps
 	int		size;
 	int		chunk_size;
 	int		score;
-	int		partial_score;
 }				t_ps;
 
 typedef struct	s_ps_data

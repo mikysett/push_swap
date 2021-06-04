@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 00:44:45 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 16:43:19 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,12 @@ void	ft_save_check(t_list **checks, t_ps *new)
 	ft_lstadd_front(checks, new_el);
 }
 
-void	ft_take_best(t_ps **best, t_ps **new)
-{
-	if ((*best) == 0 || (*best)->score < (*new)->score)
-		(*best) = (*new);
-}
-
-void	ft_take_partial_best(t_ps **best, t_ps **new)
-{
-	if ((*new) != 0
-		&& ((*best) == 0 || (*best)->partial_score < (*new)->partial_score))
-		(*best) = (*new);
-}
+// void	ft_take_partial_best(t_ps **best, t_ps **new)
+// {
+// 	if ((*new) != 0
+// 		&& ((*best) == 0 || (*best)->score < (*new)->score))
+// 		(*best) = (*new);
+// }
 
 void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 {
@@ -71,4 +65,10 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	}
 }
 
-
+int	ft_chunk_size(int size, int pos, int first_pos)
+{
+	if (pos > first_pos)
+		return (size - pos);
+	else
+		return (first_pos - pos);
+}

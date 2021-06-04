@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 11:17:52 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/04 16:26:18 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@
 # include <limits.h>
 # include "../libft/libft/libft.h"
 # include "ft_types.h"
+
 # include "ft_operation_swap.h"
 # include "ft_operation_push.h"
 # include "ft_operation_rotate.h"
 # include "ft_operation_reverse_rotate.h"
+
+# include "ft_checks_utilities.h"
 # include "ft_pseudo_sort_init.h"
 # include "ft_pseudo_sort_utilities.h"
 # include "ft_pseudo_sort.h"
+
 # include "ft_check_sort.h"
 # include "ft_sort.h"
 # include "ft_print_ops.h"

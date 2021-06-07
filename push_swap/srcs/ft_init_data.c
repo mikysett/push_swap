@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:33:19 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/02 15:49:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/07 14:04:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ bool	ft_init_data(int argc, char **argv, t_data *data)
 		data->s_a.stack[i].nb = ft_atoi(argv[j]);
 		data->s_a.stack[i].init_pos = i;
 		data->s_a.stack[i].is_sorted = 0;
+		data->s_a.stack[i].in_range = false;
 		// data->s_a.stack[i].pseudo_sort_lower = false;
 		// data->s_a.stack[i].pseudo_sort_higher = false;
 		// data->s_a_sorted.stack[i].nb = data->s_a.stack[i].nb;

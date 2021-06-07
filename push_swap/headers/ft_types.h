@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 16:28:44 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/07 14:40:12 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
 
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else
@@ -78,6 +78,7 @@ typedef struct	s_nb
 	int				is_sorted;
 	int				sort_pos;
 	int				init_pos;
+	bool			in_range;
 	t_sort_strat	strat;
 	int				mov_to_sort;
 }				t_nb;
@@ -90,23 +91,23 @@ typedef struct	s_stack
 	int		sorting_level;
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
+	bool	has_in_range;
 }				t_stack;
 
 typedef struct	s_range
 {
-	int	lower;
-	int	higher;
-	int	size;
+	int	ind_start;
+	int	ind_end;
+	int	start_nb;
+	int	end_nb;
 }				t_range;
 
 typedef struct	s_data
 {
-	t_stack		s_a;
-	// t_stack		s_a_sorted;
-	t_stack		s_b;
-	bool		wait_to_swap;
-
-	int			nb_moves;
+	t_stack	s_a;
+	t_stack	s_b;
+	bool	wait_to_swap;
+	t_range	range;
 }				t_data;
 
 typedef struct	s_ps
@@ -131,8 +132,6 @@ typedef struct	s_ps_rec
 	t_ps	*best;
 	t_ps	*new;
 	int		pos_nb;
-	// int		pos_first_nb;
-	// int		s_size;
 }				t_ps_rec;
 
 #endif

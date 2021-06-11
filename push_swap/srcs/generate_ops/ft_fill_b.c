@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 14:55:26 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 14:34:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	ft_update_edge_sort_pos(t_stack *s, int nb_sort_pos)
 {
 		if (nb_sort_pos > s->bigger_sort_pos)
 			s->bigger_sort_pos = nb_sort_pos;
-		else
+		else if (nb_sort_pos < s->smaller_sort_pos)
 			s->smaller_sort_pos = nb_sort_pos;
 }
 
@@ -120,16 +120,14 @@ void	ft_update_b(t_data *data, t_stack *s)
 	if (!s->size)
 		return ;
 	top = s->size - 1;
-	if (!s->has_in_range && s->stack[top].in_range == true)
-		s->has_in_range = true;
-	if (s->has_in_range && s->stack[top].in_range == false)
+	if (s->stack[top].in_range == true)
+		s->nb_in_range++;
+	else if (s->nb_in_range > 0)
 		ft_rotate_b(data);
 }
 
 void	ft_fill_b(t_data *data)
 {
-	int	prev_sorted_i;
-	int	next_sorted_i;
 	int	top;
 
 	top = data->s_a.size - 1;
@@ -141,32 +139,33 @@ void	ft_fill_b(t_data *data)
 		{
 			data->s_a.nb_sorted++;
 			data->s_a.stack[top].is_sorted = 1;
+			data->s_a.stack[top].in_range = false;
 			ft_update_edge_sort_pos(&data->s_a, data->s_a.stack[top].sort_pos);
 			ft_swap_a(data);
 			break;
 		}
-		prev_sorted_i = prev_sorted(&data->s_a, top - 2);
-		next_sorted_i = next_sorted(&data->s_a, 1);
 		if (data->s_a.stack[top - 1].is_sorted == 1
 				&& ft_is_sort_pos(&data->s_a,
-					top - 1 - prev_sorted_i,
+					1,
 					data->s_a.stack[top].sort_pos,
-					prev_sorted_i))
+					top - 1))
 		{
 			data->s_a.nb_sorted++;
 			data->s_a.stack[top].is_sorted = 1;
+			data->s_a.stack[top].in_range = false;
 			ft_update_edge_sort_pos(&data->s_a, data->s_a.stack[top].sort_pos);
 			ft_swap_a(data);
 			break;
 		}
 		else if (data->s_a.stack[0].is_sorted == 1
 				&& ft_is_sort_pos(&data->s_a,
-					next_sorted_i,
+					1,
 					data->s_a.stack[top].sort_pos,
-					0))
+					1))
 		{
 			data->s_a.nb_sorted++;
 			data->s_a.stack[top].is_sorted = 1;
+			data->s_a.stack[top].in_range = false;
 			ft_update_edge_sort_pos(&data->s_a, data->s_a.stack[top].sort_pos);
 			ft_reverse_rotate_a(data);
 			ft_swap_a(data);

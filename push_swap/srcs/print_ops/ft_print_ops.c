@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:31:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 15:14:25 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 15:04:07 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,25 @@ static void	ft_print_sgl_op(t_op_type type)
 static void	ft_print(t_op_info *ops, int nb_to_print)
 {
 	int	i;
+	DEBUG_CODE(
+		int	nb_ops = 0;
+	)
 
 	i = 0;
 	while (i < nb_to_print)
 	{
 		if (ops[i].type != op_none)
+		{
 			ft_print_sgl_op(ops[i].type);
+			DEBUG_CODE(
+				nb_ops++;
+			)
+		}
 		i++;
 	}
+	DEBUG_CODE(
+		printf("nb_ops: %d\n", nb_ops);
+	)
 }
 
 static void	ft_align_ops(t_op_info *ops)

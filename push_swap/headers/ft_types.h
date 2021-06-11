@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 14:40:12 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 21:37:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else
@@ -91,7 +91,7 @@ typedef struct	s_stack
 	int		sorting_level;
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
-	bool	has_in_range;
+	int		nb_in_range;
 }				t_stack;
 
 typedef struct	s_range
@@ -114,7 +114,9 @@ typedef struct	s_ps
 {
 	char	*hash;
 	int		size;
+	int		start_pos;
 	int		chunk_size;
+	int		protection_lvl;
 	int		score;
 }				t_ps;
 

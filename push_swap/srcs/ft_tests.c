@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/03 17:57:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 19:11:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	ft_print_stack(t_stack *s)
 	printf("----  %20s|%20s|%20s|\n", "NUMBER", "INITIAL POS", "SORTED POS");
 	while (i >= 0)
 	{
-		if (s->stack[i].is_sorted > 0)
+		if (s->stack[i].in_range == true)
+			printf(CLR_YELLOW);
+		else if (s->stack[i].is_sorted > 0)
 		{
 			printf(CLR_GREEN);
 			nb_sorted++;
@@ -176,4 +178,26 @@ void	ft_print_strat(t_nb *nb)
 	printf("%12s: %d\n", "a_r", nb->strat.a_r);
 	printf("%12s: %d\n", "a_rr", nb->strat.a_rr);
 	printf("%12s: %d\n", "type", nb->strat.type);
+}
+
+void	ft_print_data_range(t_data *data)
+{
+	printf("ind_start: %d  |  ind_end: %d  |  start_nb: %d  |  end_nb: %d\n",
+		data->range.ind_start,
+		data->range.ind_end,
+		data->range.start_nb,
+		data->range.end_nb);
+}
+
+void	ft_print_checks_nb(t_list ***checks, int s_a_size)
+{
+	int	i;
+	int	nb_checks;
+
+	i = 0;
+	while (i < s_a_size)
+	{
+		printf("%3d. list size: %d\n", i, ft_lstsize(*checks[i]));
+		i++;
+	}
 }

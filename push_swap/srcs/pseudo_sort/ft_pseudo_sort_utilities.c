@@ -6,13 +6,13 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 16:43:19 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 19:34:18 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	ft_free_sgl_check(void *void_ps)
+void	ft_free_sgl_check(void *void_ps)
 {
 	t_ps *ps;
 
@@ -65,10 +65,10 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	}
 }
 
-int	ft_chunk_size(int size, int pos, int first_pos)
+int	ft_chunk_size(int stack_size, int pos, int first_pos)
 {
 	if (pos > first_pos)
-		return (size - pos);
+		return (stack_size - pos + first_pos + 1);
 	else
 		return (first_pos - pos);
 }

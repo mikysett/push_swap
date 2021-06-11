@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 14:40:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 21:38:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	ft_sort(t_data *data)
 	// 	;
 	// }
 	data->wait_to_swap = true;
-	data->s_b.has_in_range = false;
+	data->s_b.nb_in_range = 0;
 	ft_set_edge_sort_pos(&data->s_a);
 	ft_generate_ops(data);
 	ft_rotate_sorted(data);

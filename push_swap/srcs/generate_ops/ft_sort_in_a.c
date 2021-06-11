@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 15:03:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/08 14:28:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	ft_mov_align_a(t_nb *nb, t_stack *s, int nb_sort_pos)
 	int	top;
 	int	down;
 
-	top = s->size - 1;
+	top = s->size;
 	down = 0;
 	nb->strat.a_r = 0;
-	nb->strat.a_rr = 1;
+	nb->strat.a_rr = 0;
 	while (!ft_is_sort_pos(s, 1, nb_sort_pos, top))
 	{
 		nb->strat.a_r++;
@@ -64,7 +64,7 @@ static void	ft_set_mov_to_sort(t_nb *nb)
 	}
 }
 
-static t_nb	*ft_best_to_sort(t_data *data)
+static t_nb	*ft_best_to_sort(t_data *data, bool only_in_range)
 {
 	int		i;
 	t_nb	*nb;
@@ -75,7 +75,7 @@ static t_nb	*ft_best_to_sort(t_data *data)
 	while (i < data->s_b.size)
 	{
 		nb = &data->s_b.stack[i];
-		if (nb->in_range)
+		if (!only_in_range || nb->in_range)
 		{
 			ft_mov_align_a(nb, &data->s_a, nb->sort_pos);
 			// ft_mov_to_top(nb, i, data->s_b.size);
@@ -91,7 +91,11 @@ static t_nb	*ft_best_to_sort(t_data *data)
 	{
 		data->s_a.nb_sorted++;
 		best_nb->is_sorted = 1;
-		best_nb->in_range = false;
+		if (best_nb->in_range)
+		{
+			best_nb->in_range = false;
+			data->s_b.nb_in_range--;
+		}
 		DEBUG_CODE(
 			printf("BEST NB TO SORT: %d\n", best_nb->nb);
 			ft_print_strat(best_nb);
@@ -159,11 +163,14 @@ static void	ft_sort_nb(t_data *data, t_nb *nb_ptr)
 		data->s_a.smaller_sort_pos = nb.sort_pos;
 }
 
-void	ft_sort_in_a(t_data *data)
+void	ft_sort_in_a(t_data *data, bool only_in_range)
 {
 	if (data->s_b.size == 0)
 		return ;
-	ft_sort_nb(data, ft_best_to_sort(data));
+	while (data->s_b.nb_in_range)
+		ft_sort_nb(data, ft_best_to_sort(data, only_in_range));
+	if (!only_in_range)
+		ft_sort_nb(data, ft_best_to_sort(data, only_in_range));
 	DEBUG_CODE(
 		printf("Stack A:\n");
 		ft_print_stack(&data->s_a);

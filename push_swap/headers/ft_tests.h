@@ -20,5 +20,6 @@ void	ft_print_checks(t_list ***checks, int size);
 void	ft_print_strat(t_nb *nb);
 void	ft_print_data_range(t_data *data);
 void	ft_print_checks_nb(t_list ***checks, int s_a_size);
+void	ft_print_ranges(t_data *data);
 
 #endif

@@ -10,11 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SORT_H
-# define FT_SORT_H
+#ifndef FT_SET_RANGE_H
+# define FT_SET_RANGE_H
 
-void	ft_sort(t_data *data);
-int		prev_p(int pos, int step, int stack_size);
-int		next_p(int pos, int step, int stack_size);
+void	ft_set_ranges(t_data *data);
+int		ft_count_ranges(t_stack *s);
+void	ft_set_sorted_range(t_data *data, t_stack *s);
+void	ft_set_unsorted_range(t_data *data, t_stack *s);
+int		ft_get_range(t_data *data, int nb);
+bool	ft_is_in_range(t_range *range, int nb);
 
 #endif

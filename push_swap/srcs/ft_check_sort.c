@@ -12,12 +12,12 @@
 
 #include "ft_push_swap.h"
 
-void	ft_set_pos(t_stack *s, bool is_initial)
+void	ft_set_pos(t_stack *s, t_pos_type pos_type)
 {
 	int	i;
 
 	i = 0;
-	if (is_initial)
+	if (pos_type == initial_pos)
 		while (i < s->size)
 		{
 			s->stack[i].init_pos = i;
@@ -58,7 +58,7 @@ static int	ft_partition(t_stack *s, int low, int high, int pivot)
 	return (curr_pos);
 }
 
-void	ft_set_sort_pos(t_stack *s, int low, int high)
+void	ft_sort_stack(t_stack *s, int low, int high)
 {
 	int	new_division;
 	int	pivot;
@@ -67,18 +67,26 @@ void	ft_set_sort_pos(t_stack *s, int low, int high)
 		return ;
 	pivot = s->stack[high].nb;
 	new_division = ft_partition(s, low, high, pivot);
-	ft_set_sort_pos(s, low, new_division);
-	ft_set_sort_pos(s, new_division + 1, high);
+	ft_sort_stack(s, low, new_division);
+	ft_sort_stack(s, new_division + 1, high);
 }
 
-void	ft_fix_pos(t_stack *s)
+void	ft_set_sort_pos(t_data *data)
+{
+	ft_sort_stack(&data->s_a, 0, data->s_a.size - 1);
+	if (ft_duplicated_nb(&data->s_a))
+		ft_exit_failure();
+	ft_set_pos(&data->s_a, sorted_pos);
+	ft_revert_to_initial_pos(&data->s_a);
+}
+
+void	ft_revert_to_initial_pos(t_stack *s)
 {
 	int		i;
 	int		init_pos;
 	t_nb	buf;
 
 	i = 0;
-	ft_set_pos(s, false);
 	while (i < s->size)
 	{
 		if (s->stack[i].init_pos != i)

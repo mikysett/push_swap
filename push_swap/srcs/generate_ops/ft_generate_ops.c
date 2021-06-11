@@ -225,7 +225,6 @@ void	ft_organize_b(t_data *data)
 	}
 }
 
-
 static void	ft_set_range(t_data *data)
 {
 	data->range.ind_start = prev_sorted(&data->s_a, data->s_a.size - 1);
@@ -235,9 +234,15 @@ static void	ft_set_range(t_data *data)
 	DEBUG_CODE(ft_print_data_range(data);)
 	ft_set_in_range_a(data);
 	ft_set_in_range_b(data);
-	// To test optimizations, for now bad results
-	// if (data->s_b.nb_in_range > 0)
-	// 	ft_organize_b(data);
+
+	DEBUG_CODE(
+		printf("--> AFTER FT SET RANGE\n");
+		printf("Stack A:\n");
+		ft_print_stack(&data->s_a);
+		printf("Stack B:\n");
+		ft_print_stack(&data->s_b);
+		// printf("Nb moves: %d\n", data->nb_moves);
+	)
 }
 
 void	ft_generate_ops(t_data *data)
@@ -250,53 +255,19 @@ void	ft_generate_ops(t_data *data)
 	while (data->s_a.nb_sorted != s_full_size)
 	{
 		ft_set_range(data);
-		DEBUG_CODE(
-			printf("--> AFTER FT SET RANGE\n");
-			printf("Stack A:\n");
-			ft_print_stack(&data->s_a);
-			printf("Stack B:\n");
-			ft_print_stack(&data->s_b);
-			// printf("Nb moves: %d\n", data->nb_moves);
-		)
 		ft_fill_b(data);
-		DEBUG_CODE(
-			printf("--> AFTER FT FILL B\n");
-			printf("Stack A:\n");
-			ft_print_stack(&data->s_a);
-			printf("Stack B:\n");
-			ft_print_stack(&data->s_b);
-			// printf("Nb moves: %d\n", data->nb_moves);
-		)
 		ft_sort_in_a(data, true);
-		DEBUG_CODE(
-			printf("--> AFTER FT SORT IN A\n");
-			printf("Stack A:\n");
-			ft_print_stack(&data->s_a);
-			printf("Stack B:\n");
-			ft_print_stack(&data->s_b);
-			// printf("Nb moves: %d\n", data->nb_moves);
-		)
 		if (data->s_a.nb_sorted != data->s_a.size)
 			ft_goto_unsorted(data);
 		else
-		{
 			ft_sort_in_a(data, false);
-			DEBUG_CODE(
-				printf("--> WHEN ALL IN A ARE SORTED\n");
-				printf("Stack A:\n");
-				ft_print_stack(&data->s_a);
-				printf("Stack B:\n");
-				ft_print_stack(&data->s_b);
-				// printf("Nb moves: %d\n", data->nb_moves);
-			)
-		}
 	}
+
 	DEBUG_CODE(
 		printf("\nFINAL RESULT:\n");
 		printf("Stack A:\n");
 		ft_print_stack(&data->s_a);
 		printf("Stack B:\n");
 		ft_print_stack(&data->s_b);
-		// printf("Nb moves: %d\n", data->nb_moves);
 	)
 }

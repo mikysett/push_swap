@@ -16,19 +16,30 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc < 3)
+	if (argc < 2)
 		return (0);
-	DEBUG_CODE(printf("Parsing starts\n");)
-	if (!ft_parser(argc, argv))
-		write(STDERR_FILENO, "Error\n", 6);
-	else if (ft_init_data(argc, argv, &data))
+	if (argc == 2)
 	{
-		DEBUG_CODE(printf("Parsing completed\n");)
-		if (!ft_sort(&data))
-			write(STDERR_FILENO, "Error\n", 6);
-		ft_free_data(&data);
+		if (!ft_isnumber(argv[2]) || !ft_isint(argv[2]))
+			ft_exit_failure();
+		return (0);
 	}
-	else
-		write(STDERR_FILENO, "Error\n", 6);
+
+	DEBUG_CODE(printf("Parsing starts\n");)
+	ft_parser(argc, argv);
+	ft_init_data(argc, argv, &data);
+	DEBUG_CODE(printf("Parsing completed\n");)
+
+	ft_set_pos(&data.s_a, initial_pos);
+	ft_set_sort_pos(&data);
+	ft_pseudo_sort(&data.s_a);
+
+	ft_set_ranges(&data);
+
+
+
+	ft_sort(&data);
+
+	ft_free_data(&data);
 	return (0);
 }

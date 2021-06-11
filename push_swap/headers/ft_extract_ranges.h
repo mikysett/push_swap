@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort.h                                          :+:      :+:    :+:   */
+/*   ft_extract_ranges.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/01 13:09:17 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/11 13:41:07 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SORT_H
-# define FT_SORT_H
+#ifndef FT_EXTRACT_CHAGES_H
+# define FT_EXTRACT_CHAGES_H
 
-void	ft_sort(t_data *data);
-int		prev_p(int pos, int step, int stack_size);
-int		next_p(int pos, int step, int stack_size);
+void	ft_extract_ranges(t_data *data);
 
 #endif

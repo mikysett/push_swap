@@ -181,4 +181,13 @@ void	ft_fill_b(t_data *data)
 				data->wait_to_swap = true;
 		}
 	}
+
+	DEBUG_CODE(
+		printf("--> AFTER FT SORT IN A\n");
+		printf("Stack A:\n");
+		ft_print_stack(&data->s_a);
+		printf("Stack B:\n");
+		ft_print_stack(&data->s_b);
+		// printf("Nb moves: %d\n", data->nb_moves);
+	)
 }

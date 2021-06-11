@@ -65,21 +65,10 @@ static void	ft_set_edge_sort_pos(t_stack *s)
 	}
 }
 
-bool	ft_sort(t_data *data)
+void	ft_sort(t_data *data)
 {
-	ft_set_pos(&data->s_a, true);
-	ft_set_sort_pos(&data->s_a, 0, data->s_a.size - 1);
-	if (ft_duplicated_nb(&data->s_a))
-		return (false);
-	DEBUG_CODE(ft_is_sorted(&data->s_a);)
-	ft_fix_pos(&data->s_a);
-	ft_pseudo_sort(&data->s_a);
+
 	// To test
-	DEBUG_CODE(
-		printf("PSEUDO SORTING CHECKS COMPLETED\n");
-		printf("Stack A initial:\n");
-		ft_print_stack(&data->s_a);
-	)
 	// while (1)
 	// {
 	// 	;
@@ -88,7 +77,8 @@ bool	ft_sort(t_data *data)
 	data->s_b.nb_in_range = 0;
 	ft_set_edge_sort_pos(&data->s_a);
 	ft_generate_ops(data);
+
+
 	ft_rotate_sorted(data);
 	ft_print_ops(data, op_none);
-	return (true);
 }

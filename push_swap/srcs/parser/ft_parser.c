@@ -12,67 +12,20 @@
 
 #include "ft_push_swap.h"
 
-// bool	ft_duplicated_nb(t_stack *s_a)
-// {
-// 	int	i;
-// 	int	j;
+void	ft_parser(int argc, char **argv)
+{
+	int	i;
 
-// 	i = 0;
-// 	printf("Check duplicated starts\n");
-// 	while (i < s_a->size)
-// 	{
-// 		j = i + 1;
-// 		while (j < s_a->size)
-// 		{
-// 			if (s_a->stack[i].nb == s_a->stack[j].nb)
-// 				return (true);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	printf("Check duplicated completed\n");
-// 	return (false);
-// }
+	i = 1;
+	while (i < argc)
+	{
+		if (!ft_isnumber(argv[i]) || !ft_isint(argv[i]))
+			ft_exit_failure();
+		i++;
+	}
+}
 
-// bool	ft_duplicated_nb(t_stack *s_a)
-// {
-// 	char	*pos_hash;
-// 	char	*neg_hash;
-// 	int		i;
-// 	int		curr_nb;
-
-// 	printf("CHECK DUPLICATES starts\n");
-// 	pos_hash = ft_calloc(INT_MAX + (size_t)1, sizeof(char));
-// 	neg_hash = ft_calloc(INT_MAX + (size_t)1, sizeof(char));
-// 	if (!pos_hash || !neg_hash)
-// 		return (true);
-// 	i = 0;
-// 	while (i < s_a->size)
-// 	{
-// 		curr_nb = s_a->stack[i].nb;
-// 		if (curr_nb >= 0)
-// 		{
-// 			if (pos_hash[curr_nb])
-// 				break;
-// 			pos_hash[curr_nb] = 1;
-// 		}
-// 		else
-// 		{
-// 			if (neg_hash[curr_nb + INT_MAX + 1])
-// 				break;
-// 			neg_hash[curr_nb + INT_MAX + 1] = 1;
-// 		}
-// 		i++;
-// 	}
-// 	free(pos_hash);
-// 	free(neg_hash);
-// 	printf("Check duplicated completed\n");
-// 	if (i != s_a->size)
-// 		return (true);
-// 	return (false);
-// }
-
-static bool	ft_isnumber(char *nb)
+bool	ft_isnumber(char *nb)
 {
 	if (*nb == '-')
 		nb++;
@@ -87,7 +40,7 @@ static bool	ft_isnumber(char *nb)
 	return (true);
 }
 
-static bool	ft_isint(char *nb)
+bool	ft_isint(char *nb)
 {
 	size_t	nb_size;
 	char	*nb_char;
@@ -101,19 +54,5 @@ static bool	ft_isint(char *nb)
 		return (false);
 	}
 	free(nb_char);
-	return (true);
-}
-
-bool	ft_parser(int argc, char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (!ft_isnumber(argv[i]) || !ft_isint(argv[i]))
-			return (false);
-		i++;
-	}
 	return (true);
 }

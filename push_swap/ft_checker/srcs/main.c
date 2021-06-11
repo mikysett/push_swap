@@ -18,22 +18,11 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	if (!ft_parser(argc, argv))
-		write(STDERR_FILENO, "Error\n", 6);
-	else if (ft_init_data(argc, argv, &data))
-	{
-		ft_set_pos(&data.s_a, true);
-		ft_set_sort_pos(&data.s_a, 0, data.s_a.size - 1);
-		if (ft_duplicated_nb(&data.s_a))
-			write(STDERR_FILENO, "Error\n", 6);
-		else
-		{
-			ft_fix_pos(&data.s_a);
-			ft_checker(&data);
-		}
-		ft_free_data(&data);
-	}
-	else
-		write(STDERR_FILENO, "Error\n", 6);
+	ft_parser(argc, argv);
+	ft_init_data(argc, argv, &data);
+	ft_set_pos(&data.s_a, initial_pos);
+	ft_set_sort_pos(&data);
+	ft_checker(&data);
+	ft_free_data(&data);
 	return (0);
 }

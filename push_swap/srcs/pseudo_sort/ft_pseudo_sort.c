@@ -15,9 +15,8 @@
 static t_ps	*ft_set_result(t_ps *best, int size, int pos, int first_pos)
 {
 	t_ps	*res;
-	bool	is_aligned;
 	
-	res = malloc(sizeof(t_ps));
+	res = ft_calloc(1, sizeof(t_ps));
 	if (res)
 		res->hash = ft_calloc(size, sizeof(char));
 	if (!res || !res->hash)
@@ -26,23 +25,17 @@ static t_ps	*ft_set_result(t_ps *best, int size, int pos, int first_pos)
 	res->start_pos = pos;
 	res->score = 1;
 	res->size = size;
-	res->protection_lvl = 0;
 	res->chunk_size = ft_chunk_size(size, pos, first_pos);
 	if (!best)
 		return (res);
-	// printf("res->chunk size: %d, best->chunk size: %d\n",
-	// 	res->chunk_size, best->chunk_size);
 	pos = (pos + 1) % size;
-	is_aligned = false;
+	while (pos != best->start_pos)
+		pos = (pos + 1) % size;
 	while (pos != first_pos)
 	{
-		if (pos == best->start_pos)
-			is_aligned = true;
-		if (is_aligned && best->hash[pos] != 0)
+		if (best->hash[pos] != 0)
 			res->hash[pos] = 1;
-		pos++;
-		if (pos == size)
-			pos = 0;
+		pos = (pos + 1) % size;
 	}
 	res->score += best->score;
 	best->protection_lvl--;
@@ -89,15 +82,16 @@ void	ft_pseudo_sort(t_stack *s)
 	t_ps		*best;
 	t_ps		*new;
 	t_list		***checks;
+	int			score_threshold;
 
 	i = 0;
 	best = 0;
 	s->sorting_level++;
+	score_threshold = s->size * SCORE_THRESHOLD;
 	checks = ft_init_checks(s->size);
 	while (i < s->size)
 	{
-		if (best
-			&& best->score > s->size * 0.90)
+		if (best && best->score > score_threshold)
 			break;
 		new = ft_do_pseudo_sort(checks, s, i, i);
 		ft_save_check(checks[i], new);
@@ -117,4 +111,11 @@ void	ft_pseudo_sort(t_stack *s)
 	// ft_print_checks(checks, s->size);
 	DEBUG_CODE(ft_print_checks_nb(checks, s->size);)
 	ft_free_checks(checks, s->size);
+
+
+	DEBUG_CODE(
+		printf("PSEUDO SORTING CHECKS COMPLETED\n");
+		printf("Stack A initial:\n");
+		ft_print_stack(s);
+	)
 }

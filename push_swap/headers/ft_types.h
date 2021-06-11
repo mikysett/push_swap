@@ -20,16 +20,24 @@
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
 
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else
 #  define DEBUG_CODE(x)
 # endif
 
-# define OP_BUF_SIZE	1000
-# define OP_SUB_BUF		10
-# define MAX_REC		100000L
+# define SCORE_THRESHOLD	0.90
+# define OP_BUF_SIZE		1000
+# define OP_SUB_BUF			10
+# define MAX_REC			100000L
+
+
+typedef enum	e_pos_type
+{
+	initial_pos,
+	sorted_pos
+}				t_pos_type;
 
 typedef enum	e_op_type
 {
@@ -48,13 +56,6 @@ typedef enum	e_op_type
 	op_error
 }				t_op_type;
 
-typedef struct	s_op_info
-{
-	t_op_type	type;
-	int			a_size;
-	int			b_size;
-}				t_op_info;
-
 typedef enum	e_strat_type
 {
 	by_rr,
@@ -62,6 +63,13 @@ typedef enum	e_strat_type
 	by_ra_rrb,
 	by_rra_rb
 }				t_strat_type;
+
+typedef struct	s_op_info
+{
+	t_op_type	type;
+	int			a_size;
+	int			b_size;
+}				t_op_info;
 
 typedef struct	s_sort_strat
 {
@@ -78,9 +86,11 @@ typedef struct	s_nb
 	int				is_sorted;
 	int				sort_pos;
 	int				init_pos;
-	bool			in_range;
+	int				range;
 	t_sort_strat	strat;
 	int				mov_to_sort;
+	
+	bool			in_range;
 }				t_nb;
 
 typedef struct	s_stack
@@ -91,6 +101,8 @@ typedef struct	s_stack
 	int		sorting_level;
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
+
+
 	int		nb_in_range;
 }				t_stack;
 
@@ -102,12 +114,27 @@ typedef struct	s_range
 	int	end_nb;
 }				t_range;
 
+typedef struct	s_ops_stats
+{
+	int	ops_fill_b;
+	int	ops_sort_not_in_range;
+	int	reduce_not_in_range;
+	int	organize_not_in_range;
+	int	merge_stacks;
+	int	rotate_sorted;
+}				t_ops_stats;
+
 typedef struct	s_data
 {
-	t_stack	s_a;
-	t_stack	s_b;
-	bool	wait_to_swap;
-	t_range	range;
+	t_stack		s_a;
+	t_stack		s_b;
+	bool		wait_to_swap;
+	t_ops_stats	stats;
+
+	t_range		*ranges;
+	int			nb_ranges;
+	// Ideally this could be deleted at the end
+	t_range		range;
 }				t_data;
 
 typedef struct	s_ps

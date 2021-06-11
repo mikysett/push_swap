@@ -171,7 +171,9 @@ void	ft_sort_in_a(t_data *data, bool only_in_range)
 		ft_sort_nb(data, ft_best_to_sort(data, only_in_range));
 	if (!only_in_range)
 		ft_sort_nb(data, ft_best_to_sort(data, only_in_range));
+
 	DEBUG_CODE(
+		printf("ft sort in a, only_in_range: %d\n", only_in_range);
 		printf("Stack A:\n");
 		ft_print_stack(&data->s_a);
 		printf("Stack B:\n");

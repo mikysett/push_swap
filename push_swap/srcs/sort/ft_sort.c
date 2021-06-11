@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 13:42:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/11 17:53:31 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,18 @@ static void	ft_rotate_sorted(t_data *data)
 			break;
 	if (curr_pos <= data->s_a.size / 2)
 		while (curr_pos-- != 0)
+		{
+			DEBUG_CODE(data->stats.rotate_sorted++;)
 			ft_reverse_rotate_a(data);
+		}
 	else
 	{
 		curr_pos = data->s_a.size - curr_pos;
 		while (curr_pos-- != 0)
+		{
+			DEBUG_CODE(data->stats.rotate_sorted++;)
 			ft_rotate_a(data);
+		}
 	}
 }
 
@@ -77,7 +83,8 @@ void	ft_sort(t_data *data)
 
 	ft_extract_ranges(data);
 	
-	ft_organize_not_in_range(data);
+	// TODO
+	// ft_organize_not_in_range(data);
 	
 	ft_generate_ops(data);
 

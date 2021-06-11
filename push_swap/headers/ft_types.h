@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/08 21:37:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/11 18:42:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define CLR_GREEN	"\033[0;32m"
 # define CLR_YELLOW	"\033[0;33m"
 # define CLR_BLUE	"\033[0;34m"
+# define CLR_PURPLE	"\033[0;35m"
+# define CLR_CYAN	"\033[0;36m"
 
 # define DEBUG_MODE 1
 # if DEBUG_MODE == 1
@@ -102,6 +104,10 @@ typedef struct	s_stack
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
 
+	// Used only in Stack B
+	int		nb_not_in_range;
+	int		unranged_in_buffer;
+
 
 	int		nb_in_range;
 }				t_stack;
@@ -116,8 +122,8 @@ typedef struct	s_range
 
 typedef struct	s_ops_stats
 {
-	int	ops_fill_b;
-	int	ops_sort_not_in_range;
+	int	fill_b;
+	int	sort_not_in_range;
 	int	reduce_not_in_range;
 	int	organize_not_in_range;
 	int	merge_stacks;
@@ -133,6 +139,8 @@ typedef struct	s_data
 
 	t_range		*ranges;
 	int			nb_ranges;
+	
+
 	// Ideally this could be deleted at the end
 	t_range		range;
 }				t_data;

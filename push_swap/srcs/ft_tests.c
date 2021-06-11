@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/08 19:11:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/11 18:03:33 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,18 @@ void	ft_is_sorted(t_stack *s)
 
 void	ft_print_stack(t_stack *s)
 {
-	int	i;
-	int	nb_sorted;
-
+	int		i;
+	int		nb_sorted;
+	char	colors[7][20] =
+		{
+			CLR_WHITE,
+			CLR_RED,
+			CLR_GREEN,
+			CLR_YELLOW,
+			CLR_BLUE,
+			CLR_PURPLE,
+			CLR_CYAN
+		};
 	i = s->size - 1;
 	nb_sorted = 0;
 	printf("----  %20s|%20s|%20s|%20s|\n", "NUMBER", "INITIAL POS", "SORTED POS", "RANGE");
@@ -49,6 +58,10 @@ void	ft_print_stack(t_stack *s)
 		{
 			printf(CLR_GREEN);
 			nb_sorted++;
+		}
+		else
+		{
+			printf("%s", colors[(s->stack[i].range + 1) % 7]);
 		}
 		printf("%4i. %20i|%20i|%20i|%20i|\n", i,
 			s->stack[i].nb,
@@ -155,4 +168,15 @@ void	ft_print_ranges(t_data *data)
 			data->ranges[i].end_nb);
 		i++;
 	}
+}
+
+void	ft_print_stats(t_data *data)
+{
+	printf("----> DATA STATS\n");
+	printf("%24s %7d\n", "fill_b:", data->stats.fill_b);
+	printf("%24s %7d\n", "sort_not_in_range:", data->stats.sort_not_in_range);
+	printf("%24s %7d\n", "reduce_not_in_range:", data->stats.reduce_not_in_range);
+	printf("%24s %7d\n", "organize_not_in_range:", data->stats.organize_not_in_range);
+	printf("%24s %7d\n", "merge_stacks:", data->stats.merge_stacks);
+	printf("%24s %7d\n", "rotate_sorted:", data->stats.rotate_sorted);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 18:03:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 13:52:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ void	ft_print_stack(t_stack *s)
 {
 	int		i;
 	int		nb_sorted;
-	char	colors[7][20] =
+	char	colors[6][20] =
 		{
 			CLR_WHITE,
 			CLR_RED,
-			CLR_GREEN,
 			CLR_YELLOW,
 			CLR_BLUE,
 			CLR_PURPLE,
@@ -61,7 +60,7 @@ void	ft_print_stack(t_stack *s)
 		}
 		else
 		{
-			printf("%s", colors[(s->stack[i].range + 1) % 7]);
+			printf("%s", colors[(s->stack[i].range + 1) % 6]);
 		}
 		printf("%4i. %20i|%20i|%20i|%20i|\n", i,
 			s->stack[i].nb,

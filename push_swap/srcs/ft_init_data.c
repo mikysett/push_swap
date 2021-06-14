@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:33:19 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 18:42:19 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:33:34 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	ft_init_data(int argc, char **argv, t_data *data)
 	j = 1;
 	i = argc - 1;
 	ft_alloc_data(data, i);
+	data->ranges = 0;
 	data->s_a.sorting_level = 0;
+	data->s_a.nb_not_in_range = 0;
+	data->s_a.unranged_in_buffer = 0;
 	data->s_b.nb_not_in_range = 0;
 	data->s_b.unranged_in_buffer = 0;
 	while (--i >= 0)

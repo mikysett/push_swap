@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:31:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/08 15:04:07 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 11:21:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_print(t_op_info *ops, int nb_to_print)
 {
 	int	i;
 	DEBUG_CODE(
-		int	nb_ops = 0;
+		static int	nb_ops = 0;
 	)
 
 	i = 0;
@@ -74,9 +74,9 @@ static void	ft_align_ops(t_op_info *ops)
 
 void	ft_print_ops(t_data *data, t_op_type op_type)
 {
+	static int			nb_ops = 0;
 	static t_op_info	ops[OP_BUF_SIZE] = { (t_op_info){.type = op_none,
 		.a_size = 0, .b_size = 0} };
-	static int			nb_ops = 0;
 
 	if (op_type == op_none)
 	{

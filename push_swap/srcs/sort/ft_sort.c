@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 17:53:31 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:00:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ void	ft_sort(t_data *data)
 	// ft_organize_not_in_range(data);
 	
 	ft_generate_ops(data);
+
+	// Just to test
+	while (data->s_b.size)
+		ft_sort_nb(data, ft_best_to_sort(data, false));
+
 
 
 	ft_rotate_sorted(data);

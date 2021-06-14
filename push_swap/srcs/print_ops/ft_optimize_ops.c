@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 18:14:31 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/04 15:33:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 16:47:25 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static int	ft_remove_useless(t_op_info *ops, int curr_pos,
 	int	next[1];
 
 	next[0] = ft_next_op(ops, curr_pos, nb_ops);
-
-	// PUSH case 1
 	if (next[0] == -1)
 		return (0);
 	if ((ops[curr_pos].type == op_ra && ops[next[0]].type == op_rra)
@@ -74,11 +72,54 @@ static int	ft_remove_useless(t_op_info *ops, int curr_pos,
 		|| (ops[curr_pos].type == op_rrb && ops[next[0]].type == op_rb)
 		|| (ops[curr_pos].type == op_sa && ops[next[0]].type == op_sa)
 		|| (ops[curr_pos].type == op_sb && ops[next[0]].type == op_sb)
+		|| (ops[curr_pos].type == op_pa && ops[next[0]].type == op_pb)
+		|| (ops[curr_pos].type == op_pb && ops[next[0]].type == op_pa)
 		)
 	{
 		ops[curr_pos].type = op_none;
 		ops[next[0]].type = op_none;
 		DEBUG_CODE(printf("ft_remove_useless() applied!\n");)
+		*is_fine = false;
+		return (next[0] - curr_pos);
+	}
+	return (0);
+}
+
+static int	ft_merge_ops(t_op_info *ops, int curr_pos,
+	int nb_ops, bool *is_fine)
+{
+	int	next[1];
+
+	next[0] = ft_next_op(ops, curr_pos, nb_ops);
+	if (next[0] == -1)
+		return (0);
+	if ((ops[curr_pos].type == op_sa && ops[next[0]].type == op_sb)
+		|| (ops[curr_pos].type == op_sb && ops[next[0]].type == op_sa)
+		)
+	{
+		ops[curr_pos].type = op_ss;
+		ops[next[0]].type = op_none;
+		DEBUG_CODE(printf("ft_merge_ops(ss) applied!\n");)
+		*is_fine = false;
+		return (next[0] - curr_pos);
+	}
+	else if ((ops[curr_pos].type == op_ra && ops[next[0]].type == op_rb)
+		|| (ops[curr_pos].type == op_rb && ops[next[0]].type == op_ra)
+		)
+	{
+		ops[curr_pos].type = op_rr;
+		ops[next[0]].type = op_none;
+		DEBUG_CODE(printf("ft_merge_ops(rr) applied!\n");)
+		*is_fine = false;
+		return (next[0] - curr_pos);
+	}
+	else if ((ops[curr_pos].type == op_rra && ops[next[0]].type == op_rrb)
+		|| (ops[curr_pos].type == op_rrb && ops[next[0]].type == op_rra)
+		)
+	{
+		ops[curr_pos].type = op_rrr;
+		ops[next[0]].type = op_none;
+		DEBUG_CODE(printf("ft_merge_ops(rrr) applied!\n");)
 		*is_fine = false;
 		return (next[0] - curr_pos);
 	}
@@ -239,6 +280,7 @@ void	ft_optimize_ops(t_op_info *ops, int nb_ops)
 		if (ops[i].type == op_none)
 			continue;
 		ft_remove_useless(ops, i, nb_ops, &is_fine);
+		ft_merge_ops(ops, i, nb_ops, &is_fine);
 		if (ops[i].type == op_pa || ops[i].type == op_pb)
 			i += ft_opti_push(ops, i, nb_ops, &is_fine);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_range.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 17:54:18 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 13:54:22 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,25 @@ void	ft_set_ranges(t_data *data)
 
 int	ft_count_ranges(t_stack *s)
 {
-	int	i;
-	int	nb_ranges;
+	int		i;
+	int		nb_ranges;
+	t_nb	*prev_nb;
 
 	nb_ranges = 0;
-	i = 0;
-	while (i < s->size)
-	{
+	prev_nb = 0;
+	i = s->size;
+	while (--i >= 0)
 		if (s->stack[i].is_sorted)
-			nb_ranges++;
-		i++;
-	}
+		{
+			if (!prev_nb || s->stack[i].sort_pos != prev_nb->sort_pos - 1)
+			{
+				s->stack[i].range = nb_ranges;
+				nb_ranges++;
+			}
+			else
+				s->stack[i].range = nb_ranges - 1;
+			prev_nb = &s->stack[i];
+		}
 	return (nb_ranges);
 }
 
@@ -52,21 +60,21 @@ void	ft_set_sorted_range(t_data *data, t_stack *s)
 	int	range_end;
 
 	curr_range = 0;
-	i = s->size - 1;
-	while (i >= 0)
+	i = s->size;
+	while (--i >= 0)
 	{
 		if (s->stack[i].is_sorted)
 		{
+			range_end = prev_sorted(&data->s_a, i - 1);
+			if (s->stack[i].sort_pos == s->stack[range_end].sort_pos + 1)
+				continue;
 			data->ranges[curr_range].ind_start = i;
 			data->ranges[curr_range].start_nb = s->stack[i].nb;
-			range_end = prev_sorted(&data->s_a, i - 1);
 			data->ranges[curr_range].ind_end = range_end;
 			data->ranges[curr_range].end_nb = s->stack[range_end].nb;
 			curr_range++;
 		}
-		i--;
 	}
-	
 	DEBUG_CODE(ft_print_ranges(data);)
 }
 

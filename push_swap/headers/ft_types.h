@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/11 18:42:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:08:55 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,12 @@ typedef struct	s_stack
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
 
+	// Only used in Stack A
+	int		unranged_in_buffer;
+	bool	splitted_bottom_buf;
+
 	// Used only in Stack B
 	int		nb_not_in_range;
-	int		unranged_in_buffer;
 
 
 	int		nb_in_range;

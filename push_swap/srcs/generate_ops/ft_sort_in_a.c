@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/08 14:28:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:02:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_set_mov_to_sort(t_nb *nb)
 	}
 }
 
-static t_nb	*ft_best_to_sort(t_data *data, bool only_in_range)
+t_nb	*ft_best_to_sort(t_data *data, bool only_in_range)
 {
 	int		i;
 	t_nb	*nb;
@@ -104,7 +104,7 @@ static t_nb	*ft_best_to_sort(t_data *data, bool only_in_range)
 	return (best_nb);
 }
 
-static void	ft_sort_nb(t_data *data, t_nb *nb_ptr)
+void	ft_sort_nb(t_data *data, t_nb *nb_ptr)
 {
 	int		i;
 	t_nb	nb;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pseudo_sort_utilities.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 16:38:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 22:52:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	i = 0;
 	while (i < s->size)
 	{
-		if (ps->hash[i] == true)
+		if (ps->hash[i] != 0)
 			s->stack[i].is_sorted = s->sorting_level;
 		i++;
 	}
@@ -78,7 +78,7 @@ bool	ft_all_sorted_set(t_stack *s)
 	int	i;
 
 	i = 0;
-	while (i < s->size - 1)
+	while (i < s->size)
 	{
 		if (!s->stack[i].is_sorted)
 			return (false);

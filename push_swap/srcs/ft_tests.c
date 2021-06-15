@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 16:43:39 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 23:59:32 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	ft_print_stack(t_stack *s)
 			printf(CLR_YELLOW);
 		else if (s->stack[i].is_sorted)
 		{
-			printf("%s", colors[(s->stack[i].is_sorted + 1) % 6]);
+			if (s->stack[i].is_sorted >= 0)
+				printf("%s", colors[(s->stack[i].is_sorted + 1) % 6]);
 			nb_sorted++;
 		}
 		else

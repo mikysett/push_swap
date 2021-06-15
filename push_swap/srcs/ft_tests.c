@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 13:52:41 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 22:09:13 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,12 @@ void	ft_print_strat(t_nb *nb)
 
 void	ft_print_data_range(t_data *data)
 {
-	printf("ind_start: %d  |  ind_end: %d  |  start_nb: %d  |  end_nb: %d\n",
+	printf("ind_start: %d  |  ind_end: %d  |  start_nb: %d  |  end_nb: %d  |  nb in range: %d\n",
 		data->range.ind_start,
 		data->range.ind_end,
 		data->range.start_nb,
-		data->range.end_nb);
+		data->range.end_nb,
+		data->range.nb_in_range);
 }
 
 void	ft_print_checks_nb(t_list ***checks, int s_a_size)
@@ -159,12 +160,13 @@ void	ft_print_ranges(t_data *data)
 	printf("---->   PRINT RANGES\n");
 	while (i < data->nb_ranges)
 	{
-		printf("%7d. ind_start: %5d, ind_end: %5d,           start_nb: %5d, end_nb: %5d\n",
+		printf("%7d. ind_start: %5d, ind_end: %5d,           start_nb: %5d, end_nb: %5d, nb in range: %5d\n",
 			i,
 			data->ranges[i].ind_start,
 			data->ranges[i].ind_end,
 			data->ranges[i].start_nb,
-			data->ranges[i].end_nb);
+			data->ranges[i].end_nb,
+			data->ranges[i].nb_in_range);
 		i++;
 	}
 }

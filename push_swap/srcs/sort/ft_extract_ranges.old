@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:39:32 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 23:00:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 22:08:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,28 @@
 
 void	ft_extract_ranges(t_data *data)
 {
-	int	top;
-	t_range	*biggest;
-	t_range	*second;
+	int	curr_range;
 
-	biggest = ft_get_biggest_range(data);
-	second = ft_get_biggest_range(data);
-	printf("biggest range id: %d\n", biggest->id);
-	printf("second range id: %d\n", second->id);
+	curr_range = 0;
+	data->s_a.splitted_bottom_buf = false;
 	while (data->s_a.nb_sorted != data->s_a.size)
 	{
-		top = data->s_a.size - 1;
-		if (data->s_a.stack[top].is_sorted)
+		ft_extract_unranged_from_a(data, curr_range);
+		ft_extract_from_unranged(data, curr_range);
+		ft_range_buf_bottom(data, curr_range, curr_range + 1);
+		ft_realign_range(data, curr_range - 1);
+		ft_extract_next_unranged(data, curr_range);
+		if (data->s_a.nb_sorted != data->s_a.size)
 		{
-			ft_rotate_a(data);
-			DEBUG_CODE(data->stats.fill_b++;)
-			continue;
+			ft_move_to_next_range(data, curr_range);
+			curr_range++;
 		}
-		if (data->s_a.stack[top].range == biggest->id)
-		{
-			ft_push_b(data);
-			biggest->nb_ranged_in_b++;
-			if (biggest->nb_ranged_in_b == biggest->nb_in_range)
-				biggest = ft_get_biggest_range(data);
-			DEBUG_CODE(data->stats.fill_b++;)
-		}
-		else if (data->s_a.stack[top].range == second->id)
-		{
-			ft_push_b(data);
-			ft_rotate_b(data);
-			second->nb_ranged_in_b++;
-			if (second->nb_ranged_in_b == second->nb_in_range)
-				second = ft_get_biggest_range(data);
-			DEBUG_CODE(data->stats.fill_b += 2;)
-		}
-		else
-		{
-			ft_rotate_a(data);
-			DEBUG_CODE(data->stats.fill_b++;)
-		}
+		// if (curr_range == 20)
+		// 	break;
+
 	}
 	DEBUG_CODE(
+		printf("--> FOR RANGE %d\n", curr_range - 1);
 		printf("nb sorted in a: %d, a size: %d\n\n", data->s_a.nb_sorted,
 			data->s_a.size);
 		printf("Stack A:\n");
@@ -68,32 +49,11 @@ void	ft_extract_ranges(t_data *data)
 	)
 
 	DEBUG_CODE(
-		// while (1)
-		// {
+		while (1)
+		{
 
-		// }
+		}
 	)
-}
-
-t_range	*ft_get_biggest_range(t_data *data)
-{
-	int		i;
-	t_range	*biggest;
-
-	i = 0;
-	biggest = 0;
-	while (i < data->nb_ranges)
-	{
-		if (!data->ranges[i].already_ranged
-			&& (!biggest
-				|| data->ranges[i].nb_in_range > biggest->nb_in_range))
-			biggest = &data->ranges[i];
-		i++;
-	}
-	if (!biggest)
-		return (&data->ranges[0]);
-	biggest->already_ranged = true;
-	return (biggest);
 }
 
 void	ft_extract_unranged_from_a(t_data *data, int curr_range)

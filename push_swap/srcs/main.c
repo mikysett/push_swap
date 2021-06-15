@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:43:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 19:32:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:36:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	main(int argc, char **argv)
 	ft_set_pos(&data.s_a, initial_pos);
 	ft_set_sort_pos(&data);
 	ft_pseudo_sort(&data.s_a);
-	DEBUG_CODE(
-		printf("This is it!\n");
-		ft_free_data(&data);
-		exit(EXIT_SUCCESS);
-	)
+	// DEBUG_CODE(
+	// 	printf("This is it!\n");
+	// 	ft_free_data(&data);
+	// 	exit(EXIT_SUCCESS);
+	// )
 
 	ft_set_ranges(&data);
 

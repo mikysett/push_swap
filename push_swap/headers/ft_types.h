@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 19:08:55 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 22:32:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,14 @@ typedef struct	s_stack
 
 typedef struct	s_range
 {
-	int	ind_start;
-	int	ind_end;
-	int	start_nb;
-	int	end_nb;
+	int		id;
+	int		ind_start;
+	int		ind_end;
+	int		start_nb;
+	int		end_nb;
+	bool	already_ranged;
+	int		nb_in_range;
+	int		nb_ranged_in_b;
 }				t_range;
 
 typedef struct	s_ops_stats

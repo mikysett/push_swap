@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 13:54:22 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/14 22:53:24 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_set_ranges(t_data *data)
 	ft_set_unsorted_range(data, &data->s_a);
 
 	DEBUG_CODE(
+		ft_print_ranges(data);
 		printf("RANGES SET FOR ALL UNSORTED\n");
 		printf("Stack A initial:\n");
 		ft_print_stack(&data->s_a);
@@ -68,6 +69,9 @@ void	ft_set_sorted_range(t_data *data, t_stack *s)
 			range_end = prev_sorted(&data->s_a, i - 1);
 			if (s->stack[i].sort_pos == s->stack[range_end].sort_pos + 1)
 				continue;
+			data->ranges[curr_range].id = curr_range;
+			data->ranges[curr_range].already_ranged = false;
+			data->ranges[curr_range].nb_in_range = 0;
 			data->ranges[curr_range].ind_start = i;
 			data->ranges[curr_range].start_nb = s->stack[i].nb;
 			data->ranges[curr_range].ind_end = range_end;
@@ -75,7 +79,6 @@ void	ft_set_sorted_range(t_data *data, t_stack *s)
 			curr_range++;
 		}
 	}
-	DEBUG_CODE(ft_print_ranges(data);)
 }
 
 void	ft_set_unsorted_range(t_data *data, t_stack *s)
@@ -86,7 +89,10 @@ void	ft_set_unsorted_range(t_data *data, t_stack *s)
 	while (i < data->s_a.size)
 	{
 		if (!s->stack[i].is_sorted)
+		{
 			s->stack[i].range = ft_get_range(data, s->stack[i].nb);
+			data->ranges[s->stack[i].range].nb_in_range++;
+		}	
 		i++;
 	}
 }

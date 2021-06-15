@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 22:32:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 17:43:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct	s_stack
 	int		size;
 	int		nb_sorted;
 	int		sorting_level;
+	int		size_unsorted;
+
 	int		smaller_sort_pos;
 	int		bigger_sort_pos;
 

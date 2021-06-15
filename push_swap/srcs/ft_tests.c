@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 22:09:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:43:39 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,25 @@ void	ft_print_stack(t_stack *s)
 		};
 	i = s->size - 1;
 	nb_sorted = 0;
-	printf("----  %20s|%20s|%20s|%20s|\n", "NUMBER", "INITIAL POS", "SORTED POS", "RANGE");
+	printf("----  %20s|%20s|%20s|%20s|%20s|\n", "NUMBER", "INITIAL POS", "SORTED POS", "IS SORTED", "RANGE");
 	while (i >= 0)
 	{
 		if (s->stack[i].in_range == true)
 			printf(CLR_YELLOW);
-		else if (s->stack[i].is_sorted > 0)
+		else if (s->stack[i].is_sorted)
 		{
-			printf(CLR_GREEN);
+			printf("%s", colors[(s->stack[i].is_sorted + 1) % 6]);
 			nb_sorted++;
 		}
 		else
 		{
 			printf("%s", colors[(s->stack[i].range + 1) % 6]);
 		}
-		printf("%4i. %20i|%20i|%20i|%20i|\n", i,
+		printf("%4i. %20i|%20i|%20i|%20i|%20i|\n", i,
 			s->stack[i].nb,
 			s->stack[i].init_pos,
 			s->stack[i].sort_pos,
+			s->stack[i].is_sorted,
 			s->stack[i].range);
 		printf(CLR_WHITE);
 		i--;

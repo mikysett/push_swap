@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pseudo_sort_utilities.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/08 19:34:18 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:38:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,18 @@ int	ft_chunk_size(int stack_size, int pos, int first_pos)
 		return (stack_size - pos + first_pos + 1);
 	else
 		return (first_pos - pos);
+}
+
+bool	ft_all_sorted_set(t_stack *s)
+{
+	int	i;
+
+	i = 0;
+	while (i < s->size - 1)
+	{
+		if (!s->stack[i].is_sorted)
+			return (false);
+		i++;
+	}
+	return (true);
 }

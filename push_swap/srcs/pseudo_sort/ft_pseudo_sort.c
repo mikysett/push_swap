@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pseudo_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 19:33:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 18:39:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s, int pos, int first_
 	int			i;
 
 	ft_init_ps_rec(&rec, s, pos);
+	// i = (pos + 1);
 	i = (pos + 1) % s->size;
+	// while (i < s->size)
 	while (i != first_pos)
 	{
 		nb = &s->stack[i];
+		// if (!nb->is_sorted && nb->nb < s->stack[pos].nb)
 		if (!nb->is_sorted && nb->nb < rec.pos_nb)
 		{
 			// Recursion depth limit
@@ -105,6 +108,7 @@ void	ft_pseudo_sort(t_stack *s)
 	}
 	DEBUG_CODE(ft_print_pseudo_sorted(best);)
 
+
 	ft_set_is_sorted(s, best);
 	s->nb_sorted = best->score;
 	DEBUG_CODE(printf("nb_sorted: %d\n", best->score);)
@@ -112,10 +116,8 @@ void	ft_pseudo_sort(t_stack *s)
 	DEBUG_CODE(ft_print_checks_nb(checks, s->size);)
 	ft_free_checks(checks, s->size);
 
-
-	DEBUG_CODE(
-		printf("PSEUDO SORTING CHECKS COMPLETED\n");
-		printf("Stack A initial:\n");
-		ft_print_stack(s);
-	)
+	// while (1)
+	// {
+		
+	// }
 }

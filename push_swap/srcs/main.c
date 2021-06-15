@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:43:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 19:36:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 18:30:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,24 @@ int	main(int argc, char **argv)
 
 	ft_set_pos(&data.s_a, initial_pos);
 	ft_set_sort_pos(&data);
-	ft_pseudo_sort(&data.s_a);
+	while (!ft_all_sorted_set(&data.s_a))
+		ft_pseudo_sort(&data.s_a);
+	DEBUG_CODE(
+		printf("PSEUDO SORTING CHECKS COMPLETED\n");
+		printf("Stack A initial:\n");
+		ft_print_stack(&data.s_a);
+	)
 	// DEBUG_CODE(
 	// 	printf("This is it!\n");
+	// 	printf("Stack A:\n");
+	// 	ft_print_stack(&data.s_a);
 	// 	ft_free_data(&data);
 	// 	exit(EXIT_SUCCESS);
 	// )
 
-	ft_set_ranges(&data);
-
-
+	// ft_set_ranges(&data);
 
 	ft_sort(&data);
-
 	ft_free_data(&data);
 	return (0);
 }

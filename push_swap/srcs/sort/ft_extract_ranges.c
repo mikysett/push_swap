@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_extract_ranges.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 13:39:32 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 23:00:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/15 11:47:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_extract_ranges(t_data *data)
 
 	biggest = ft_get_biggest_range(data);
 	second = ft_get_biggest_range(data);
-	printf("biggest range id: %d\n", biggest->id);
-	printf("second range id: %d\n", second->id);
+	// printf("biggest range id: %d\n", biggest->id);
+	// printf("second range id: %d\n", second->id);
 	while (data->s_a.nb_sorted != data->s_a.size)
 	{
 		top = data->s_a.size - 1;
@@ -68,10 +68,10 @@ void	ft_extract_ranges(t_data *data)
 	)
 
 	DEBUG_CODE(
-		// while (1)
-		// {
+		while (1)
+		{
 
-		// }
+		}
 	)
 }
 

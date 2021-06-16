@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:33:19 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/14 19:33:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 18:55:14 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
+static void	ft_alloc_data(t_data *data, int stack_size);
+static void	ft_init_stack_a(t_data *data, char **argv, int nb_items);
+
+void	ft_init_data(int argc, char **argv, t_data *data)
+{
+	int	nb_items;
+
+	nb_items = argc - 1;
+	ft_alloc_data(data, nb_items);
+	data->s_a.sorting_level = 0;
+	ft_init_stack_a(data, argv, nb_items);
+
+}
 
 static void	ft_alloc_data(t_data *data, int stack_size)
 {
@@ -31,29 +44,18 @@ static void	ft_alloc_data(t_data *data, int stack_size)
 	)
 }
 
-void	ft_init_data(int argc, char **argv, t_data *data)
+static void	ft_init_stack_a(t_data *data, char **argv, int nb_items)
 {
-	int	i;
 	int	j;
 
 	j = 1;
-	i = argc - 1;
-	ft_alloc_data(data, i);
-	data->ranges = 0;
-	data->s_a.sorting_level = 0;
-	data->s_a.nb_not_in_range = 0;
-	data->s_a.unranged_in_buffer = 0;
-	data->s_b.nb_not_in_range = 0;
-	data->s_b.unranged_in_buffer = 0;
-	while (--i >= 0)
+	while (--nb_items >= 0)
 	{
-		data->s_a.stack[i].nb = ft_atoi(argv[j]);
-		data->s_a.stack[i].init_pos = i;
-		data->s_a.stack[i].is_sorted = 0;
-		data->s_a.stack[i].range = 0;
-
-		// TODO clean this code if necessary
-		data->s_a.stack[i].in_range = false;
+		data->s_a.stack[nb_items].nb = ft_atoi(argv[j]);
+		data->s_a.stack[nb_items].init_pos = nb_items;
+		data->s_a.stack[nb_items].is_sorted = 0;
+		data->s_a.stack[nb_items].range = 0;
+		data->s_a.stack[nb_items].in_range = false;
 		j++;
 	}
 }

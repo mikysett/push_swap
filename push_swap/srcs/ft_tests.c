@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 23:59:32 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 18:55:55 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,75 @@ void	ft_is_sorted(t_stack *s)
 		printf("%sARRAY SORTED%s\n", CLR_GREEN, CLR_WHITE);
 	else
 		printf("%sARRAY NOT SORTED%s\n", CLR_RED, CLR_WHITE);
+}
+
+void	ft_print_stack_ligh(t_data *data)
+{
+	int		i;
+	int		top_a;
+	int		top_b;
+	char	colors[6][20] =
+		{
+			CLR_WHITE,
+			CLR_RED,
+			CLR_YELLOW,
+			CLR_BLUE,
+			CLR_PURPLE,
+			CLR_CYAN
+		};
+	top_a = data->s_a.size - 1;
+	top_b = data->s_b.size - 1;
+	i = top_a > top_b ? top_a : top_b;
+	printf("----  index. number .sorted_lvl\n");
+	printf("%18s|%17s|\n", "  STACK A ", "  STACK B ");
+	while (i >= 0)
+	{
+		if (i <= top_a)
+		{
+			if (data->s_a.stack[i].is_sorted)
+			{
+				if (data->s_a.stack[i].is_sorted >= 0)
+					printf("%s", colors[(data->s_a.stack[i].is_sorted + 1) % 6]);
+			}
+			else
+			{
+				printf("%s", colors[(data->s_a.stack[i].range + 1) % 6]);
+			}
+			printf("%s%4i.%s %5i%s .%5i|    ",
+				CLR_GRAY,
+				i,
+				colors[(data->s_a.stack[i].is_sorted + 1) % 6],
+				data->s_a.stack[i].nb,
+				CLR_GRAY,
+				data->s_a.stack[i].is_sorted);
+			printf(CLR_WHITE);
+		}
+		else
+			printf("%18s|    ", " ");
+		if (i <= top_b)
+		{
+			if (data->s_b.stack[i].is_sorted)
+			{
+				if (data->s_b.stack[i].is_sorted >= 0)
+					printf("%s", colors[(data->s_b.stack[i].is_sorted + 1) % 6]);
+			}
+			else
+			{
+				printf("%s", colors[(data->s_b.stack[i].range + 1) % 6]);
+			}
+			printf("%s %5i%s .%5i|    ",
+				colors[(data->s_b.stack[i].is_sorted + 1) % 6],
+				data->s_b.stack[i].nb,
+				CLR_GRAY,
+				data->s_b.stack[i].is_sorted);
+			printf(CLR_WHITE);
+		}
+		printf("\n");
+		i--;
+	}
+	printf("-------------- SIZES --------------\n");
+	printf("%18d|%17d|\n\n", top_a + 1, top_b + 1);
+	printf(CLR_WHITE);
 }
 
 void	ft_print_stack(t_stack *s)
@@ -131,44 +200,14 @@ void	ft_print_strat(t_nb *nb)
 	printf("%12s: %d\n", "type", nb->strat.type);
 }
 
-void	ft_print_data_range(t_data *data)
-{
-	printf("ind_start: %d  |  ind_end: %d  |  start_nb: %d  |  end_nb: %d  |  nb in range: %d\n",
-		data->range.ind_start,
-		data->range.ind_end,
-		data->range.start_nb,
-		data->range.end_nb,
-		data->range.nb_in_range);
-}
-
 void	ft_print_checks_nb(t_list ***checks, int s_a_size)
 {
 	int	i;
-	int	nb_checks;
 
 	i = 0;
 	while (i < s_a_size)
 	{
 		printf("%3d. list size: %d\n", i, ft_lstsize(*checks[i]));
-		i++;
-	}
-}
-
-void	ft_print_ranges(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	printf("---->   PRINT RANGES\n");
-	while (i < data->nb_ranges)
-	{
-		printf("%7d. ind_start: %5d, ind_end: %5d,           start_nb: %5d, end_nb: %5d, nb in range: %5d\n",
-			i,
-			data->ranges[i].ind_start,
-			data->ranges[i].ind_end,
-			data->ranges[i].start_nb,
-			data->ranges[i].end_nb,
-			data->ranges[i].nb_in_range);
 		i++;
 	}
 }

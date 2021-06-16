@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tests.h                                         :+:      :+:    :+:   */
+/*   ft_pseudo_sort_memory.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 18:59:31 by msessa           ###   ########.fr       */
+/*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
+/*   Updated: 2021/06/16 19:06:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TESTS_H
-# define FT_TESTS_H
+#include "ft_push_swap.h"
 
-void	ft_print_stack(t_stack *s);
-void	ft_print_stack_ligh(t_data *data);
-void	ft_is_sorted(t_stack *s);
-void	ft_print_pseudo_sorted(t_ps *pseudo_sorted);
-void	ft_print_checks(t_list ***checks, int size);
-void	ft_print_strat(t_nb *nb);
-void	ft_print_checks_nb(t_list ***checks, int s_a_size);
-void	ft_print_stats(t_data *data);
+void	ft_free_checks(t_list ***checks, int s_size)
+{
+	int		i;
 
-#endif
+	i = 0;
+	while (i < s_size)
+	{
+		ft_lstclear(checks[i], ft_free_sgl_check);
+		free(checks[i]);
+		i++;
+	}
+	free(checks);
+}
+
+void	ft_free_sgl_check(void *void_ps)
+{
+	t_ps *ps;
+
+	ps = (t_ps *)void_ps;
+	free(ps->hash);
+	free(ps);
+}

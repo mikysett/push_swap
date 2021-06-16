@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 01:33:24 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 19:10:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define CLR_WHITE	"\033[0;37m"
 # define CLR_BLACK	"\033[0;30m"
+# define CLR_GRAY	"\033[30;1m"
 # define CLR_RED	"\033[0;31m"
 # define CLR_GREEN	"\033[0;32m"
 # define CLR_YELLOW	"\033[0;33m"
@@ -100,35 +101,16 @@ typedef struct	s_stack
 	t_nb	*stack;
 	int		size;
 	int		nb_sorted;
-	int		sorting_level;
 	int		size_unsorted;
 
-	int		smaller_sort_pos;
-	int		bigger_sort_pos;
-
 	// Only used in Stack A
-	int		unranged_in_buffer;
-	bool	splitted_bottom_buf;
-
-	// Used only in Stack B
-	int		nb_not_in_range;
-
+	int		sorting_level;
 
 	int		nb_in_range;
 }				t_stack;
 
-typedef struct	s_range
-{
-	int		id;
-	int		ind_start;
-	int		ind_end;
-	int		start_nb;
-	int		end_nb;
-	bool	already_ranged;
-	int		nb_in_range;
-	int		nb_ranged_in_b;
-}				t_range;
 
+// TODO remove after tests (only for debug and opti)
 typedef struct	s_ops_stats
 {
 	int	fill_b;
@@ -143,15 +125,11 @@ typedef struct	s_data
 {
 	t_stack		s_a;
 	t_stack		s_b;
+
+
 	bool		wait_to_swap;
+	// TODO remove (only for debug and opti)
 	t_ops_stats	stats;
-
-	t_range		*ranges;
-	int			nb_ranges;
-	
-
-	// Ideally this could be deleted at the end
-	t_range		range;
 }				t_data;
 
 typedef struct	s_ps

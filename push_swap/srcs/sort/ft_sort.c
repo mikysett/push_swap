@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 00:31:31 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 01:13:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_sort(t_data *data)
 		ft_print_stack(&data->s_a);
 		printf("Stack B initial:\n");
 		ft_print_stack(&data->s_b);
-		ft_print_ops(data, op_none);
-		ft_exit_failure();
+		// ft_print_ops(data, op_none);
 	)
 
 	ft_merge_sorted(data);
+	// ft_reverse_b(data);
 
 	DEBUG_CODE(
 		printf("MERGING SORTED COMPLETED\n");
@@ -184,6 +184,7 @@ void	ft_extract_sorting_level_from_b(t_data *data, int sorting_level)
 void	ft_merge_sorted(t_data *data)
 {
 	int				i = 0;
+	int				curr_level;
 	t_stack_type	merge_into;
 
 	merge_into = stack_a;
@@ -211,7 +212,7 @@ void	ft_merge_sorted(t_data *data)
 		// 	break;
 
 		i++;
-		if (i == 9)
+		if (i == 8)
 			break;
 	}
 }
@@ -274,7 +275,21 @@ void	ft_merge_into_b(t_data *data)
 		ft_rotate_b(data);
 }
 
+void	ft_reverse_b(t_data *data)
+{
+	int	b_size = data->s_b.size;
+	int	i;
 
+	i = -1;
+	while (++i < b_size)
+		ft_push_a(data);
+	i = -1;
+	while (++i < b_size)
+	{
+		ft_push_b(data);
+		ft_rotate_b(data);
+	}
+}
 
 
 

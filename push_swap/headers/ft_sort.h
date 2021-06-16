@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 23:25:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 00:59:31 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		ft_extract_sorting_level_from_b(t_data *data, int sorting_level);
 void	ft_merge_sorted(t_data *data);
 void	ft_merge_into_a(t_data *data);
 void	ft_merge_into_b(t_data *data);
+void	ft_reverse_b(t_data *data);
 
 
 static void	ft_rotate_sorted(t_data *data);

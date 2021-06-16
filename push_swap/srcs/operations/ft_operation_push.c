@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 12:58:38 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 11:12:59 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ void	ft_push_b(t_data *data)
 {
 	if (ft_push(&data->s_b, &data->s_a))
 		ft_print_ops(data, op_pb);
+}
+
+void	ft_push_stack(t_data *data, bool is_stack_a)
+{
+	if (is_stack_a)
+		ft_push_a(data);
+	else
+		ft_push_b(data);
 }

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/07 12:57:24 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 11:14:18 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ void	ft_reverse_rotate_2(t_data *data)
 		ft_print_ops(data, op_rra);
 	else if (res_rrb)
 		ft_print_ops(data, op_rrb);
+}
+
+
+void	ft_reverse_rotate_stack(t_data *data, bool is_stack_a)
+{
+	if (is_stack_a)
+		ft_reverse_rotate_a(data);
+	else
+		ft_reverse_rotate_b(data);
 }

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 23:07:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 01:33:24 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@
 # define OP_SUB_BUF			10
 # define MAX_REC			100000L
 
-
-typedef enum	e_stack_type
-{
-	stack_a,
-	stack_b
-}				t_stack_type;
 
 typedef enum	e_pos_type
 {

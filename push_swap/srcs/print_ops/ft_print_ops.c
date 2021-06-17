@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ops.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:31:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 15:23:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/17 00:47:42 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ static void	ft_print(t_op_info *ops, int nb_to_print)
 	i = 0;
 	while (i < nb_to_print)
 	{
-		if (ops[i].type != op_none)
-		{
-			ft_print_sgl_op(ops[i].type);
-			DEBUG_CODE(
+		DEBUG_CODE(
+			if (ops[i].type != op_none)
 				nb_ops++;
-			)
-		}
+			i++;
+			continue;
+		)
+		if (ops[i].type != op_none)
+			ft_print_sgl_op(ops[i].type);
 		i++;
 	}
 	DEBUG_CODE(

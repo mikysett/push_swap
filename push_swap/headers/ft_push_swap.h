@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 19:18:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/17 00:22:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 
 
 # include "ft_sort.h"
+# include "ft_extract_sorted.h"
+# include "ft_reverse_stack.h"
 # include "ft_print_ops.h"
 
 # include "ft_tests.h"

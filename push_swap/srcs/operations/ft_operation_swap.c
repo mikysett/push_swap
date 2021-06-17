@@ -6,24 +6,20 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 11:15:02 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/17 00:27:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static bool	ft_swap(t_stack *s)
-{
-	int		top;
-	t_nb	buf;
+static bool	ft_swap(t_stack *s);
 
-	if (s->size < 2)
-		return (false);
-	top = s->size - 1;
-	buf = s->stack[top];
-	s->stack[top] = s->stack[top - 1];
-	s->stack[top - 1] = buf;
-	return (true);
+void	ft_swap_stack(t_data *data, bool is_stack_a)
+{
+	if (is_stack_a)
+		ft_swap_a(data);
+	else
+		ft_swap_b(data);
 }
 
 void	ft_swap_a(t_data *data)
@@ -53,10 +49,16 @@ void	ft_swap_2(t_data *data)
 		ft_print_ops(data, op_sb);
 }
 
-void	ft_swap_stack(t_data *data, bool is_stack_a)
+static bool	ft_swap(t_stack *s)
 {
-	if (is_stack_a)
-		ft_swap_a(data);
-	else
-		ft_swap_b(data);
+	int		top;
+	t_nb	buf;
+
+	if (s->size < 2)
+		return (false);
+	top = s->size - 1;
+	buf = s->stack[top];
+	s->stack[top] = s->stack[top - 1];
+	s->stack[top - 1] = buf;
+	return (true);
 }

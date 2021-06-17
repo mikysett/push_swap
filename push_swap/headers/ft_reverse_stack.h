@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_operation_rotate.h                              :+:      :+:    :+:   */
+/*   ft_reverse_stack.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:28:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/17 00:22:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_OPERATION_ROTATE_H
-# define FT_OPERATION_ROTATE_H
+#ifndef FT_REVERSE_STACK_H
+# define FT_REVERSE_STACK_H
 
-void	ft_rotate_stack(t_data *data, bool is_stack_a);
-void	ft_rotate_a(t_data *data);
-void	ft_rotate_b(t_data *data);
-void	ft_rotate_2(t_data *data);
+void	ft_reverse_stack(t_data *data, t_stack *s, bool is_stack_a);
 
 #endif

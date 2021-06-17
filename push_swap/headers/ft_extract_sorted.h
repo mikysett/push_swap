@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_operation_rotate.h                              :+:      :+:    :+:   */
+/*   ft_extract_sorted.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:28:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/16 23:04:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_OPERATION_ROTATE_H
-# define FT_OPERATION_ROTATE_H
+#ifndef FT_EXTRACT_SORTED_H
+# define FT_EXTRACT_SORTED_H
 
-void	ft_rotate_stack(t_data *data, bool is_stack_a);
-void	ft_rotate_a(t_data *data);
-void	ft_rotate_b(t_data *data);
-void	ft_rotate_2(t_data *data);
+void	ft_extract_sorted(t_data *data);
 
 #endif

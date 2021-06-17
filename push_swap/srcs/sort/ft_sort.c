@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 19:29:17 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/17 00:23:22 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,131 +26,15 @@ void	ft_sort(t_data *data)
 		// ft_print_ops(data, op_none);
 		// ft_exit_failure();
 	)
-
 	ft_merge_sorted(data);
-	// ft_reverse_b(data);
-
 	DEBUG_CODE(
 		printf("FINAL STATUS OF BOTH STACKS:\n");
 		ft_print_stack_ligh(data);
 		ft_print_ops(data, op_none);
 		ft_exit_failure();
 	)
-
-	// ft_generate_ops(data);
-
 	ft_rotate_sorted(data, &data->s_a, true);
 	ft_print_ops(data, op_none);
-}
-
-void	ft_extract_sorted(t_data *data)
-{
-	int	sorting_level;
-
-	data->s_a.size_unsorted = 0;
-	data->s_b.size_unsorted = 0;
-	sorting_level = 2;
-	ft_extract_first_level(data, sorting_level);
-	ft_rotate_sorted(data, &data->s_a, true);
-	sorting_level++;
-	while (data->s_a.size_unsorted || data->s_b.size_unsorted)
-	{
-		if (data->s_a.size_unsorted)
-			ft_extract_sorting_level_from_a(data, sorting_level);
-		else
-			ft_extract_sorting_level_from_b(data, sorting_level);
-		sorting_level += 2;
-	}
-}
-
-void	ft_extract_first_level(t_data *data, int sorting_level)
-{
-	int	top;
-	int	b_size;
-
-	b_size = data->s_a.size - ft_nb_sorted(&data->s_a, sorting_level - 1);
-	while (data->s_b.size != b_size)
-	{
-		top = data->s_a.size - 1;
-		if (data->s_a.stack[top].is_sorted == sorting_level)
-		{
-			ft_push_b(data);
-			ft_rotate_b(data);
-		}
-		else if (data->s_a.stack[top].is_sorted != 1)
-		{
-			ft_push_b(data);
-			data->s_b.size_unsorted++;
-		}
-		else
-			ft_rotate_a(data);
-	}
-}
-
-int		ft_nb_sorted(t_stack *s, int sorting_level)
-{
-	int	i;
-	int	nb_sorted;
-
-	i = 0;
-	nb_sorted = 0;
-	while (i < s->size)
-	{
-		if (s->stack[i].is_sorted == sorting_level)
-			nb_sorted++;
-		i++;
-	}
-	return (nb_sorted);
-}
-
-void	ft_extract_sorting_level_from_a(t_data *data, int sorting_level)
-{
-	int	top;
-
-	while (data->s_a.size_unsorted)
-	{
-		top = data->s_a.size - 1;
-		if (data->s_a.stack[top].is_sorted == sorting_level)
-		{
-			ft_rotate_a(data);
-		}
-		else if (data->s_a.stack[top].is_sorted == sorting_level + 1)
-		{
-			ft_push_b(data);
-			ft_rotate_b(data);
-		}
-		else
-		{
-			ft_push_b(data);
-			data->s_b.size_unsorted++;
-		}
-		data->s_a.size_unsorted--;
-	}
-}
-
-void	ft_extract_sorting_level_from_b(t_data *data, int sorting_level)
-{
-	int	top;
-
-	while (data->s_b.size_unsorted)
-	{
-		top = data->s_b.size - 1;
-		if (data->s_b.stack[top].is_sorted == sorting_level)
-		{
-			ft_rotate_b(data);
-		}
-		else if (data->s_b.stack[top].is_sorted == sorting_level + 1)
-		{
-			ft_push_a(data);
-			ft_rotate_a(data);
-		}
-		else
-		{
-			ft_push_a(data);
-			data->s_a.size_unsorted++;
-		}
-		data->s_b.size_unsorted--;
-	}
 }
 
 void	ft_merge_sorted(t_data *data)
@@ -168,13 +52,16 @@ void	ft_merge_sorted(t_data *data)
 		{
 			DEBUG_CODE(printf("MERGING B INTO A\n");)
 			if (ft_level_reversed(&data->s_b))
-				ft_invert_level(data, merge_into_a, &data->s_b);
-			else if (ft_level_reversed(&data->s_a))
 			{
-				ft_invert_level(data, !merge_into_a, &data->s_b);
-				continue;
+				if (ft_count_lvl(&data->s_b) == 1)
+					ft_reverse_stack(data, &data->s_b, false);
+				else
+					ft_invert_level(data, merge_into_a, &data->s_b);
 			}
-			ft_merge_into(data, merge_into_a, &data->s_a, &data->s_b);
+			else if (ft_level_reversed(&data->s_a))
+				ft_invert_level(data, !merge_into_a, &data->s_b);
+			else
+				ft_merge_into(data, merge_into_a, &data->s_a, &data->s_b);
 		}
 		else
 		{
@@ -183,10 +70,13 @@ void	ft_merge_sorted(t_data *data)
 				ft_invert_level(data, merge_into_a, &data->s_a);
 			else if (ft_level_reversed(&data->s_b))
 			{
-				ft_invert_level(data, !merge_into_a, &data->s_b);
-				continue;
+				if (ft_count_lvl(&data->s_b) == 1)
+					ft_reverse_stack(data, &data->s_b, false);
+				else
+					ft_invert_level(data, !merge_into_a, &data->s_b);
 			}
-			ft_merge_into(data, merge_into_a, &data->s_b, &data->s_a);
+			else
+				ft_merge_into(data, merge_into_a, &data->s_b, &data->s_a);
 		}
 		DEBUG_CODE(
 			ft_print_stack_ligh(data);
@@ -253,10 +143,10 @@ void	ft_invert_level(t_data *data, bool merge_into_a, t_stack *s)
 	if (top < 1)
 		return ;
 	level = s->stack[top].is_sorted;
-	while (s->stack[top].is_sorted == level)
+	while (top >= 0 && s->stack[top].is_sorted == level)
 	{
 		ft_push_stack(data, merge_into_a);
-		top = s->size - 1;
+		top--;
 	}
 }
 
@@ -327,78 +217,6 @@ bool	ft_only_one_level(t_stack *s)
 		i++;
 	}
 	return (true);
-}
-
-void	ft_merge_into_a(t_data *data)
-{
-	int	level_to_sort;
-	int	top_a;
-	int	top_b;
-
-	top_a = data->s_a.size - 1;
-	top_b = data->s_b.size - 1;
-	level_to_sort = data->s_b.stack[top_b].is_sorted;
-	while (data->s_b.stack[top_b].is_sorted == level_to_sort)
-	{
-		if (data->s_b.stack[top_b].nb < data->s_a.stack[top_a].nb
-			|| data->s_a.stack[top_a].is_sorted != level_to_sort - 1)
-		{
-			data->s_b.stack[top_b].is_sorted = level_to_sort - 1;
-			ft_push_a(data);
-		}
-		else
-			ft_rotate_a(data);
-		top_a = data->s_a.size - 1;
-		top_b = data->s_b.size - 1;
-	}
-	top_a = data->s_a.size - 1;
-	while (data->s_a.stack[top_a].is_sorted == level_to_sort - 1)
-		ft_rotate_a(data);
-}
-
-void	ft_merge_into_b(t_data *data)
-{
-	int	level_to_sort;
-	int	top_a;
-	int	top_b;
-
-	top_a = data->s_a.size - 1;
-	top_b = data->s_b.size - 1;
-	level_to_sort = data->s_a.stack[top_a].is_sorted;
-	while (data->s_a.stack[top_a].is_sorted == level_to_sort)
-	{
-		top_a = data->s_a.size - 1;
-		top_b = data->s_b.size - 1;
-		if (data->s_a.stack[top_a].nb > data->s_b.stack[top_b].nb
-			|| data->s_b.stack[top_b].is_sorted != level_to_sort - 1)
-		{
-			data->s_a.stack[top_a].is_sorted = level_to_sort - 1;
-			ft_push_b(data);
-		}
-		else
-			ft_rotate_b(data);
-		top_a = data->s_a.size - 1;
-		top_b = data->s_b.size - 1;
-	}
-	top_b = data->s_b.size - 1;
-	while (data->s_b.stack[top_b].is_sorted == level_to_sort - 1)
-		ft_rotate_b(data);
-}
-
-void	ft_reverse_b(t_data *data)
-{
-	int	b_size = data->s_b.size;
-	int	i;
-
-	i = -1;
-	while (++i < b_size)
-		ft_push_a(data);
-	i = -1;
-	while (++i < b_size)
-	{
-		ft_push_b(data);
-		ft_rotate_b(data);
-	}
 }
 
 void	ft_rotate_sorted(t_data *data, t_stack *s, bool is_stack_a)

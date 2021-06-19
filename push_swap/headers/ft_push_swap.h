@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:22:41 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/18 16:02:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@
 # include "ft_operation_rotate.h"
 # include "ft_operation_reverse_rotate.h"
 
-
 # include "ft_sort.h"
 # include "ft_extract_sorted.h"
+# include "ft_can_be_in_middle.h"
+# include "ft_optimize_extracted.h"
 # include "ft_reverse_stack.h"
 # include "ft_print_ops.h"
 

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:34:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/19 11:23:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct	s_stack
 	int		size_unsorted;
 
 	// Only used in Stack A
-	int		sorting_level;
+	int		sort_lvl;
 
 	int		nb_in_range;
 }				t_stack;
@@ -157,5 +157,16 @@ typedef struct	s_ps_rec
 	t_ps	*new;
 	int		pos_nb;
 }				t_ps_rec;
+
+typedef struct	s_merge_info
+{
+	t_stack	*s_in;
+	t_stack	*s_from;
+	int		lvl_in;
+	int		lvl_from;
+	int		top_in;
+	int		top_from;
+	bool	into_a;
+}				t_merge_info;
 
 #endif

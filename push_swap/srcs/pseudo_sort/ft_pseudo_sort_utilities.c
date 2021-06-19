@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pseudo_sort_utilities.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 19:06:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/18 15:19:42 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	while (i < s->size)
 	{
 		if (ps->hash[i] != 0)
-			s->stack[i].is_sorted = s->sorting_level;
+			s->stack[i].is_sorted = s->sort_lvl;
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pseudo_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 19:25:25 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/18 15:19:42 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_pseudo_sort(t_stack *s)
 	{
 		i = 0;
 		best = 0;
-		s->sorting_level++;
+		s->sort_lvl++;
 		while (i < s->size)
 		{
 			if (best && best->score > score_threshold)

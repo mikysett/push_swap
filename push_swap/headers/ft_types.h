@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/19 11:23:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 01:20:02 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ typedef struct	s_merge_info
 	int		top_in;
 	int		top_from;
 	bool	into_a;
+	bool	reversed_merge;
+	bool	reverse_into_b;
 }				t_merge_info;
 
 #endif

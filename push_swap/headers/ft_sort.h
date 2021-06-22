@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/19 00:59:00 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/21 16:43:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,20 @@ void		ft_merge_sorted(t_data *data);
 void		ft_compact_top(t_data *data, t_stack *s, bool is_stack_a);
 
 void		ft_init_merge(t_data *data, t_merge_info *m);
+void		ft_chose_best_top_lvl(t_data *data);
+void		ft_chose_best_top_lvl_in_stack(t_data *data, t_stack *s,
+				bool is_stack_a);
+int			ft_get_lvl_size(t_stack *s, int sort_lvl);
+void		ft_reverse_rotate_bottom_lvl(t_data *data, t_stack *s,
+				bool is_stack_a);
+
+
 bool		ft_any_reversed_in_stack(t_stack *s);
 
 bool		ft_more_levels_in_a(t_data *data);
 int			ft_count_lvl(t_stack *s);
-bool		ft_level_reversed(t_stack *s, int pos);
+bool		ft_top_level_reversed(t_stack *s, int pos);
+bool		ft_bottom_level_reversed(t_stack *s, int pos);
 void		ft_merge_into(t_data *data, t_merge_info *m);
 bool		ft_merge_from_bottom(t_data *data, t_merge_info *m,
 				int from_bottom_lvl);

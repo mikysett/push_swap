@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/19 00:56:44 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/21 14:46:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_optimize_extracted_stack(t_stack *s)
 	while (pos >= 0)
 	{
 		curr_lvl = s->stack[pos].is_sorted;
-		curr_lvl_reversed = ft_level_reversed(s, pos);
+		curr_lvl_reversed = ft_top_level_reversed(s, pos);
 		if (!curr_lvl_reversed && pos < s->size - 1
 			&& s->stack[pos + 1].nb < s->stack[pos].nb)
 			s->stack[pos + 1].is_sorted = curr_lvl;

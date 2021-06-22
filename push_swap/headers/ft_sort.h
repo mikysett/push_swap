@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 16:17:14 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 21:33:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ bool		ft_any_reversed_in_stack(t_stack *s);
 
 t_s_name	ft_stack_with_less_lvl(t_data *data);
 int			ft_count_lvl(t_stack *s);
-bool		ft_top_level_reversed(t_stack *s, int pos);
+bool		ft_top_lvl_reversed(t_stack *s, int pos);
 bool		ft_bottom_level_reversed(t_stack *s, int pos);
 void		ft_merge_into(t_data *data, t_merge_info *m);
-bool		ft_merge_from_bottom(t_data *data, t_merge_info *m,
-				int from_bottom_lvl);
+bool		ft_merge_from_bottom(t_data *data, t_merge_info *m);
 void		ft_merge_reversed(t_data *data, t_merge_info *m);
 void		ft_merge_tail(t_data *data, t_merge_info *m,
 				int lvl_to_sort, int dest_lvl);

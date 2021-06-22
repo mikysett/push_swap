@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_optimize_extracted.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 14:12:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 21:07:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_optimize_extracted_stack(t_stack *s)
 	while (pos >= 0)
 	{
 		curr_lvl = s->stack[pos].lis_lvl;
-		curr_lvl_reversed = ft_top_level_reversed(s, pos);
+		curr_lvl_reversed = ft_top_lvl_reversed(s, pos);
 		if (!curr_lvl_reversed && pos < s->size - 1
 			&& s->stack[pos + 1].nb < s->stack[pos].nb)
 			s->stack[pos + 1].lis_lvl = curr_lvl;

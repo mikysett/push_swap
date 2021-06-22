@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_merge_sorted.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 16:28:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 21:49:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
+static void	ft_prepare_reversed_stacks(t_data *data);
+static bool	ft_it_is_mergable(t_data *data, t_merge_info *m);
 
 void	ft_merge_sorted(t_data *data)
 {
 	t_merge_info	merge;
-	int				i;
 
 	merge.reverse_into_b = true;
 	while (data->s_b.size)
@@ -33,6 +34,8 @@ void	ft_merge_sorted(t_data *data)
 		)
 		ft_print_ops(data, op_none);
 	}
+
+	// TODO improve this flow
 	if (ft_count_lvl(&data->s_a) > 1)
 	{
 		ft_invert_level(data, stack_b, &data->s_a);
@@ -42,28 +45,12 @@ void	ft_merge_sorted(t_data *data)
 
 void	ft_init_merge(t_data *data, t_merge_info *m)
 {
-	if (ft_top_level_reversed(&data->s_a, data->s_a.top)
-		&& ft_top_level_reversed(&data->s_b, data->s_b.top))
+	m->reversed_merge = false;
+	if (ft_top_lvl_reversed(&data->s_a, data->s_a.top)
+		&& ft_top_lvl_reversed(&data->s_b, data->s_b.top))
 		m->reversed_merge = true;
 	else
-	{
-		if (ft_top_level_reversed(&data->s_a, data->s_a.top))
-		{
-			if (ft_count_lvl(&data->s_a) == 1)
-				ft_reverse_stack(data, &data->s_a, stack_a);
-			else
-				ft_invert_level(data, stack_b, &data->s_a);
-		}
-		else if (ft_top_level_reversed(&data->s_b, data->s_b.top))
-		{
-			if (ft_count_lvl(&data->s_b) == 1)
-				ft_reverse_stack(data, &data->s_b, stack_b);
-			else
-				ft_invert_level(data, stack_a, &data->s_b);
-		}
-		// ft_chose_best_top_lvl(data);
-		m->reversed_merge = false;
-	}
+		ft_prepare_reversed_stacks(data);
 	if (m->reversed_merge)
 	{
 		DEBUG_CODE(printf("- - - - REVERSED MERGE: %d\n", m->reverse_into_b);)
@@ -74,24 +61,15 @@ void	ft_init_merge(t_data *data, t_merge_info *m)
 		m->reverse_into_b = !m->reverse_into_b;
 	}
 	else if (ft_bottom_level_reversed(&data->s_a, 0))
-		m->in_name = stack_a;
-	else if (ft_bottom_level_reversed(&data->s_b, 0))
 		m->in_name = stack_b;
+	else if (ft_bottom_level_reversed(&data->s_b, 0))
+		m->in_name = stack_a;
 	else
 	{
 		m->in_name = ft_stack_with_less_lvl(data);
 		DEBUG_CODE(printf("ORDER DECIDED BY MORE LEVELS IN A: %d\n", m->in_name);)
 	}
-	if (m->in_name == stack_a)
-	{
-		m->s_in = &data->s_a;
-		m->s_from = &data->s_b;
-	}
-	else
-	{
-		m->s_in = &data->s_b;
-		m->s_from = &data->s_a;
-	}
+	ft_init_stacks_name(data, m);
 	// This function needs to be reviewed deeply!
 	ft_chose_best_top_lvl(data);
 	// ft_chose_best_top_lvl_in_stack(data, m->s_in, m->in_name);
@@ -100,6 +78,24 @@ void	ft_init_merge(t_data *data, t_merge_info *m)
 	if (m->s_in->size > 0)
 		m->lvl_in = m->s_in->stack[m->s_in->top].lis_lvl;
 
+}
+
+static void	ft_prepare_reversed_stacks(t_data *data)
+{
+	if (ft_top_lvl_reversed(&data->s_a, data->s_a.top))
+	{
+		if (ft_count_lvl(&data->s_a) == 1)
+			ft_reverse_stack(data, &data->s_a, stack_a);
+		else
+			ft_invert_level(data, stack_b, &data->s_a);
+	}
+	else if (ft_top_lvl_reversed(&data->s_b, data->s_b.top))
+	{
+		if (ft_count_lvl(&data->s_b) == 1)
+			ft_reverse_stack(data, &data->s_b, stack_b);
+		else
+			ft_invert_level(data, stack_a, &data->s_b);
+	}
 }
 
 void	ft_chose_best_top_lvl(t_data *data)
@@ -111,7 +107,7 @@ void	ft_chose_best_top_lvl(t_data *data)
 void	ft_chose_best_top_lvl_in_stack(t_data *data, t_stack *s, t_s_name s_name)
 {
 	if (ft_count_lvl(s) != 2
-		|| ft_top_level_reversed(s, s->top)
+		|| ft_top_lvl_reversed(s, s->top)
 		|| ft_bottom_level_reversed(s, 0))
 		return ;
 	if (ft_get_lvl_size(s, s->stack[s->top].lis_lvl)
@@ -153,7 +149,7 @@ bool	ft_any_reversed_in_stack(t_stack *s)
 	pos = s->top;
 	while (pos >= 0)
 	{
-		if (ft_top_level_reversed(s, pos))
+		if (ft_top_lvl_reversed(s, pos))
 			return (true);
 		pos = ft_get_next_lvl_pos(s, pos);
 	}
@@ -164,7 +160,7 @@ void	ft_compact_top(t_data *data, t_stack *s, t_s_name s_name)
 {
 	if (s->top > 1
 		&& s->stack[s->top].lis_lvl != s->stack[s->top - 1].lis_lvl
-		&& !ft_top_level_reversed(s, s->top - 1)
+		&& !ft_top_lvl_reversed(s, s->top - 1)
 		&& (s->top < 2
 			|| s->stack[s->top - 2].lis_lvl != s->stack[s->top - 1].lis_lvl
 			|| ft_can_be_in_middle(s->stack[s->top].nb,
@@ -210,7 +206,7 @@ int		ft_count_lvl(t_stack *s)
 	return (nb_levels);
 }
 
-bool	ft_top_level_reversed(t_stack *s, int pos)
+bool	ft_top_lvl_reversed(t_stack *s, int pos)
 {
 	int	level;
 
@@ -249,31 +245,39 @@ void	ft_invert_level(t_data *data, t_s_name dest, t_stack *s)
 
 void	ft_merge_into(t_data *data, t_merge_info *m)
 {
-	int		from_bottom_lvl;
-
-	from_bottom_lvl = m->s_from->stack[0].lis_lvl;
 	DEBUG_CODE(printf("MERGING LEVEL: %d\n", m->lvl_from);)
-	while (m->s_from->top >= 0
-		&& m->s_from->stack[m->s_from->top].lis_lvl == m->lvl_from)
+	while (ft_it_is_mergable(data, m))
 	{
-		if (ft_merge_from_bottom(data, m, from_bottom_lvl))
-			continue;
-		else if (m->s_from->stack[m->s_from->top].nb < m->s_in->stack[m->s_in->top].nb
-			|| m->s_in->stack[m->s_in->top].lis_lvl != m->lvl_in)
+		if (m->s_from->top >= 0
+			&& m->s_from->stack[m->s_from->top].lis_lvl == m->lvl_from
+			&& (m->s_from->stack[m->s_from->top].nb < m->s_in->stack[m->s_in->top].nb
+			|| m->s_in->stack[m->s_in->top].lis_lvl != m->lvl_in))
 		{
 			m->s_from->stack[m->s_from->top].lis_lvl = m->lvl_in;
 			ft_push_stack(data, m->in_name);
 		}
-		else if (ft_only_one_level(m->s_in)
-			&& m->s_from->stack[m->s_from->top].nb > ft_get_biggest_nb(m->s_in))
+		else if (m->s_from->top >= 0
+			&& (ft_only_one_level(m->s_in)
+			&& m->s_from->stack[m->s_from->top].nb > ft_get_biggest_nb(m->s_in)))
 			ft_merge_tail(data, m, m->lvl_from, m->lvl_in);
 		else
 			ft_rotate_stack(data, m->in_name);
+		// ft_print_stack_ligh(data);
 	}
 	ft_align_s_in(data, m);
 }
 
-bool	ft_merge_from_bottom(t_data *data, t_merge_info *m, int from_bottom_lvl)
+static bool	ft_it_is_mergable(t_data *data, t_merge_info *m)
+{
+	while (ft_count_lvl(m->s_from) > 1 && ft_merge_from_bottom(data, m))
+		continue;
+	return ((m->s_from->top >= 0
+		&& m->s_from->stack[m->s_from->top].lis_lvl == m->lvl_from)
+		|| (ft_count_lvl(m->s_in) != 1
+			&& m->s_in->stack[m->s_in->top].lis_lvl == m->lvl_in));
+}
+
+bool	ft_merge_from_bottom(t_data *data, t_merge_info *m)
 {
 	t_nb	*bottom_nb;
 	t_nb	*prev_nb;

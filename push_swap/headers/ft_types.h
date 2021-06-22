@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 16:38:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 21:52:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define CLR_PURPLE	"\033[0;35m"
 # define CLR_CYAN	"\033[0;36m"
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else
@@ -166,13 +166,13 @@ typedef struct	s_ps_rec
 
 typedef struct	s_merge_info
 {
-	t_stack			*s_in;
-	t_stack			*s_from;
-	int				lvl_in;
-	int				lvl_from;
+	t_stack		*s_in;
+	t_stack		*s_from;
+	int			lvl_in;
+	int			lvl_from;
 	t_s_name	in_name;
-	bool			reversed_merge;
-	bool			reverse_into_b;
+	bool		reversed_merge;
+	bool		reverse_into_b;
 }				t_merge_info;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:25:52 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:10:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	ft_reverse_rotate(t_stack *s);
 
-void	ft_reverse_rotate_stack(t_data *data, bool is_stack_a)
+void	ft_reverse_rotate_stack(t_data *data, t_s_name s_name)
 {
-	if (is_stack_a)
+	if (s_name == stack_a)
 		ft_reverse_rotate_a(data);
 	else
 		ft_reverse_rotate_b(data);
@@ -52,19 +52,17 @@ void	ft_reverse_rotate_2(t_data *data)
 static bool	ft_reverse_rotate(t_stack *s)
 {
 	int 	i;
-	int		top;
 	t_nb	buf;
 
 	if (s->size < 2)
 		return (false);
 	i = 1;
-	top = s->size - 1;
 	buf = s->stack[0];
-	while (i <= top)
+	while (i <= s->top)
 	{
 		s->stack[i - 1] = s->stack[i];
 		i++;
 	}
-	s->stack[top] = buf;
+	s->stack[s->top] = buf;
 	return (true);
 }

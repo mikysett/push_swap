@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:24:45 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:10:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	ft_push(t_stack *s_in, t_stack *s_out);
 
-void	ft_push_stack(t_data *data, bool is_stack_a)
+void	ft_push_stack(t_data *data, t_s_name s_name)
 {
-	if (is_stack_a)
+	if (s_name == stack_a)
 		ft_push_a(data);
 	else
 		ft_push_b(data);
@@ -34,17 +34,14 @@ void	ft_push_b(t_data *data)
 		ft_print_ops(data, op_pb);
 }
 
-static bool	ft_push(t_stack *s_in, t_stack *s_out)
+static bool	ft_push(t_stack *s_in, t_stack *s_from)
 {
-	int	top_in;
-	int	top_out;
-
-	if (s_out->size < 1)
+	if (s_from->size < 1)
 		return (false);
-	top_in = s_in->size;
-	top_out = s_out->size - 1;
-	s_in->stack[top_in] = s_out->stack[top_out];
+	s_in->stack[s_in->top + 1] = s_from->stack[s_from->top];
 	s_in->size++;
-	s_out->size--;
+	s_from->size--;
+	s_in->top++;
+	s_from->top--;
 	return (true);
 }

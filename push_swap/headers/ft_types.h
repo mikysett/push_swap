@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 01:20:02 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:38:42 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 # define OP_SUB_BUF			10
 # define MAX_REC			100000L
 
+
+typedef enum	e_s_name
+{
+	stack_a = 0,
+	stack_b = 1
+}				t_s_name;
 
 typedef enum	e_pos_type
 {
@@ -86,7 +92,7 @@ typedef struct	s_sort_strat
 typedef struct	s_nb
 {
 	int				nb;
-	int				is_sorted;
+	int				lis_lvl;
 	int				sort_pos;
 	int				init_pos;
 	int				range;
@@ -100,13 +106,13 @@ typedef struct	s_stack
 {
 	t_nb	*stack;
 	int		size;
+	int		top;
+	
 	int		nb_sorted;
 	int		size_unsorted;
 
 	// Only used in Stack A
-	int		sort_lvl;
-
-	int		nb_in_range;
+	int		lis_lvl;
 }				t_stack;
 
 
@@ -160,15 +166,13 @@ typedef struct	s_ps_rec
 
 typedef struct	s_merge_info
 {
-	t_stack	*s_in;
-	t_stack	*s_from;
-	int		lvl_in;
-	int		lvl_from;
-	int		top_in;
-	int		top_from;
-	bool	into_a;
-	bool	reversed_merge;
-	bool	reverse_into_b;
+	t_stack			*s_in;
+	t_stack			*s_from;
+	int				lvl_in;
+	int				lvl_from;
+	t_s_name	in_name;
+	bool			reversed_merge;
+	bool			reverse_into_b;
 }				t_merge_info;
 
 #endif

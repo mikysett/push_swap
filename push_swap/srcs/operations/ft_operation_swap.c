@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 00:27:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:10:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	ft_swap(t_stack *s);
 
-void	ft_swap_stack(t_data *data, bool is_stack_a)
+void	ft_swap_stack(t_data *data, t_s_name s_name)
 {
-	if (is_stack_a)
+	if (s_name == stack_a)
 		ft_swap_a(data);
 	else
 		ft_swap_b(data);
@@ -51,14 +51,12 @@ void	ft_swap_2(t_data *data)
 
 static bool	ft_swap(t_stack *s)
 {
-	int		top;
 	t_nb	buf;
 
 	if (s->size < 2)
 		return (false);
-	top = s->size - 1;
-	buf = s->stack[top];
-	s->stack[top] = s->stack[top - 1];
-	s->stack[top - 1] = buf;
+	buf = s->stack[s->top];
+	s->stack[s->top] = s->stack[s->top - 1];
+	s->stack[s->top - 1] = buf;
 	return (true);
 }

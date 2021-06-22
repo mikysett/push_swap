@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/18 15:19:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 15:38:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	ft_pseudo_sort(t_stack *s)
 	{
 		i = 0;
 		best = 0;
-		s->sort_lvl++;
+		s->lis_lvl++;
 		while (i < s->size)
 		{
 			if (best && best->score > score_threshold)
 				break;
-			if (!s->stack[i].is_sorted)
+			if (!s->stack[i].lis_lvl)
 			{
 				new = ft_do_pseudo_sort(checks, s, i, i);
 				ft_save_check(checks[i], new);
@@ -79,7 +79,7 @@ static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s,
 	while (i < s->size)
 	{
 		nb = &s->stack[i];
-		if (!nb->is_sorted && nb->nb < rec.pos_nb)
+		if (!nb->lis_lvl && nb->nb < rec.pos_nb)
 		{
 			// Recursion depth limit
 			// if (ps_data->nb_rec > MAX_REC)

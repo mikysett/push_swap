@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 18:04:07 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/17 18:26:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 14:14:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	ft_can_be_in_middle(int nb, t_nb *prev, t_nb *next)
 t_nb	*ft_prev_in_lvl(t_stack *s, int pos, int lvl)
 {
 	pos = (pos + 1) % s->size;
-	while (s->stack[pos].is_sorted != lvl)
+	while (s->stack[pos].lis_lvl != lvl)
 		pos = (pos + 1) % s->size;
 	return (&s->stack[pos]);
 }
@@ -39,12 +39,12 @@ t_nb	*ft_next_in_lvl(t_stack *s, int pos, int lvl)
 {
 	pos--;
 	if (pos < 0)
-		pos = s->size - 1;
-	while (s->stack[pos].is_sorted != lvl)
+		pos = s->top;
+	while (s->stack[pos].lis_lvl != lvl)
 	{
 		pos--;
 		if (pos < 0)
-			pos = s->size - 1;
+			pos = s->top;
 	}
 	return (&s->stack[pos]);
 }

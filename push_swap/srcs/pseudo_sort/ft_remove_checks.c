@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/18 15:19:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 15:38:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static bool	ft_is_level_in_check(t_ps *ps, t_stack *s)
 	while (i < s->size)
 	{
 		if (ps->hash[i] == 1
-			&& s->stack[i].is_sorted == s->sort_lvl)
+			&& s->stack[i].lis_lvl == s->lis_lvl)
 			return (true);
 		i++;
 	}

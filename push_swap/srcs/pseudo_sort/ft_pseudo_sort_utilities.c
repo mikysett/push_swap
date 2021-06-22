@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/18 15:19:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/22 15:38:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	ft_all_sorted_set(t_stack *s)
 	i = 0;
 	while (i < s->size)
 	{
-		if (!s->stack[i].is_sorted)
+		if (!s->stack[i].lis_lvl)
 			return (false);
 		i++;
 	}
@@ -44,7 +44,7 @@ void	ft_set_is_sorted(t_stack *s, t_ps *ps)
 	while (i < s->size)
 	{
 		if (ps->hash[i] != 0)
-			s->stack[i].is_sorted = s->sort_lvl;
+			s->stack[i].lis_lvl = s->lis_lvl;
 		i++;
 	}
 }

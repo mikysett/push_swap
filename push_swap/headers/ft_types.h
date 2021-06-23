@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 21:52:28 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/23 17:10:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # endif
 
 # define SCORE_THRESHOLD	0.90
+# define OP_MAX_CHECK		10
 # define OP_BUF_SIZE		1000
 # define OP_SUB_BUF			10
 # define MAX_REC			100000L

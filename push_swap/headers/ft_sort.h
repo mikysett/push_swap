@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 21:33:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/23 15:59:42 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,33 @@
 void		ft_sort(t_data *data);
 
 t_s_name	ft_opposite_s(t_s_name current_stack);
+void		ft_init_stacks_name(t_data *data, t_merge_info *m);
+
+int			ft_count_lvl(t_stack *s);
+bool		ft_only_one_lvl(t_stack *s);
+int			ft_get_lvl_size(t_stack *s, int lis_lvl);
+
+void		ft_swap_lvl(t_data *data, t_s_name dest, t_stack *s_from);
+void		ft_reverse_swap_lvl(t_data *data, t_s_name dest, t_stack *s_from);
+
+t_s_name	ft_stack_with_less_lvl(t_data *data);
+bool		ft_top_lvl_reversed(t_stack *s, int pos);
+bool		ft_bottom_lvl_reversed(t_stack *s, int pos);
+bool		ft_any_reversed_lvl_in_stack(t_stack *s);
+
+void		ft_init_merge(t_data *data, t_merge_info *m);
+
+void		ft_merge_into(t_data *data, t_merge_info *m);
+void		ft_merge_tail(t_data *data, t_merge_info *m,
+				int lvl_to_sort, int dest_lvl);
+void		ft_align_s_in(t_data *data, t_merge_info *m);
+
+void		ft_merge_reversed(t_data *data, t_merge_info *m);
+
+bool		ft_merge_from_bottom(t_data *data, t_merge_info *m);
 
 void		ft_merge_sorted(t_data *data);
 void		ft_compact_top(t_data *data, t_stack *s, t_s_name s_name);
-
-void		ft_init_merge(t_data *data, t_merge_info *m);
-void		ft_chose_best_top_lvl(t_data *data);
-void		ft_chose_best_top_lvl_in_stack(t_data *data, t_stack *s,
-				t_s_name s_name);
-int			ft_get_lvl_size(t_stack *s, int lis_lvl);
-void		ft_reverse_rotate_bottom_lvl(t_data *data, t_stack *s,
-				t_s_name s_name);
-
-
-bool		ft_any_reversed_in_stack(t_stack *s);
-
-t_s_name	ft_stack_with_less_lvl(t_data *data);
-int			ft_count_lvl(t_stack *s);
-bool		ft_top_lvl_reversed(t_stack *s, int pos);
-bool		ft_bottom_level_reversed(t_stack *s, int pos);
-void		ft_merge_into(t_data *data, t_merge_info *m);
-bool		ft_merge_from_bottom(t_data *data, t_merge_info *m);
-void		ft_merge_reversed(t_data *data, t_merge_info *m);
-void		ft_merge_tail(t_data *data, t_merge_info *m,
-				int lvl_to_sort, int dest_lvl);
-
-bool		ft_only_one_level(t_stack *s);
-int			ft_get_biggest_nb(t_stack *s);
-int			ft_get_smallest_nb(t_stack *s);
-
-void		ft_invert_level(t_data *data, t_s_name dest, t_stack *s);
-void		ft_align_s_in(t_data *data, t_merge_info *m);
 
 void		ft_rotate_sorted(t_data *data, t_s_name s_name);
 

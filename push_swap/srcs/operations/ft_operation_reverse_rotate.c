@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 16:10:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 00:12:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_reverse_rotate_2(t_data *data)
 
 static bool	ft_reverse_rotate(t_stack *s)
 {
-	int 	i;
+	int		i;
 	t_nb	buf;
 
 	if (s->size < 2)

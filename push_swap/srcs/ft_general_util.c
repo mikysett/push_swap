@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utilities.c                                     :+:      :+:    :+:   */
+/*   ft_general_util.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:41:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/16 18:56:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 00:14:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_free_data(t_data *data)
 
 void	ft_exit_failure(void)
 {
-		write(STDERR_FILENO, "Error\n", 6);
-		exit(EXIT_FAILURE);
+	write(STDERR_FILENO, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ops.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:31:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/23 16:19:07 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 00:23:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	ft_align_ops(t_op_info *ops);
 void	ft_print_ops(t_data *data, t_op_type op_type)
 {
 	static int			nb_ops = 0;
-	static t_op_info	ops[OP_BUF_SIZE] = { (t_op_info){.type = op_none,
-		.a_size = 0, .b_size = 0} };
+	static t_op_info	ops[OP_BUF_SIZE] = {(t_op_info){.type = op_none,
+		.a_size = 0, .b_size = 0}};
 
 	if (op_type == op_none)
 	{
@@ -45,10 +45,8 @@ void	ft_print_ops(t_data *data, t_op_type op_type)
 static void	ft_print(t_op_info *ops, int nb_to_print)
 {
 	int	i;
-	DEBUG_CODE(
-		static int	nb_ops = 0;
-	)
 
+	DEBUG_CODE(static int	nb_ops = 0;)
 	i = 0;
 	while (i < nb_to_print)
 	{
@@ -69,8 +67,7 @@ static void	ft_print(t_op_info *ops, int nb_to_print)
 
 static void	ft_print_sgl_op(t_op_type type)
 {
-	static char	ops_str[12][4] =
-	{
+	static char	ops_str[12][4] = {
 		"",
 		"sa\n",
 		"sb\n",

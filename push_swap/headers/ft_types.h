@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/23 17:10:38 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 00:18:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,25 +118,21 @@ typedef struct	s_stack
 
 
 // TODO remove after tests (only for debug and opti)
-typedef struct	s_ops_stats
-{
-	int	fill_b;
-	int	sort_not_in_range;
-	int	reduce_not_in_range;
-	int	organize_not_in_range;
-	int	merge_stacks;
-	int	rotate_sorted;
-}				t_ops_stats;
+// typedef struct	s_ops_stats
+// {
+// 	int	fill_b;
+// 	int	sort_not_in_range;
+// 	int	reduce_not_in_range;
+// 	int	organize_not_in_range;
+// 	int	merge_stacks;
+// 	int	rotate_sorted;
+// }				t_ops_stats;
 
 typedef struct	s_data
 {
 	t_stack		s_a;
 	t_stack		s_b;
-
-
 	bool		wait_to_swap;
-	// TODO remove (only for debug and opti)
-	t_ops_stats	stats;
 }				t_data;
 
 typedef struct	s_ps

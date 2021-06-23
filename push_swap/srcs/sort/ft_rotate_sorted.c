@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 16:18:03 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 00:25:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_rotate_sorted(t_data *data, t_s_name s_name)
 	smallest_sort_pos = ft_get_smallest_sort_pos(s);
 	while (++curr_pos < s->size)
 		if (s->stack[curr_pos].sort_pos == smallest_sort_pos)
-			break;
+			break ;
 	if (curr_pos <= s->size / 2)
 		while (curr_pos-- != 0)
 			ft_reverse_rotate_stack(data, s_name);

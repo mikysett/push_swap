@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 00:18:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 19:32:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ typedef struct	s_stack
 	int		size;
 	int		top;
 	
-	int		nb_sorted;
 	int		size_unsorted;
 
 	// Only used in Stack A
 	int		lis_lvl;
+	int		smaller_sp;
+	int		bigger_sp;
+	int		nb_sorted;
 }				t_stack;
 
 

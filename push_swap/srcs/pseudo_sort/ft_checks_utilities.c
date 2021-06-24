@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 16:22:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/15 22:25:39 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 19:12:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_reduce_checked(t_list **checks)
 			next = curr->next;
 			ft_lstdelone(curr, ft_free_sgl_check);
 			curr = next;
-			// printf("ONE BUFFER CLEANED ---<<<<<<------------\n");
 		}
 		else
 		{
@@ -89,7 +88,6 @@ t_ps	*ft_best_checked(t_list **checks, int s_size, int pos, int first_pos)
 	t_ps	*best;
 	int		curr_chunck_size;
 
-	ft_reduce_checked(checks);
 	curr = *checks;
 	if (!curr)
 		return (0);
@@ -98,23 +96,12 @@ t_ps	*ft_best_checked(t_list **checks, int s_size, int pos, int first_pos)
 	while (curr)
 	{
 		curr_ps = (t_ps *)curr->content;
-		// printf("curr_chunk_size: %d  |  curr_ps->chunk_size: %d\n",
-		// 	curr_chunck_size,
-		// 	curr_ps->chunk_size);
 		if (curr_chunck_size <= curr_ps->chunk_size)
 		{
 			curr_ps->score = ft_get_partial_score(curr_ps, s_size,
 				pos, first_pos);
-			// if (best)
-			// 	printf("---------------> curr score: %d  |  best score: %d\n",
-			// 		curr_ps->score,
-			// 		best->score);
 			if (!best || curr_ps->score > best->score)
-			{
-				// printf("%sTAKEN FROM BUFFER%s\n",
-				// 	CLR_GREEN, CLR_WHITE);
 				best = curr_ps;
-			}
 		}
 		curr = curr->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/22 15:38:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 19:20:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s,
 	int pos, int first_pos);
-static t_ps	*ft_set_result(t_ps *best, int size, int pos, int first_pos);
 static t_ps	*ft_init_result(int size, int pos, int first_pos);
 
 void	ft_pseudo_sort(t_stack *s)
@@ -67,8 +66,7 @@ void	ft_pseudo_sort(t_stack *s)
 	ft_free_checks(checks, s->size);
 }
 
-static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s,
-	int pos, int first_pos)
+static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s, int pos, int first_pos)
 {
 	t_ps_rec	rec;
 	t_nb		*nb;
@@ -87,6 +85,7 @@ static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s,
 			if (rec.best
 				&& rec.best->score >= ft_chunk_size(s->size, i, first_pos))
 				break;
+			ft_reduce_checked(checks[i]);
 			rec.new = ft_best_checked(checks[i], s->size, i, first_pos);
 			if (!rec.new)
 			{
@@ -100,7 +99,7 @@ static t_ps	*ft_do_pseudo_sort(t_list ***checks, t_stack *s,
 	return (ft_set_result(rec.best, s->size, pos, first_pos));
 }
 
-static t_ps	*ft_set_result(t_ps *best, int size, int pos, int first_pos)
+t_ps	*ft_set_result(t_ps *best, int size, int pos, int first_pos)
 {
 	t_ps	*res;
 	

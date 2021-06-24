@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pseudo_sort_memory.c                            :+:      :+:    :+:   */
+/*   ft_circling_pseudo_sort.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 17:27:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 17:31:29 by msessa           ###   ########.fr       */
+/*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
+/*   Updated: 2021/06/24 18:57:25 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#ifndef FT_CIRCLING_PSEUDO_SORT_H
+# define FT_CIRCLING_PSEUDO_SORT_H
 
-void	ft_free_checks(t_list ***checks, int s_size)
-{
-	int	i;
+void	ft_circling_pseudo_sort(t_stack *s);
+void	ft_circling_take_best(t_ps **best, t_ps **new);
 
-	i = 0;
-	while (i < s_size)
-	{
-		ft_lstclear(checks[i], ft_free_sgl_check);
-		free(checks[i]);
-		i++;
-	}
-	free(checks);
-}
-
-void	ft_free_sgl_check(void *void_ps)
-{
-	t_ps *ps;
-
-	ps = (t_ps *)void_ps;
-	free(ps->hash);
-	free(ps);
-}
+#endif

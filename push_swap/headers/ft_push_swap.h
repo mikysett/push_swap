@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:42:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/18 16:02:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:52:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "ft_pseudo_sort_utilities.h"
 # include "ft_remove_checks.h"
 # include "ft_pseudo_sort.h"
+# include "ft_circling_pseudo_sort.h"
 
 # include "ft_operation_swap.h"
 # include "ft_operation_push.h"
@@ -37,6 +38,7 @@
 # include "ft_operation_reverse_rotate.h"
 
 # include "ft_sort.h"
+# include "ft_small_stack_sort.h"
 # include "ft_extract_sorted.h"
 # include "ft_can_be_in_middle.h"
 # include "ft_optimize_extracted.h"

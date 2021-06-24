@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/23 15:59:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/24 16:48:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		ft_compact_top(t_data *data, t_stack *s, t_s_name s_name);
 
 void		ft_rotate_sorted(t_data *data, t_s_name s_name);
 
-void		ft_sort_nb(t_data *data, t_nb *nb_ptr);
-t_nb		*ft_best_to_sort(t_data *data, bool only_in_range);
+// void		ft_sort_nb(t_data *data, t_nb *nb_ptr);
+// t_nb		*ft_best_to_sort(t_data *data, bool only_in_range);
 
 #endif

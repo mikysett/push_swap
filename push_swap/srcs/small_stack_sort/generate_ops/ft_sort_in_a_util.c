@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_generate_ops.c                                  :+:      :+:    :+:   */
+/*   ft_sort_in_a_util.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/25 01:43:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/25 01:39:03 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	ft_generate_ops(t_data *data)
+void	ft_set_nb_mov_to_top(t_nb *nb, int nb_pos, int s_size)
 {
-	data->wait_to_swap = true;
-	ft_set_edge_sort_pos(&data->s_a);
-	ft_fill_b(data);
-	DEBUG_CODE(ft_print_stack_ligh(data);)
-	ft_sort_in_a(data);
-	DEBUG_CODE(ft_print_stack_ligh(data);)
+	nb->strat.b_r = s_size - 1 - nb_pos;
+	nb->strat.b_rr = nb_pos + 1;
 }
 
-void	ft_set_edge_sort_pos(t_stack *s)
+int	ft_bigger_nb(int nb1, int nb2)
 {
-	int	i;
+	if (nb1 > nb2)
+		return (nb1);
+	return (nb2);
+}
 
-	i = -1;
-	s->smaller_sp = s->size;
-	s->bigger_sp = -1;
-	while (++i < s->size)
-	{
-		if (!s->stack[i].lis_lvl)
-			continue;
-		if (s->smaller_sp > s->stack[i].sort_pos)
-			s->smaller_sp = s->stack[i].sort_pos;
-		if (s->bigger_sp < s->stack[i].sort_pos)
-			s->bigger_sp = s->stack[i].sort_pos;
-	}
+int	ft_smaller_nb(int nb1, int nb2)
+{
+	if (nb1 > nb2)
+		return (nb2);
+	return (nb1);
+}
+
+int	ft_abs_diff_nb(int nb1, int nb2)
+{
+	if (nb1 > nb2)
+		return (nb1 - nb2);
+	return (nb2 - nb1);
 }

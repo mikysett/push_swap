@@ -6,13 +6,12 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 19:32:27 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/25 02:09:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	ft_update_edge_sort_pos(t_stack *s, int nb_sort_pos);
 
 void	ft_fill_b(t_data *data)
 {
@@ -69,7 +68,6 @@ void	ft_fill_b(t_data *data)
 			ft_fill_b(data);
 			return ;
 		}
-
 		ft_push_b(data);
 		if (data->wait_to_swap == true)
 			data->wait_to_swap = false;
@@ -90,7 +88,7 @@ void	ft_fill_b(t_data *data)
 	ft_fill_b(data);
 }
 
-static void	ft_update_edge_sort_pos(t_stack *s, int nb_index)
+void	ft_update_edge_sort_pos(t_stack *s, int nb_index)
 {
 	if (s->stack[nb_index].sort_pos > s->bigger_sp)
 		s->bigger_sp = s->stack[nb_index].sort_pos;
@@ -123,38 +121,6 @@ bool	ft_is_rotate_better(t_data *data)
 	return (false);
 }
 
-bool	ft_optimal_swap(t_data *data)
-{
-	if (data->s_b.size > 1 && data->s_a.size > 1
-		&& data->s_a.stack[1].lis_lvl == 0
-		&& data->s_b.stack[0].nb < data->s_b.stack[1].nb
-		&& data->s_a.stack[0].nb > data->s_a.stack[1].nb)
-		ft_swap_2(data);
-	else
-		return (false);
-	return (true);
-}
-
-void	ft_optimal_reverse_push(t_data *data)
-{
-	t_nb	*first;
-	t_nb	*last;
-
-	last = &data->s_a.stack[data->s_a.top];
-	first = &data->s_a.stack[0];
-	while (first->lis_lvl != 1)
-	{
-		if (!first->lis_lvl && !last->lis_lvl && last > first)
-			ft_push_b(data);
-		else
-		{
-			ft_reverse_rotate_a(data);
-			last = &data->s_a.stack[data->s_a.top];
-		}
-		first = &data->s_a.stack[0];
-	}
-}
-
 bool	ft_is_sort_pos(t_stack *s, int step, int nb_sort_pos, int pos)
 {
 	int	next_p_i;
@@ -170,19 +136,6 @@ bool	ft_is_sort_pos(t_stack *s, int step, int nb_sort_pos, int pos)
 	return (false);
 }
 
-int	prev_sorted(t_stack *s, int start_pos)
-{
-	while (!s->stack[start_pos].lis_lvl)
-		start_pos--;
-	return (start_pos);
-}
-
-int	next_sorted(t_stack *s, int start_pos)
-{
-	while (!s->stack[start_pos].lis_lvl)
-		start_pos++;
-	return (start_pos);
-}
 bool	ft_possible_sort_by_top(t_stack *s, int nb_sort_pos,
 	int start, bool recursive)
 {
@@ -204,20 +157,4 @@ bool	ft_possible_sort_by_top(t_stack *s, int nb_sort_pos,
 				start - 1, true));
 	else
 		return (false);
-}
-
-int	prev_p(int pos, int step, int stack_size)
-{
-	if (pos - step < 0)
-		return (stack_size + (pos - step));
-	else
-		return (pos - step);
-}
-
-int	next_p(int pos, int step, int stack_size)
-{
-	if (pos + step > stack_size - 1)
-		return (pos + step - stack_size);
-	else
-		return (pos + step);
 }

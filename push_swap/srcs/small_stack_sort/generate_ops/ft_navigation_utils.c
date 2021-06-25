@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_navigation_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:40:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/25 02:03:02 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/25 12:38:59 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	prev_sorted(t_stack *s, int start_pos)
 {
-	while (!s->stack[start_pos].lis_lvl)
+	while (start_pos >= 0 && !s->stack[start_pos].lis_lvl)
 		start_pos--;
 	return (start_pos);
 }
 
 int	next_sorted(t_stack *s, int start_pos)
 {
-	while (!s->stack[start_pos].lis_lvl)
+	while (start_pos <= s->top && !s->stack[start_pos].lis_lvl)
 		start_pos++;
 	return (start_pos);
 }

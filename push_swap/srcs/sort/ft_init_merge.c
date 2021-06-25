@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/23 15:57:24 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/25 14:01:14 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static void	ft_prepare_reversed_stacks(t_data *data)
 
 static void	ft_chose_best_top_lvl(t_data *data)
 {
+	// if (ft_get_lvl_size(&data->s_a, data->s_a.stack[data->s_a.top].lis_lvl)
+	// > )
 	ft_chose_best_top_lvl_in_stack(data, &data->s_a, stack_a);
 	ft_chose_best_top_lvl_in_stack(data, &data->s_b, stack_b);
 }
@@ -83,7 +85,7 @@ static void	ft_chose_best_top_lvl(t_data *data)
 static void	ft_chose_best_top_lvl_in_stack(t_data *data, t_stack *s,
 	t_s_name s_name)
 {
-	if (ft_count_lvl(s) != 2
+	if (ft_count_lvl(s) < 2
 		|| ft_top_lvl_reversed(s, s->top)
 		|| ft_bottom_lvl_reversed(s, 0))
 		return ;

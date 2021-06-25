@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_small_stack_sort.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/25 02:04:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/25 13:29:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SMALL_STACK_SORT_H
 # define FT_SMALL_STACK_SORT_H
-
-void	ft_generate_ops(t_data *data);
-void	ft_set_edge_sort_pos(t_stack *s);
 
 void	ft_sort_in_a(t_data *data);
 t_nb	ft_best_to_sort(t_data *data);
@@ -29,11 +26,13 @@ int		ft_smaller_nb(int nb1, int nb2);
 int		ft_abs_diff_nb(int nb1, int nb2);
 
 void	ft_fill_b(t_data *data);
+
+void	ft_set_edge_sort_pos(t_stack *s);
 void	ft_update_edge_sort_pos(t_stack *s, int nb_index);
+bool	ft_is_rotate_better(t_data *data);
+bool	ft_is_sort_pos(t_stack *s, int step, int nb_sort_pos, int pos);
 bool	ft_possible_sort_by_top(t_stack *s, int nb_sort_pos,
 			int start, bool recursive);
-bool	ft_is_sort_pos(t_stack *s, int step, int nb_sort_pos, int pos);
-bool	ft_is_rotate_better(t_data *data);
 
 bool	ft_optimal_swap(t_data *data);
 void	ft_optimal_reverse_push(t_data *data);

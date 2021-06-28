@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_merge.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/27 22:56:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/28 13:43:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	ft_reverse_rotate_bottom_lvl(t_data *data, t_stack *s,
 
 void	ft_init_merge(t_data *data, t_merge_info *m)
 {
+	// This function needs to be reviewed deeply!
+	ft_chose_best_top_lvl(data);
 	m->reversed_merge = false;
 	if (ft_top_lvl_reversed(&data->s_a, data->s_a.top)
 		&& ft_top_lvl_reversed(&data->s_b, data->s_b.top))
@@ -40,14 +42,18 @@ void	ft_init_merge(t_data *data, t_merge_info *m)
 		m->in_name = stack_b;
 	else if (ft_bottom_lvl_reversed(&data->s_b, 0))
 		m->in_name = stack_a;
+	// TODO the next else if is just a test
+	else if (ft_get_lvl_size(&data->s_a, data->s_a.stack[data->s_a.top].lis_lvl)
+		+ ft_get_lvl_size(&data->s_b, data->s_b.stack[data->s_b.top].lis_lvl)
+		>= (data->s_a.size + data->s_b.size) / 2)
+		m->in_name = stack_a;
 	else
 	{
 		m->in_name = ft_stack_with_less_lvl(data);
 		DEBUG_CODE(printf("ORDER DECIDED BY MORE LEVELS IN A: %d\n", m->in_name);)
 	}
 	ft_init_stacks_name(data, m);
-	// This function needs to be reviewed deeply!
-	ft_chose_best_top_lvl(data);
+
 	// ft_chose_best_top_lvl_in_stack(data, m->s_in, m->in_name);
 	if (m->s_from->size > 0)
 		m->lvl_from = m->s_from->stack[m->s_from->top].lis_lvl;
@@ -87,6 +93,7 @@ static void	ft_chose_best_top_lvl(t_data *data)
 	delta_lvl_size = ft_abs(top_a_lvl_size - top_b_lvl_size);
 	if (delta_lvl_size * 2 > ft_bigger_nb(top_a_lvl_size, top_b_lvl_size))
 	{
+		DEBUG_CODE(printf("TRY TO PUT A BETTER LEVEL ON TOP\n");)
 		ft_chose_best_top_lvl_in_stack(data, &data->s_a, stack_a);
 		ft_chose_best_top_lvl_in_stack(data, &data->s_b, stack_b);
 	}
@@ -101,7 +108,10 @@ static void	ft_chose_best_top_lvl_in_stack(t_data *data, t_stack *s,
 		return ;
 	if (ft_get_lvl_size(s, s->stack[s->top].lis_lvl)
 		> ft_get_lvl_size(s, s->stack[0].lis_lvl) * 2)
+	{
+		DEBUG_CODE(printf("STACK %d TOP CHANGED\n", s_name);)
 		ft_reverse_rotate_bottom_lvl(data, s, s_name);
+	}
 }
 
 static void	ft_reverse_rotate_bottom_lvl(t_data *data, t_stack *s,

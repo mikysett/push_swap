@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 16:48:38 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:13:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			ft_get_lvl_size(t_stack *s, int lis_lvl);
 void		ft_swap_lvl(t_data *data, t_s_name dest, t_stack *s_from);
 void		ft_reverse_swap_lvl(t_data *data, t_s_name dest, t_stack *s_from);
 
+t_s_name	ft_choose_best_stack_to_merge(t_data *data);
 t_s_name	ft_stack_with_less_lvl(t_data *data);
 bool		ft_top_lvl_reversed(t_stack *s, int pos);
 bool		ft_bottom_lvl_reversed(t_stack *s, int pos);

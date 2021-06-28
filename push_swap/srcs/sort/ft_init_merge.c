@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/28 13:43:36 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:12:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	ft_reverse_rotate_bottom_lvl(t_data *data, t_stack *s,
 
 void	ft_init_merge(t_data *data, t_merge_info *m)
 {
-	// This function needs to be reviewed deeply!
 	ft_chose_best_top_lvl(data);
 	m->reversed_merge = false;
 	if (ft_top_lvl_reversed(&data->s_a, data->s_a.top)
@@ -42,19 +41,12 @@ void	ft_init_merge(t_data *data, t_merge_info *m)
 		m->in_name = stack_b;
 	else if (ft_bottom_lvl_reversed(&data->s_b, 0))
 		m->in_name = stack_a;
-	// TODO the next else if is just a test
-	else if (ft_get_lvl_size(&data->s_a, data->s_a.stack[data->s_a.top].lis_lvl)
-		+ ft_get_lvl_size(&data->s_b, data->s_b.stack[data->s_b.top].lis_lvl)
-		>= (data->s_a.size + data->s_b.size) / 2)
-		m->in_name = stack_a;
 	else
 	{
-		m->in_name = ft_stack_with_less_lvl(data);
+		m->in_name = ft_choose_best_stack_to_merge(data);
 		DEBUG_CODE(printf("ORDER DECIDED BY MORE LEVELS IN A: %d\n", m->in_name);)
 	}
 	ft_init_stacks_name(data, m);
-
-	// ft_chose_best_top_lvl_in_stack(data, m->s_in, m->in_name);
 	if (m->s_from->size > 0)
 		m->lvl_from = m->s_from->stack[m->s_from->top].lis_lvl;
 	if (m->s_in->size > 0)

@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/28 14:03:24 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:02:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define CLR_PURPLE	"\033[0;35m"
 # define CLR_CYAN	"\033[0;36m"
 
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 # if DEBUG_MODE == 1
 #  define DEBUG_CODE(x) x
 # else

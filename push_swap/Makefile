@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: msessa <mikysett@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/06/18 14:26:53 by msessa           ###   ########.fr        #
+#    Updated: 2021/06/30 19:12:04 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(NAME):	$(DEPS) $(OBJS)
 			@make $(FAST)bonus -C $(LIBFT)
 			@make $(FAST) -C ft_checker
 			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBS)
-			cp push_swap ../../06-push_swap_speed_tester/speed_tester/prog_to_test/push_swap
+			# cp push_swap ../../06-push_swap_speed_tester/speed_tester/prog_to_test/push_swap
 			printf "$(WHT)[$(GRN)$(NAME) COMPILED$(WHT)]\n"
 
 all:		$(NAME)

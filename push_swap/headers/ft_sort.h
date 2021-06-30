@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/28 17:13:20 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/30 18:40:26 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,5 @@ void		ft_merge_sorted(t_data *data);
 void		ft_compact_top(t_data *data, t_stack *s, t_s_name s_name);
 
 void		ft_rotate_sorted(t_data *data, t_s_name s_name);
-
-// void		ft_sort_nb(t_data *data, t_nb *nb_ptr);
-// t_nb		*ft_best_to_sort(t_data *data, bool only_in_range);
 
 #endif

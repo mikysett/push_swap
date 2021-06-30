@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/28 17:02:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/30 18:40:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,6 @@ typedef struct	s_stack
 	int		bigger_sp;
 	int		nb_sorted;
 }				t_stack;
-
-
-// TODO remove after tests (only for debug and opti)
-// typedef struct	s_ops_stats
-// {
-// 	int	fill_b;
-// 	int	sort_not_in_range;
-// 	int	reduce_not_in_range;
-// 	int	organize_not_in_range;
-// 	int	merge_stacks;
-// 	int	rotate_sorted;
-// }				t_ops_stats;
 
 typedef struct	s_data
 {

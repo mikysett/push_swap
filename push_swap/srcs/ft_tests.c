@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 17:38:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 00:18:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/30 18:40:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,14 +209,3 @@ void	ft_print_checks_nb(t_list ***checks, int s_a_size)
 		i++;
 	}
 }
-
-// void	ft_print_stats(t_data *data)
-// {
-// 	printf("----> DATA STATS\n");
-// 	printf("%24s %7d\n", "fill_b:", data->stats.fill_b);
-// 	printf("%24s %7d\n", "sort_not_in_range:", data->stats.sort_not_in_range);
-// 	printf("%24s %7d\n", "reduce_not_in_range:", data->stats.reduce_not_in_range);
-// 	printf("%24s %7d\n", "organize_not_in_range:", data->stats.organize_not_in_range);
-// 	printf("%24s %7d\n", "merge_stacks:", data->stats.merge_stacks);
-// 	printf("%24s %7d\n", "rotate_sorted:", data->stats.rotate_sorted);
-// }

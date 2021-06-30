@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tests.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:54:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/24 00:19:19 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/30 18:48:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void	ft_print_pseudo_sorted(t_ps *pseudo_sorted);
 void	ft_print_checks(t_list ***checks, int size);
 void	ft_print_strat(t_nb *nb);
 void	ft_print_checks_nb(t_list ***checks, int s_a_size);
-// void	ft_print_stats(t_data *data);
 
 #endif

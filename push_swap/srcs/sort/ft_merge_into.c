@@ -6,7 +6,7 @@
 /*   By: msessa <mikysett@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 16:59:05 by msessa            #+#    #+#             */
-/*   Updated: 2021/06/23 15:41:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/06/30 18:41:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_merge_into(t_data *data, t_merge_info *m)
 			ft_merge_tail(data, m, m->lvl_from, m->lvl_in);
 		else
 			ft_rotate_stack(data, m->in_name);
-		// ft_print_stack_ligh(data);
 	}
 	ft_align_s_in(data, m);
 }
